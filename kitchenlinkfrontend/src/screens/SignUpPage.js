@@ -22,12 +22,17 @@ export default function SignUpPage() {
       });
   };
   return (
-    <div className="container text-center">
+    <div className="signup-page text-center">
       {/* <h1>Welcome to <i>KitchenLink!</i></h1>
       <h3>Sign Up</h3> */}
-      <div className="login-container d-flex  justify-content-center ">
-      
-        <form action="">
+      <div className="login-container row shadow">
+          <div className="col-7">
+
+
+          </div>
+          <div className="col-5 d-flex align-items-center">
+
+   <form action="">
         <div className="form-group mb-2 ">
         <h2 className="mb-3">Welcome to <i>KitchenLink!</i></h2>
       <h3>Sign Up</h3>
@@ -48,7 +53,7 @@ export default function SignUpPage() {
             {/* <label htmlFor="">Email</label> */}
             <input
               value={userDetails.email}
-              type="text"
+              type="email"
               name=""
               id=""
               placeholder="Email"
@@ -70,7 +75,7 @@ export default function SignUpPage() {
           </div>
           <div className="form-check mb-5">
             <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-            <label className="form-check-label  " for="flexCheckDefault">
+            <label className="form-check-label  " htmlFor ="flexCheckDefault">
                <b>I agree to terms of Service and Privacy Policy.</b> 
             </label>
           </div>
@@ -95,7 +100,9 @@ export default function SignUpPage() {
           </p>
 
         </form>
+          </div>
       </div>
-    </div>
+     
+      </div>
   );
 }

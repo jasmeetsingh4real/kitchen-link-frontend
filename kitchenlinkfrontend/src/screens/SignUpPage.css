@@ -1,20 +1,28 @@
 *{
-  background-color: #FFAA05;
-  font-family: 'Poppins, sans-serif';
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
   
 }
 h2 i {
   color: #784800;
 }
 
-
-
+.signup-page{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+    background-color: #FFAA05;
+}
 
 .login-container {
-  width: 450px;
-  height: 450px;
-  padding: 10px;
-  margin: 110px 0 0 550px;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 80%;
+  height:80vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(../assets/bgimage/image.jpg);
 }
 
 .custom-input{
