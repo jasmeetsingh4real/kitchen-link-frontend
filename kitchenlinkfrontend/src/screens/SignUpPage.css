@@ -1,0 +1,39 @@
+*{
+  background-color: #FFAA05;
+  font-family: 'Poppins, sans-serif';
+  
+}
+h2 i {
+  color: #784800;
+}
+
+
+
+
+.login-container {
+  width: 450px;
+  height: 450px;
+  padding: 10px;
+  margin: 110px 0 0 550px;
+}
+
+.custom-input{
+  height: 50px;
+
+
+}
+
+.edit-btn{
+  height: 50px;
+  width: 350px;
+  border: 1px solid black;
+  border-radius: 50px;
+  background-color: #FFAA05;
+  color: white;
+  font-size: 25px;
+}
+
+button:hover{
+  background-color: white;
+  color: #FFAA05;
+}
