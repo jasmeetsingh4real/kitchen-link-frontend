@@ -1,7 +1,7 @@
 *{
 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-  
+
 }
 h2 i {
   color: #784800;
@@ -12,7 +12,7 @@ h2 i {
   justify-content: center;
   align-items: center;
   height: 100vh;
-    background-color: #FFAA05;
+  background-color: #FFAA05;
 }
 
 .login-container {
@@ -27,8 +27,6 @@ h2 i {
 
 .custom-input{
   height: 50px;
-
-
 }
 
 .edit-btn{

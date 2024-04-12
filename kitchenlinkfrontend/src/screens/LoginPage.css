@@ -1,0 +1,27 @@
+.custom-input{
+    height: 50px;
+}
+
+.login-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #FFAA05;
+}
+
+
+.login-container {
+    border-radius: 20px;
+    overflow: hidden;
+    width: 80%;
+    height:80vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(../assets/bgimage/image.jpg);
+  }
+
+button:hover{
+    background-color: white;
+    color: #FFAA05;
+  }
