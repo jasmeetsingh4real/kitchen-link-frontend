@@ -1,5 +1,7 @@
 .custom-input{
     height: 50px;
+    font-size: 18px;
+    padding: 0 20px;
 }
 
 .login-page{
@@ -24,4 +26,54 @@
 button:hover{
     background-color: white;
     color: #FFAA05;
+  }
+
+  @media screen and (max-width : 1112px){
+    .empty-container{
+      display: none;
+    }
+    .login-container{
+      
+      padding: 20px;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      justify-content: center
+    }
+    .user-details-container{
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      background:rgba(255, 255, 255, 0.855) ;
+      filter: blur(.5);
+      width: max-content;
+        height: max-content;
+        border-radius: 10px;
+        padding: 30px;
+    }
+  }
+
+  @media screen and (max-width : 470px){
+    .user-details-container{
+    padding: 10px;
+    }
+    .login-heading , .login-subheading {
+      font-size: 20px;
+    }
+    .login-page{
+      margin: 0;
+      padding: 0;
+    }
+    .login-container{
+      display: flex;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 50px 10px;
+    }
+    .custom-input{
+      height: 40px;
+width: 100%;
+    }
   }
