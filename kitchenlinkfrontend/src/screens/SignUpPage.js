@@ -24,8 +24,8 @@ export default function SignUpPage() {
   return (
     <div className="signup-page text-center">
 
-      <div className="login-container row shadow">
-        <div className="col-7">
+      <div className="signup-container ">
+        <div className="empty-container">
 
 
         </div>

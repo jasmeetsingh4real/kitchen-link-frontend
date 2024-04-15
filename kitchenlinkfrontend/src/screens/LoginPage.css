@@ -2,6 +2,7 @@
     height: 50px;
     font-size: 18px;
     padding: 0 20px;
+    transition: all ease-in-out .1s;
 }
 
 .login-page{
@@ -14,6 +15,10 @@
 
 
 .login-container {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
     border-radius: 20px;
     overflow: hidden;
     width: 80%;
@@ -22,18 +27,20 @@
     background-repeat: no-repeat;
     background-image: url(../assets/bgimage/image.jpg);
   }
-
+.empty-container{
+  width: 50%;
+}
 button:hover{
     background-color: white;
     color: #FFAA05;
   }
 
-  @media screen and (max-width : 1112px){
+  @media screen and (max-width : 1200px){
     .empty-container{
       display: none;
     }
     .login-container{
-      
+      border-radius: 0;
       padding: 20px;
       align-items: center;
       height: 100%;
@@ -41,15 +48,15 @@ button:hover{
       justify-content: center
     }
     .user-details-container{
+      max-width: max-content;
       margin: 0;
       display: flex;
       justify-content: center;
-      background:rgba(255, 255, 255, 0.855) ;
+      background:rgba(255, 255, 255, 0.951) ;
       filter: blur(.5);
-      width: max-content;
-        height: max-content;
-        border-radius: 10px;
-        padding: 30px;
+      height: max-content;
+      border-radius: 10px;
+      padding: 30px;
     }
   }
 
@@ -60,10 +67,7 @@ button:hover{
     .login-heading , .login-subheading {
       font-size: 20px;
     }
-    .login-page{
-      margin: 0;
-      padding: 0;
-    }
+ 
     .login-container{
       display: flex;
       align-items: center;
@@ -71,9 +75,10 @@ button:hover{
       width: 100%;
       margin: 0;
       padding: 50px 10px;
+      background-image: url(../assets/bgimage/mobilebg.jpg);
     }
     .custom-input{
       height: 40px;
-width: 100%;
+      width: 50%;
     }
   }

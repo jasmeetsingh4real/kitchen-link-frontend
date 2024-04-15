@@ -25,8 +25,8 @@ export default function LoginPage() {
 
   return (
     <div className="login-page text-center">
-      <div className="login-container row shadow">
-        <div className="col-7 row empty-container"></div>
+      <div className="login-container ">
+        <div className=" empty-container"></div>
         <div className="user-details-container  d-flex align-items-center col-xl-5 col-12">
           <form action="">
             <div className="form-group mb-2  ">

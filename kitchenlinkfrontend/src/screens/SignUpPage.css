@@ -14,29 +14,37 @@ h2 i {
   height: 100vh;
   background-color: #FFAA05;
 }
-
-.login-container {
-  border-radius: 20px;
-  overflow: hidden;
-  width: 80%;
-  height:80vh;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url(../assets/bgimage/image.jpg);
+.empty-container{
+  width: 50%;
+}
+.signup-container {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 80%;
+    height:80vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(../assets/bgimage/image.jpg);
 }
 
 .custom-input{
+
   height: 50px;
 }
 
 .edit-btn{
+  transition: all ease-in-out .3s;
   height: 50px;
   width: 350px;
   border: 1px solid black;
   border-radius: 50px;
   background-color: #FFAA05;
   color: white;
-  font-size: 25px;
+  font-size: 18px;
 }
 
 button:hover{
