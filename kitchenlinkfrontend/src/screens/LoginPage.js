@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [userDetails, setUserDetails] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate()
   // const handleEmail = (e) => {
   //   setUserDetails((old)=>{
   //     return {...old , email : e.target.value}
@@ -73,7 +75,7 @@ export default function LoginPage() {
               </button>
             </div>
             <div>
-              <p>
+              <p role="button" onClick={()=>{navigate("/createAccount")}}>
                 Don't have an account?{" "}
                 <a href="#" color="#1D4A6A">
                   SignUp now
