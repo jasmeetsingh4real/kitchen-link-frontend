@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import { verifyAuthToken } from "./commonFx";
 import Cookies from "js-cookie";
+import SetUp from "./screens/SetUp";
 
 function App() {
   const authToken = Cookies.get("authToken");
