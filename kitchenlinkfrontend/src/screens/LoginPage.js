@@ -1,29 +1,45 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 export default function LoginPage() {
   const [userDetails, setUserDetails] = useState({
     email: "",
     password: "",
   });
-  const navigate = useNavigate()
-  // const handleEmail = (e) => {
-  //   setUserDetails((old)=>{
-  //     return {...old , email : e.target.value}
-  //   })
-  // };
-  // const handlePassword = (e) => {
-  //   setUserDetails((old) => {
-  //     return { ...old, password: e.target.value };
-  //   });
-  // };
+  const navigate = useNavigate();
 
-  const handleUserDetails  = (e)=>{
-    setUserDetails(old=>{
+  const handleUserDetails = (e) => {
+    setUserDetails((old) => {
       let name = e.target.name;
-      return {...old , [name] : e.target.value  }})
-  }
+      return { ...old, [name]: e.target.value };
+    });
+  };
+
+  const loginUser = async () => {
+    try {
+      //set { withCredentials :true} to recieve the auth-token among the response
+      const apiRes = await axios.post(
+        `${process.env.REACT_APP_API_URL}/auth/login`,
+        userDetails,
+        { withCredentials: true }
+      );
+      if (apiRes.data.success) {
+        toast.success("Login Successful!");
+        setUserDetails({
+          email: "",
+          password: "",
+        });
+        navigate("/home");
+      } else {
+        throw new Error(apiRes.data.errorMessage || "Invalid Credentials");
+      }
+    } catch (err) {
+      toast.error(err.message || "something went wrong");
+    }
+  };
 
   return (
     <div className="login-page text-center">
@@ -39,7 +55,7 @@ export default function LoginPage() {
             </div>
             <div className="mb-3">
               <input
-              name ="email"
+                name="email"
                 type="text"
                 value={userDetails.Email}
                 onChange={handleUserDetails}
@@ -49,7 +65,7 @@ export default function LoginPage() {
             </div>
             <div className="mb-3">
               <input
-              name  ="password"
+                name="password"
                 type="text"
                 placeholder="Password"
                 value={userDetails.password}
@@ -64,18 +80,19 @@ export default function LoginPage() {
                 className="edit-btn custom-input "
                 onClick={(e) => {
                   e.preventDefault();
-                  console.log(userDetails);
-                  setUserDetails({
-                    email: "",
-                    password: "",
-                  });
+                  loginUser();
                 }}
               >
-                Login 
+                Login
               </button>
             </div>
             <div>
-              <p role="button" onClick={()=>{navigate("/createAccount")}}>
+              <p
+                role="button"
+                onClick={() => {
+                  navigate("/createAccount");
+                }}
+              >
                 Don't have an account?{" "}
                 <a href="#" color="#1D4A6A">
                   SignUp now

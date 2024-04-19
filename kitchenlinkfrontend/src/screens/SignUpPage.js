@@ -46,12 +46,14 @@ const createUser = async ()=>{
     toast.success("User created successfully")
     navigate("/login")
   }
+  console.log(apiRes.data.errorMessage);
+
   if(!apiRes.data.success){
     throw new Error(apiRes.data.errorMessage || "something went wrong")
   }
     }catch(err){
       //else show error
-         toast.error(err.errorMessage || "something went wrong")
+         toast.error(err.message || "something went wrong")
     }
 }
 
@@ -61,8 +63,7 @@ const createUser = async ()=>{
 
       <div className="signup-container ">
         <div className="empty-container">
-
-
+          {/* empty container for design purpose */}
         </div>
         <div className=" d-flex align-items-center">
 
