@@ -9,6 +9,7 @@ import SignUpPage from "./screens/SignUpPage";
 import { HomePage } from "./screens/HomePage";
 import { GuestRoute } from "./guards/GuestRoute";
 import { ProtectedRoute } from "./guards/ProtectedRoute";
+import SetUp from "./screens/SetUp";
 
 const router = createBrowserRouter(
   [
@@ -16,6 +17,10 @@ const router = createBrowserRouter(
       path: "/",
       element: <App />,
       children: [
+        {
+          path: "setup",
+          element: <SetUp />,
+        },
         {
           path: "login",
           element: (
