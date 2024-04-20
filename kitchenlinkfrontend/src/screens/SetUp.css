@@ -1,0 +1,37 @@
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar{
+    height: 43px;
+}
+
+.navbar i{
+    color: #784800;
+    font-weight: 500;
+    font-size: 24px;
+    padding-left: 70px ;
+}
+
+.heading
+{
+    text-align: left;
+    height: 90px;
+    background-image: linear-gradient(to right , #FEBD00 , #000000);
+    color: white;
+
+}
+
+.heading h2{
+    font-size: 22px;
+    padding: 30px  ;
+}
+h5{
+    text-align: left;
+    padding: 15px 0 0 50px;
+    
+    
+}
+label{
+    display: block;
+}
