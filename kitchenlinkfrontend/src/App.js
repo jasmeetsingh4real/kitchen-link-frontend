@@ -11,15 +11,6 @@ import Cookies from "js-cookie";
 import SetUp from "./screens/SetUp";
 
 function App() {
-  // const authToken = Cookies.get("authToken");
-  // const navigate = useNavigate();
-  // const verifyUser = async () => {
-  //   const response = await verifyAuthToken(authToken);
-  //   if (!response) navigate("/login");
-  // };
-  // useEffect(() => {
-  //   verifyUser();
-  // }, []);
   return (
     <div className="App">
       <ToastContainer />
