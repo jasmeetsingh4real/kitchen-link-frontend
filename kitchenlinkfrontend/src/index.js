@@ -10,6 +10,9 @@ import { HomePage } from "./screens/HomePage";
 import { GuestRoute } from "./guards/GuestRoute";
 import { ProtectedRoute } from "./guards/ProtectedRoute";
 import SetUp from "./screens/SetUp";
+import { SellerDashboard } from "./seller/SellerDashboard";
+import SellerLogin from "./seller/SellerLogin";
+import { SellerRoute } from "./guards/SellerRoute";
 
 const router = createBrowserRouter(
   [
@@ -44,6 +47,27 @@ const router = createBrowserRouter(
               <HomePage />
             </ProtectedRoute>
           ),
+        },
+        {
+          path: "seller",
+          children: [
+            {
+              path: "sellerLogin",
+              element: (
+                <GuestRoute isSellerRoute={true}>
+                  <SellerLogin />
+                </GuestRoute>
+              ),
+            },
+            {
+              path: "sellerDashboard",
+              element: (
+                <SellerRoute>
+                  <SellerDashboard />
+                </SellerRoute>
+              ),
+            },
+          ],
         },
       ],
     },

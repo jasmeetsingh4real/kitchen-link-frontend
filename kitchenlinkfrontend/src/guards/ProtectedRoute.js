@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { verifyAuthToken } from "../commonFx";
 
-export const ProtectedRoute = (props) => { 
+export const ProtectedRoute = (props) => {
   const [userVerified, setUserVerified] = useState(false);
   const authToken = Cookies.get("authToken");
   const navigate = useNavigate();

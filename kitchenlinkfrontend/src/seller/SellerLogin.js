@@ -1,41 +1,43 @@
 import React, { useState } from "react";
-import "./LoginPage.css";
+import "./SellerLogin.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { appAxios } from "../axios/appAxios";
+
 const userRoles = {
   USER: "user",
   SELLER: "seller",
 };
-export default function LoginPage() {
-  const [userDetails, setUserDetails] = useState({
+export default function SellerLogin() {
+  const [sellerDetails, setSellerDetails] = useState({
     email: "",
     password: "",
   });
   const navigate = useNavigate();
 
   const handleUserDetails = (e) => {
-    setUserDetails((old) => {
+    setSellerDetails((old) => {
       let name = e.target.name;
       return { ...old, [name]: e.target.value };
     });
   };
 
-  const loginUser = async () => {
+  const loginSeller = async () => {
     try {
-      const apiRes = await appAxios.post("/auth/login", userDetails, {
+      const apiRes = await appAxios.post("/auth/login", sellerDetails, {
         withCredentials: true,
       });
       if (apiRes.data.success) {
         toast.success("Login Successful!");
-        setUserDetails({
+        setSellerDetails({
           email: "",
           password: "",
         });
-        if (apiRes.data.data?.role === userRoles.SELLER) {
+        if (apiRes?.data?.data?.role === userRoles.SELLER) {
           navigate("/seller/sellerDashboard");
-        } else navigate("/home");
+        } else {
+          navigate("/home");
+        }
       } else {
         throw new Error(apiRes.data.errorMessage || "Invalid Credentials");
       }
@@ -54,13 +56,13 @@ export default function LoginPage() {
               <h2 className="login-heading mb-1 ">
                 Welcome to <i>KitchenLink!</i>
               </h2>
-              <h3 className="login-subheading">Login now</h3>
+              <h3 className="login-subheading">Seller Login</h3>
             </div>
             <div className="mb-3">
               <input
                 name="email"
                 type="text"
-                value={userDetails.Email}
+                value={sellerDetails.email}
                 onChange={handleUserDetails}
                 placeholder="Email or Mobile Number"
                 className="form-control rounded-5 custom-input"
@@ -71,7 +73,7 @@ export default function LoginPage() {
                 name="password"
                 type="text"
                 placeholder="Password"
-                value={userDetails.password}
+                value={sellerDetails.password}
                 onChange={handleUserDetails}
                 className="form-control rounded-5 custom-input"
               />
@@ -85,7 +87,7 @@ export default function LoginPage() {
                 className="edit-btn custom-input "
                 onClick={(e) => {
                   e.preventDefault();
-                  loginUser();
+                  loginSeller();
                 }}
               >
                 Login
@@ -93,7 +95,6 @@ export default function LoginPage() {
             </div>
             <div>
               <p
-                className="mb-1"
                 role="button"
                 onClick={() => {
                   navigate("/createAccount");
@@ -103,15 +104,6 @@ export default function LoginPage() {
                 <a href="#" color="#1D4A6A">
                   SignUp now
                 </a>
-              </p>
-              <p
-                className="mb-0"
-                role="button"
-                onClick={() => {
-                  navigate("/seller/sellerLogin");
-                }}
-              >
-                login with your seller account{" "}
               </p>
             </div>
           </form>
