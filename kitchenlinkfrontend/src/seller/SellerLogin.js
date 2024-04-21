@@ -3,12 +3,15 @@ import "./SellerLogin.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { appAxios } from "../axios/appAxios";
+import { useDispatch } from "react-redux";
+import { userActions } from "../slices/userSlice";
 
 const userRoles = {
   USER: "user",
   SELLER: "seller",
 };
 export default function SellerLogin() {
+  const dispatch = useDispatch();
   const [sellerDetails, setSellerDetails] = useState({
     email: "",
     password: "",
@@ -33,9 +36,11 @@ export default function SellerLogin() {
           email: "",
           password: "",
         });
-        if (apiRes?.data?.data?.role === userRoles.SELLER) {
+        if (apiRes.data.data?.role === userRoles.SELLER) {
+          dispatch(userActions.setSeller(apiRes.data.data));
           navigate("/seller/sellerDashboard");
         } else {
+          dispatch(userActions.setUser(apiRes.data.data));
           navigate("/home");
         }
       } else {

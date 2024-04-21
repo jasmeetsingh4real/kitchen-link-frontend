@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { appAxios } from "../axios/appAxios";
+import { useDispatch } from "react-redux";
+import { userActions } from "../slices/userSlice";
 const userRoles = {
   USER: "user",
   SELLER: "seller",
@@ -14,7 +16,7 @@ export default function LoginPage() {
     password: "",
   });
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleUserDetails = (e) => {
     setUserDetails((old) => {
       let name = e.target.name;
@@ -33,9 +35,14 @@ export default function LoginPage() {
           email: "",
           password: "",
         });
+
         if (apiRes.data.data?.role === userRoles.SELLER) {
+          dispatch(userActions.setSeller(apiRes.data.data));
           navigate("/seller/sellerDashboard");
-        } else navigate("/home");
+        } else {
+          dispatch(userActions.setUser(apiRes.data.data));
+          navigate("/home");
+        }
       } else {
         throw new Error(apiRes.data.errorMessage || "Invalid Credentials");
       }

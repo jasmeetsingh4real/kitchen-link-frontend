@@ -13,6 +13,10 @@ import SetUp from "./screens/SetUp";
 import { SellerDashboard } from "./seller/SellerDashboard";
 import SellerLogin from "./seller/SellerLogin";
 import { SellerRoute } from "./guards/SellerRoute";
+import { NotFoundPage } from "./screens/NotFoundPage";
+import { Provider } from "react-redux";
+import { persistor, store } from "./store";
+import { PersistGate } from "redux-persist/integration/react";
 
 const router = createBrowserRouter(
   [
@@ -20,10 +24,6 @@ const router = createBrowserRouter(
       path: "/",
       element: <App />,
       children: [
-        {
-          path: "setup",
-          element: <SetUp />,
-        },
         {
           path: "login",
           element: (
@@ -67,7 +67,20 @@ const router = createBrowserRouter(
                 </SellerRoute>
               ),
             },
+            {
+              path: "setup",
+              element: (
+                <SellerRoute>
+                  <SetUp />
+                </SellerRoute>
+              ),
+            },
           ],
+        },
+
+        {
+          path: "*",
+          element: <NotFoundPage />,
         },
       ],
     },
@@ -79,4 +92,12 @@ const router = createBrowserRouter(
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(<RouterProvider router={router} />);
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>
+);
