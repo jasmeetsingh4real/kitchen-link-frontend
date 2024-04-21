@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SetUp.css";
+import { useParams } from "react-router-dom";
 
 export default function SetUp() {
   return (

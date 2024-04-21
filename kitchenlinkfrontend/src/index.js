@@ -35,9 +35,9 @@ const router = createBrowserRouter(
         {
           path: "createAccount",
           element: (
-            <GuestRoute>
-              <SignUpPage />
-            </GuestRoute>
+            // <GuestRoute>
+            <SignUpPage />
+            // </GuestRoute>
           ),
         },
         {

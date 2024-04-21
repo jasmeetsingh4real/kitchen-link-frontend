@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SignUpPage.css";
-import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { appAxios } from "../axios/appAxios";
 
@@ -12,6 +10,8 @@ const userRoles = {
 };
 
 export default function SignUpPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   //state for userdetails
   const [userDetails, setUserDetails] = useState({
     fullName: "",
@@ -50,7 +50,7 @@ export default function SignUpPage() {
       //if backend sends success response then navigate user to login page
       if (apiRes.data.success) {
         toast.success("User created successfully");
-        navigate("/login");
+        isSeller ? navigate("/seller/sellerLogin") : navigate("/login");
       }
       console.log(apiRes.data.errorMessage);
 
@@ -62,6 +62,12 @@ export default function SignUpPage() {
       toast.error(err.message || "something went wrong");
     }
   };
+
+  useEffect(() => {
+    if (searchParams.get("isSellerSignup")) {
+      setIsSeller(true);
+    }
+  }, [searchParams]);
 
   return (
     <div
@@ -160,7 +166,7 @@ export default function SignUpPage() {
               className="m-0 text-white"
               role="button"
               onClick={() => {
-                navigate("/login");
+                isSeller ? navigate("/seller/sellerLogin") : navigate("/login");
               }}
             >
               Already have an account?{" "}

@@ -97,7 +97,7 @@ export default function SellerLogin() {
               <p
                 role="button"
                 onClick={() => {
-                  navigate("/createAccount");
+                  navigate("/createAccount?isSellerSignup=true");
                 }}
               >
                 Don't have an account?{" "}
