@@ -17,6 +17,8 @@ import { NotFoundPage } from "./screens/NotFoundPage";
 import { Provider } from "react-redux";
 import { persistor, store } from "./store";
 import { PersistGate } from "redux-persist/integration/react";
+import { LogoutSeller } from "./seller/LogoutSeller";
+import { UserLogout } from "./screens/UserLogout";
 
 const router = createBrowserRouter(
   [
@@ -49,6 +51,10 @@ const router = createBrowserRouter(
           ),
         },
         {
+          path: "logout",
+          element: <UserLogout />,
+        },
+        {
           path: "seller",
           children: [
             {
@@ -74,6 +80,10 @@ const router = createBrowserRouter(
                   <SetUp />
                 </SellerRoute>
               ),
+            },
+            {
+              path: "logout",
+              element: <LogoutSeller />,
             },
           ],
         },

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import Cookies from "js-cookie";
 const initialState = {
   userDetails: {
     id: "",
@@ -24,6 +24,14 @@ const userSlice = createSlice({
     },
     setSeller: (state, action) => {
       state.sellerDetails = action.payload;
+    },
+    logoutUser: (state, action) => {
+      state.userDetails = null;
+      Cookies.remove("authToken");
+    },
+    logoutSeller: (state, action) => {
+      state.sellerDetails = null;
+      Cookies.remove("sellerAuthToken");
     },
   },
 });
