@@ -1,51 +1,76 @@
-import React, { useEffect } from "react";
-import "./SetUp.css";
+import React, { useEffect, useState } from "react";
+import styles from "./SetUp.module.css";
 import { useParams } from "react-router-dom";
-
+import Carousel from "react-bootstrap/Carousel";
+import { RestaurantDetails } from "./setupComponents/RestaurantDetails";
+import { RestaurantLocationDetails } from "./setupComponents/RestaurantLocationDetails";
+import { RestaurantImages } from "./setupComponents/RestaurantImages";
 export default function SetUp() {
+  const [index, setIndex] = useState(0);
+
+  const initialRestaurantValues = {
+    restaurantName: "",
+    openingTime: null,
+    closingTime: null,
+    restaurantEmail: "",
+    restaurantContact: "",
+    stateId: "",
+    countryId: "",
+    cityId: "",
+    streetAddress: "",
+  };
+  const [restaurantDetails, setRestaurantDetails] = useState(
+    initialRestaurantValues
+  );
+
+  const handleRestaurantDetails = (name, value) => {
+    setRestaurantDetails((old) => {
+      return { ...old, [name]: value };
+    });
+  };
+
+  const handleSelect = (selectedIndex) => {
+    setIndex(selectedIndex);
+  };
+  console.log(restaurantDetails);
   return (
-    <div className="">
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            <i>KitchenLink</i>
-          </a>
+    <div className={styles.setup_page}>
+      <div className={styles.heading_bg}></div>
+      <div className={styles.heading_bg_gradient}></div>
+      <div className={styles.setup_page_container}>
+        <div className={`${styles.main_heading} text-white `}>
+          <h1>Kitchen-Link.com</h1>
+
+          <span>Setup your restaurant</span>
         </div>
-      </nav>
-      <div className="heading">
-        <h2>Set up your Restaurant</h2>
-      </div>
-      <div className="container">
-        <h5>Restaurant details</h5>
-        <form action="form-group">
-          <div className="row text-start">
-            {/* input field*/}
-            <div className="col-6">
-              <div className="p-2 ">
-                <label htmlFor="res-name " className="form-label small mb-0">
-                  Restaurant name
-                </label>
-                <input type="text" id="res-name" className="form-control" />
-              </div>
-            </div>
-            {/* input field*/}
-            <div className="col-6">
-              <div className="p-2">
-                <label htmlFor="own-name" className="form-label small mb-0">
-                  Owner's name
-                </label>
-                <input
-                  type="text"
-                  id="own-name"
-                  className="form-control mt-0"
-                />
-              </div>
-            </div>
-            <div className="col-12 text-end ">
-              <button className="btn btn-outline-success me-3">Save</button>
-            </div>
-          </div>
-        </form>
+        <div className="container bg-white rounded shadow border  py-3 text-dark">
+          <Carousel
+            activeIndex={index}
+            onSelect={handleSelect}
+            interval={null}
+            controls={false}
+            indicatorLabels={false}
+            indicators={false}
+          >
+            <Carousel.Item>
+              <RestaurantDetails
+                handleRestaurantDetails={handleRestaurantDetails}
+                restaurantDetails={restaurantDetails}
+                setIndex={setIndex}
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <RestaurantLocationDetails
+                setIndex={setIndex}
+                handleRestaurantDetails={handleRestaurantDetails}
+                restaurantDetails={restaurantDetails}
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <RestaurantImages setIndex={setIndex} />
+            </Carousel.Item>
+          </Carousel>
+        </div>
       </div>
     </div>
   );

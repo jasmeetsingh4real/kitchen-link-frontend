@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./SignUpPage.css";
+import styles from "./SignUpPage.module.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { appAxios } from "../axios/appAxios";
@@ -72,15 +72,15 @@ export default function SignUpPage() {
   return (
     <div
       className={`${
-        isSeller ? " green-bg " : " yellow-bg "
-      }  signup-page text-center`}
+        isSeller ? ` ${styles.green_bg} ` : `${styles.yellow_bg} `
+      }  ${styles.signup_page} text-center`}
     >
       <div
         className={`${
-          isSeller ? " green-image " : " yellow-image "
-        } signup-container `}
+          isSeller ? ` ${styles.green_image} ` : ` ${styles.yellow_image} `
+        } ${styles.signup_container} `}
       >
-        <div className="empty-container">
+        <div className={styles.empty_container}>
           {/* empty container for design purpose */}
         </div>
         <div className=" d-flex align-items-center">
@@ -110,7 +110,7 @@ export default function SignUpPage() {
                 name=""
                 id=""
                 placeholder="Full Name"
-                className="form-control rounded-5 custom-input "
+                className={`form-control rounded-5 ${styles.custom_input}`}
                 onChange={handleName}
               />
             </div>
@@ -122,7 +122,7 @@ export default function SignUpPage() {
                 name=""
                 id=""
                 placeholder="Email"
-                className="form-control rounded-5 custom-input "
+                className={`form-control rounded-5 ${styles.custom_input}`}
                 onChange={handleEmail}
               />
             </div>
@@ -134,7 +134,7 @@ export default function SignUpPage() {
                 name=""
                 id=""
                 placeholder="Password"
-                className="form-control  rounded-5 custom-input"
+                className={`form-control rounded-5 ${styles.custom_input}`}
                 onChange={handlePassword}
               />
             </div>
@@ -153,7 +153,7 @@ export default function SignUpPage() {
             </div>
             <div className="mb-1">
               <button
-                className="edit-btn"
+                className={styles.edit_btn}
                 onClick={(e) => {
                   e.preventDefault();
                   createUser();

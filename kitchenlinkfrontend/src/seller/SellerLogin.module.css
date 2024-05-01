@@ -1,0 +1,95 @@
+.custom_input {
+  height: 50px;
+  font-size: 18px;
+  padding: 0 20px;
+  transition: all ease-in-out 0.1s;
+}
+
+.seller_login_page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffaa05;
+}
+
+.seller_login_container {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 80%;
+  height: 80vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(../assets/bgimage/image.jpg);
+}
+.empty_container {
+  width: 50%;
+}
+button:hover {
+  background-color: white;
+  color: #ffaa05;
+}
+.edit_btn {
+  transition: all ease-in-out 0.3s;
+  height: 50px;
+  width: 350px;
+  border: 1px solid black;
+  border-radius: 50px;
+  background-color: #ffaa05;
+  color: white;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 1200px) {
+  .empty-container {
+    display: none;
+  }
+  .seller_login_container {
+    border-radius: 0;
+    padding: 20px;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+  }
+  .user_details_container {
+    max-width: max-content;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.951);
+    filter: blur(0.5);
+    height: max-content;
+    border-radius: 10px;
+    padding: 30px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .user_details_ container {
+    padding: 10px;
+  }
+  .login_heading,
+  .login_subheading {
+    font-size: 20px;
+  }
+
+  .seller_login_container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 50px 10px;
+    background-image: url(../assets/bgimage/mobilebg.jpg);
+  }
+  .custom_input {
+    height: 40px;
+    width: 50%;
+  }
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./SellerLogin.css";
+import styles from "./SellerLogin.module.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { appAxios } from "../axios/appAxios";
@@ -52,16 +52,18 @@ export default function SellerLogin() {
   };
 
   return (
-    <div className="login-page text-center">
-      <div className="login-container ">
-        <div className=" empty-container"></div>
-        <div className="user-details-container  d-flex align-items-center col-xl-5 col-12">
+    <div className={`${styles.seller_login_page} text-center`}>
+      <div className={styles.seller_login_container}>
+        <div className={styles.empty_container}></div>
+        <div
+          className={`${styles.user_details_container}  d-flex align-items-center col-xl-5 col-12`}
+        >
           <form action="">
             <div className="form-group mb-2  ">
-              <h2 className="login-heading mb-1 ">
+              <h2 className={`${styles.login_heading} mb-1 `}>
                 Welcome to <i>KitchenLink!</i>
               </h2>
-              <h3 className="login-subheading">Seller Login</h3>
+              <h3 className={styles.login_subheading}>Seller Login</h3>
             </div>
             <div className="mb-3">
               <input
@@ -70,7 +72,7 @@ export default function SellerLogin() {
                 value={sellerDetails.email}
                 onChange={handleUserDetails}
                 placeholder="Email or Mobile Number"
-                className="form-control rounded-5 custom-input"
+                className={`form-control rounded-5 ${styles.custom_input}`}
               />
             </div>
             <div className="mb-3">
@@ -80,7 +82,7 @@ export default function SellerLogin() {
                 placeholder="Password"
                 value={sellerDetails.password}
                 onChange={handleUserDetails}
-                className="form-control rounded-5 custom-input"
+                className={`form-control rounded-5 ${styles.custom_input}`}
               />
             </div>
             <p className="mb-3" role="button">
@@ -89,7 +91,7 @@ export default function SellerLogin() {
             {/* <div className="mb-3">or continue with</div> */}
             <div className="mb-1">
               <button
-                className="edit-btn custom-input "
+                className={`${styles.edit_btn} ${styles.custom_input}`}
                 onClick={(e) => {
                   e.preventDefault();
                   loginSeller();

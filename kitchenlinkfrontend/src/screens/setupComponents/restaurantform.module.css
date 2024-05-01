@@ -1,0 +1,9 @@
+.restaurantDetailsForm {
+  padding: 40px 100px;
+  min-height: 500px;
+}
+.formHeading {
+  color: #515151;
+  font-size: 30px;
+  font-weight: 800;
+}
