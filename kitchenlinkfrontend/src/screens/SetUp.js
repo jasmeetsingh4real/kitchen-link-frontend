@@ -8,7 +8,7 @@ import { RestaurantImages } from "./setupComponents/RestaurantImages";
 import { sellerAxios } from "../axios/sellerAxios";
 import { toast } from "react-toastify";
 export default function SetUp() {
-  const [index, setIndex] = useState(1);
+  const [index, setIndex] = useState(0);
 
   const initialRestaurantValues = {
     restaurantName: "",
@@ -42,7 +42,7 @@ export default function SetUp() {
         toast.success("Details saved");
         setIndex(2);
       } else {
-        throw new Error(apiRes.data.errorMessgae || "Something went wrong");
+        throw new Error(apiRes.data.errorMessage || "Something went wrong");
       }
     } catch (err) {
       toast.error(err.message);

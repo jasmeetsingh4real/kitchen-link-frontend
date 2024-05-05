@@ -2,16 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 const initialState = {
   userDetails: {
-    id: "",
+    id: null,
     fullName: "",
     email: "",
     role: "",
   },
   sellerDetails: {
-    id: "",
+    id: null,
     fullName: "",
     email: "",
     role: "",
+    restaurantDetails: null,
   },
 };
 
@@ -23,7 +24,12 @@ const userSlice = createSlice({
       state.userDetails = action.payload;
     },
     setSeller: (state, action) => {
-      state.sellerDetails = action.payload;
+      state.sellerDetails = { ...state, ...action.payload };
+    },
+    setSellerRestaurant: (state, action) => {
+      if (state.sellerDetails?.id) {
+        state.sellerDetails.restaurantDetails = action.payload;
+      }
     },
     logoutUser: (state, action) => {
       state.userDetails = null;

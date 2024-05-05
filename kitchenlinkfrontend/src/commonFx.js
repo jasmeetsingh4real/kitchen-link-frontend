@@ -9,7 +9,7 @@ export const verifyAuthToken = async (authToken, isSeller = false) => {
       { token: authToken, isSeller }
     );
     if (apiRes && apiRes?.data?.success) {
-      return true;
+      return apiRes.data.result;
     } else {
       toast.error("Authorization error");
       return false;
