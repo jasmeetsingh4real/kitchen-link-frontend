@@ -5,8 +5,10 @@ import Carousel from "react-bootstrap/Carousel";
 import { RestaurantDetails } from "./setupComponents/RestaurantDetails";
 import { RestaurantLocationDetails } from "./setupComponents/RestaurantLocationDetails";
 import { RestaurantImages } from "./setupComponents/RestaurantImages";
+import { sellerAxios } from "../axios/sellerAxios";
+import { toast } from "react-toastify";
 export default function SetUp() {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(1);
 
   const initialRestaurantValues = {
     restaurantName: "",
@@ -14,14 +16,38 @@ export default function SetUp() {
     closingTime: null,
     restaurantEmail: "",
     restaurantContact: "",
-    stateId: "",
-    countryId: "",
-    cityId: "",
+    stateId: null,
+    countryId: null,
+    cityId: null,
     streetAddress: "",
   };
   const [restaurantDetails, setRestaurantDetails] = useState(
     initialRestaurantValues
   );
+
+  const handleHookFormDetails = (data) => {
+    setRestaurantDetails((old) => {
+      return { ...old, ...data };
+    });
+  };
+  console.log(restaurantDetails);
+
+  const saveRestaurantDetails = async () => {
+    try {
+      const apiRes = await sellerAxios.post(
+        "/master/createRestaurant",
+        restaurantDetails
+      );
+      if (apiRes.data.success) {
+        toast.success("Details saved");
+        setIndex(2);
+      } else {
+        throw new Error(apiRes.data.errorMessgae || "Something went wrong");
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
 
   const handleRestaurantDetails = (name, value) => {
     setRestaurantDetails((old) => {
@@ -32,7 +58,7 @@ export default function SetUp() {
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
-  console.log(restaurantDetails);
+  // console.log(restaurantDetails);
   return (
     <div className={styles.setup_page}>
       <div className={styles.heading_bg}></div>
@@ -57,6 +83,7 @@ export default function SetUp() {
                 handleRestaurantDetails={handleRestaurantDetails}
                 restaurantDetails={restaurantDetails}
                 setIndex={setIndex}
+                handleHookFormDetails={handleHookFormDetails}
               />
             </Carousel.Item>
             <Carousel.Item>
@@ -64,6 +91,7 @@ export default function SetUp() {
                 setIndex={setIndex}
                 handleRestaurantDetails={handleRestaurantDetails}
                 restaurantDetails={restaurantDetails}
+                saveRestaurantDetails={saveRestaurantDetails}
               />
             </Carousel.Item>
             <Carousel.Item>

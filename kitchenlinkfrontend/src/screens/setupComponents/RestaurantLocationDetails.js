@@ -4,24 +4,65 @@ import { CountrySelect } from "../../commonUi/CountrySelect";
 import { useState } from "react";
 import { StateSelect } from "../../commonUi/StateSelect";
 import { CitySelect } from "../../commonUi/CitySelect";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { RestaurabtLoacationSchema } from "../../zodSchemas/restaurantSchemas";
+import { sellerAxios } from "../../axios/sellerAxios";
+
+const streetAddressSchema = z.object({
+  streetAddress: z.string().min(1, "Please enter a valid street address"),
+});
+
 export const RestaurantLocationDetails = (props) => {
   const [selectedCountry, setSelectedCountry] = useState({
     code: "",
     id: null,
   });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(streetAddressSchema),
+  });
   const [selectedState, setSelectedState] = useState();
-  const submit = () => {
-    //validate data
-    props.setIndex(2);
+
+  const submit = (data) => {
+    try {
+      if (!props.restaurantDetails.countryId) {
+        toast.error("Please select country");
+        return;
+      }
+      if (!props.restaurantDetails.stateId) {
+        toast.error("Please select state");
+        return;
+      }
+      if (!props.restaurantDetails.cityId) {
+        toast.error("Please select city");
+        return;
+      }
+      props.handleRestaurantDetails("streetAddress", data["streetAddress"]);
+      props.saveRestaurantDetails();
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        error.errors.forEach((err) => {
+          toast.error(err.message);
+        });
+      } else {
+        console.error("An unexpected error occurred:", error);
+      }
+    }
   };
 
   return (
     <div className={`row ${styles.restaurantDetailsForm}`}>
       <div className="col-6">
-        <div className="text-start">
-          <span className={styles.formHeading}>Location Details</span> (2/3)
-        </div>
-        <form action="form-group">
+        <form action="" onSubmit={handleSubmit(submit)}>
+          <div className="text-start">
+            <span className={styles.formHeading}>Location Details</span> (2/3)
+          </div>
           <div className="text-start pt-3 row">
             {/* input fields*/}
             <div className="pe-5 col-10 mb-3">
@@ -70,18 +111,17 @@ export const RestaurantLocationDetails = (props) => {
                 Street Address
               </label>
               <textarea
-                onChange={(e) => {
-                  props.handleRestaurantDetails(
-                    "streetAddress",
-                    e.target.value
-                  );
-                }}
-                value={props.restaurantDetails.streetAddress}
+                {...register("streetAddress", { required: true })}
                 rows={2}
                 type="text"
                 id="res-name"
                 className="form-control"
               ></textarea>
+              {errors?.["streetAddress"] && (
+                <p className="text-danger text-start small">
+                  {errors?.["streetAddress"]["message"]}
+                </p>
+              )}
             </div>
 
             <div className="pe-5 col-10 d-flex justify-content-between  text-end">
@@ -94,11 +134,7 @@ export const RestaurantLocationDetails = (props) => {
               >
                 Previous
               </button>
-              <button
-                className="btn btn-primary  px-5"
-                type="button"
-                onClick={submit}
-              >
+              <button className="btn btn-primary  px-5" type="submit">
                 Next
               </button>
             </div>

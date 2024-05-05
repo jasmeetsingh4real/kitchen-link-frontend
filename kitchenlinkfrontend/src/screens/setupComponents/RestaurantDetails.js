@@ -2,60 +2,69 @@ import styles from "./restaurantform.module.css";
 import resImage from "../../assets/restaurant/res1.png";
 import { CustomDatePicker } from "../../commonUi/CustomDatePicker";
 import moment from "moment";
+import { useForm } from "react-hook-form";
+import { AppInput } from "../../commonUi/AppInpurt";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { RestaurantDetailsSchema } from "../../zodSchemas/restaurantSchemas";
+import { toast } from "react-toastify";
 export const RestaurantDetails = (props) => {
-  const submit = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm({
+    resolver: zodResolver(RestaurantDetailsSchema),
+  });
+  const submit = (data) => {
+    if (!props.restaurantDetails.openingTime) {
+      toast.error("Please select a opening time");
+      return;
+    }
+    if (!props.restaurantDetails.closingTime) {
+      toast.error("Please select a closing time");
+      return;
+    }
+    props.handleHookFormDetails(data);
     props.setIndex(1);
   };
-  const handleDetails = (e) => {
-    props.handleRestaurantDetails(e.target.name, e.target.value);
-  };
+
   return (
     <div className={`row ${styles.restaurantDetailsForm}`}>
       <div className="col-6">
-        <div className="text-start">
-          <span className={styles.formHeading}>Restaurant Details</span> (1/3)
-        </div>
-        <form action="form-group">
+        <form onSubmit={handleSubmit(submit)}>
+          <div className="text-start">
+            <span className={styles.formHeading}>Restaurant Details</span> (1/3)
+          </div>
+
           <div className="text-start pt-3 row">
             {/* input fields*/}
             <div className="pe-5 col-10 mb-3">
-              <label htmlFor="res-name " className="form-label small mb-0">
-                Restaurant Name
-              </label>
-              <input
-                type="text"
-                id="res-name"
-                className="form-control"
+              <AppInput
+                errors={errors}
+                register={register}
                 name="restaurantName"
-                onChange={handleDetails}
-                value={props.restaurantDetails.restaurantName}
+                required={true}
+                label="Restaurant Name"
               />
             </div>
 
             <div className="pe-5 col-10 mb-3">
-              <label htmlFor="res-name " className="form-label small mb-0">
-                Contact Number
-              </label>
-              <input
-                type="text"
-                id="res-name"
-                className="form-control"
+              <AppInput
+                errors={errors}
+                register={register}
                 name="restaurantContact"
-                onChange={handleDetails}
-                value={props.restaurantDetails.restaurantContact}
+                required={true}
+                label="Contact Number"
               />
             </div>
             <div className="pe-5 col-10 mb-3">
-              <label htmlFor="res-name " className="form-label small mb-0">
-                Restaurant Email
-              </label>
-              <input
-                type="text"
-                id="res-name"
-                className="form-control"
+              <AppInput
+                errors={errors}
+                register={register}
                 name="restaurantEmail"
-                onChange={handleDetails}
-                value={props.restaurantDetails.restaurantEmail}
+                required={true}
+                label="Restaurant Email"
               />
             </div>
             <div className="pe-5 col-5 mb-3">
@@ -63,9 +72,9 @@ export const RestaurantDetails = (props) => {
                 Opening Time
               </label>
               <CustomDatePicker
-                onChange={(date) =>
-                  props.handleRestaurantDetails("openingTime", date)
-                }
+                onChange={(date) => {
+                  props.handleRestaurantDetails("openingTime", date);
+                }}
                 selected={props.restaurantDetails.openingTime || null}
                 showTimeOnly={true}
               />
@@ -75,19 +84,15 @@ export const RestaurantDetails = (props) => {
                 Closing Time
               </label>
               <CustomDatePicker
-                onChange={(date) =>
-                  props.handleRestaurantDetails("closingTime", date)
-                }
+                onChange={(date) => {
+                  props.handleRestaurantDetails("closingTime", date);
+                }}
                 selected={props.restaurantDetails.closingTime || null}
                 showTimeOnly={true}
               />
             </div>
             <div className="pe-5 col-10  text-end">
-              <button
-                className="btn btn-primary  px-5"
-                type="button"
-                onClick={submit}
-              >
+              <button className="btn btn-primary  px-5" type="submit">
                 Next
               </button>
             </div>

@@ -12,21 +12,12 @@ export const RestaurantImages = (props) => {
           <span className={styles.formHeading}>Upload Images</span> (3/3)
         </div>
         <div className="alert alert-primary" role="alert">
-          This is a beta version, so you can skip this part.
+          This feature is under maintenance, so you can skip this part for now.
         </div>
         <div className="text-start pt-3 row">
           {/* input fields*/}
 
           <div className="pe-5 col-10 d-flex justify-content-between  text-end">
-            <button
-              className="btn btn-outline-secondary  px-3"
-              type="button"
-              onClick={() => {
-                props.setIndex(1);
-              }}
-            >
-              Previous
-            </button>
             <button
               className="btn btn-primary  px-5"
               type="button"
