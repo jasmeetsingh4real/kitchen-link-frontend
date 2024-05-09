@@ -1,6 +1,5 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import Cookies from "js-cookie";
 export const verifyAuthToken = async (authToken, isSeller = false) => {
   try {
     if (!authToken) return false;
@@ -9,7 +8,7 @@ export const verifyAuthToken = async (authToken, isSeller = false) => {
       { token: authToken, isSeller }
     );
     if (apiRes && apiRes?.data?.success) {
-      return apiRes.data.result;
+      return apiRes.data;
     } else {
       toast.error("Authorization error");
       return false;

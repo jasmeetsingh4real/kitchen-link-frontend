@@ -24,7 +24,7 @@ const userSlice = createSlice({
       state.userDetails = action.payload;
     },
     setSeller: (state, action) => {
-      state.sellerDetails = { ...state, ...action.payload };
+      state.sellerDetails = { ...state.sellerDetails, ...action.payload };
     },
     setSellerRestaurant: (state, action) => {
       if (state.sellerDetails?.id) {

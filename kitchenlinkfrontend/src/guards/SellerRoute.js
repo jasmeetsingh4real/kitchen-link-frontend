@@ -12,9 +12,9 @@ export const SellerRoute = (props) => {
   const dispatch = useDispatch();
   const verifySeller = async () => {
     const response = await verifyAuthToken(sellerAuthToken, true);
-    if (response) {
+    if (response?.success) {
       setSellerVerified(true);
-      dispatch(userActions.setSellerRestaurant(response))
+      dispatch(userActions.setSellerRestaurant(response?.result));
     } else {
       Cookies.remove("sellerAuthToken");
       setSellerVerified(false);

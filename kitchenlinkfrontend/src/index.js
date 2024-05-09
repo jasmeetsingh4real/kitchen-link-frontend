@@ -9,7 +9,7 @@ import SignUpPage from "./screens/SignUpPage";
 import { HomePage } from "./screens/HomePage";
 import { GuestRoute } from "./guards/GuestRoute";
 import { ProtectedRoute } from "./guards/ProtectedRoute";
-import SetUp from "./screens/SetUp";
+
 import { SellerDashboard } from "./seller/SellerDashboard";
 import SellerLogin from "./seller/SellerLogin";
 import { SellerRoute } from "./guards/SellerRoute";
@@ -19,6 +19,7 @@ import { persistor, store } from "./store";
 import { PersistGate } from "redux-persist/integration/react";
 import { LogoutSeller } from "./seller/LogoutSeller";
 import { UserLogout } from "./screens/UserLogout";
+import SetUp from "./seller/SetUp";
 
 const router = createBrowserRouter(
   [

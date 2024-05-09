@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styles from "./SetUp.module.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
 import { RestaurantDetails } from "./setupComponents/RestaurantDetails";
 import { RestaurantLocationDetails } from "./setupComponents/RestaurantLocationDetails";
 import { RestaurantImages } from "./setupComponents/RestaurantImages";
 import { sellerAxios } from "../axios/sellerAxios";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 export default function SetUp() {
-  const [index, setIndex] = useState(0);
-
+  const [index, setIndex] = useState(2);
+  const navigate = useNavigate();
   const initialRestaurantValues = {
     restaurantName: "",
     openingTime: null,
@@ -30,7 +31,6 @@ export default function SetUp() {
       return { ...old, ...data };
     });
   };
-  console.log(restaurantDetails);
 
   const saveRestaurantDetails = async () => {
     try {
@@ -59,6 +59,16 @@ export default function SetUp() {
     setIndex(selectedIndex);
   };
   // console.log(restaurantDetails);
+
+  const savedRestaurantDetails = useSelector(
+    (state) => state?.user?.sellerDetails?.restaurantDetails
+  );
+  useEffect(() => {
+    if (savedRestaurantDetails?.id) {
+      navigate("/seller/sellerDashboard");
+    }
+  }, [savedRestaurantDetails]);
+
   return (
     <div className={styles.setup_page}>
       <div className={styles.heading_bg}></div>
