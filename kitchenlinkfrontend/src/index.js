@@ -20,6 +20,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import { LogoutSeller } from "./seller/LogoutSeller";
 import { UserLogout } from "./screens/UserLogout";
 import SetUp from "./seller/SetUp";
+import { EditRestaurantDetails } from "./seller/sellerDashboardComponents/EditRestaurantDetails";
+import { EditMenu } from "./seller/sellerDashboardComponents/EditMenu";
 
 const router = createBrowserRouter(
   [
@@ -66,14 +68,7 @@ const router = createBrowserRouter(
                 </GuestRoute>
               ),
             },
-            {
-              path: "sellerDashboard",
-              element: (
-                <SellerRoute>
-                  <SellerDashboard />
-                </SellerRoute>
-              ),
-            },
+
             {
               path: "setup",
               element: (
@@ -85,6 +80,25 @@ const router = createBrowserRouter(
             {
               path: "logout",
               element: <LogoutSeller />,
+            },
+
+            {
+              path: "sellerDashboard",
+              element: (
+                <SellerRoute>
+                  <SellerDashboard />
+                </SellerRoute>
+              ),
+              children: [
+                {
+                  path: "editRestaurantDetails",
+                  element: <EditRestaurantDetails />,
+                },
+                {
+                  path: "editMenu",
+                  element: <EditMenu />,
+                },
+              ],
             },
           ],
         },

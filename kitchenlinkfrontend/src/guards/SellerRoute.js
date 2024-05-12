@@ -16,7 +16,6 @@ export const SellerRoute = (props) => {
       setSellerVerified(true);
       dispatch(userActions.setSellerRestaurant(response?.result));
     } else {
-      Cookies.remove("sellerAuthToken");
       setSellerVerified(false);
       return navigate("/seller/sellerLogin");
     }

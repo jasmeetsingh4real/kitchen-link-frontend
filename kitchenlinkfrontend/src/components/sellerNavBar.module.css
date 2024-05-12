@@ -1,22 +1,18 @@
 .sellerNav {
   height: 60px;
-  background: linear-gradient(
-    180deg,
-    rgb(36, 36, 36) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  position: fixed;
+  background: white;
+  position: static;
   z-index: 10;
   width: 100%;
-  color: #fff;
+  color: black;
   display: flex;
   align-items: center;
-  padding: 0 40px;
-  justify-content: flex-end;
+  padding: 30px 40px;
+  justify-content: space-between;
 }
 .userLogo {
   text-transform: capitalize;
-  color: white;
+  color: black;
   display: flex;
   align-items: center;
   justify-content: center;

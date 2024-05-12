@@ -9,8 +9,9 @@ import { sellerAxios } from "../axios/sellerAxios";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 export default function SetUp() {
-  const [index, setIndex] = useState(2);
+  const [index, setIndex] = useState(0);
   const navigate = useNavigate();
+
   const initialRestaurantValues = {
     restaurantName: "",
     openingTime: null,
@@ -60,14 +61,21 @@ export default function SetUp() {
   };
   // console.log(restaurantDetails);
 
-  const savedRestaurantDetails = useSelector(
-    (state) => state?.user?.sellerDetails?.restaurantDetails
-  );
+  const sellerDetails = useSelector((state) => state?.user?.sellerDetails);
+
   useEffect(() => {
-    if (savedRestaurantDetails?.id) {
+    if (sellerDetails?.restaurantDetails && sellerDetails?.imagesSaved) {
       navigate("/seller/sellerDashboard");
     }
-  }, [savedRestaurantDetails]);
+    if (sellerDetails?.restaurantDetails) {
+      setRestaurantDetails((old) => {
+        return { ...old, ...sellerDetails?.restaurantDetails };
+      });
+    }
+    if (!sellerDetails?.imagesSaved) {
+      setIndex(2);
+    }
+  }, [sellerDetails]);
 
   return (
     <div className={styles.setup_page}>

@@ -13,6 +13,7 @@ const initialState = {
     email: "",
     role: "",
     restaurantDetails: null,
+    imagesSaved: false,
   },
 };
 
@@ -29,6 +30,11 @@ const userSlice = createSlice({
     setSellerRestaurant: (state, action) => {
       if (state.sellerDetails?.id) {
         state.sellerDetails.restaurantDetails = action.payload;
+      }
+    },
+    updateImagesStatus: (state, action) => {
+      if (state.sellerDetails?.id && state.sellerDetails?.restaurantDetails) {
+        state.sellerDetails.imagesSaved = action.payload;
       }
     },
     logoutUser: (state, action) => {

@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { RestaurabtLoacationSchema } from "../../zodSchemas/restaurantSchemas";
 import { sellerAxios } from "../../axios/sellerAxios";
+import { useSelector } from "react-redux";
 
 const streetAddressSchema = z.object({
   streetAddress: z.string().min(1, "Please enter a valid street address"),
@@ -24,13 +25,18 @@ export const RestaurantLocationDetails = (props) => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     resolver: zodResolver(streetAddressSchema),
   });
   const [selectedState, setSelectedState] = useState();
-
+  setValue("streetAddress", props?.restaurantDetails?.streetAddress);
   const submit = (data) => {
     try {
+      if (sellerDetails?.restaurantDetails) {
+        props.setIndex(2);
+        return;
+      }
       if (!props.restaurantDetails.countryId) {
         toast.error("Please select country");
         return;
@@ -55,6 +61,7 @@ export const RestaurantLocationDetails = (props) => {
       }
     }
   };
+  const sellerDetails = useSelector((state) => state?.user?.sellerDetails);
 
   return (
     <div className={`row ${styles.restaurantDetailsForm}`}>

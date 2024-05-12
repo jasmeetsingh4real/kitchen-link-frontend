@@ -3,7 +3,6 @@ import { Button, Modal } from "react-bootstrap";
 import styles from "./restaurantform.module.css";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { sellerAxios } from "../../axios/sellerAxios";
 import { toast } from "react-toastify";
 
 export const UploadImagePopup = (props) => {

@@ -1,0 +1,32 @@
+.dashboard {
+  height: 90vh;
+}
+.tab {
+  color: black;
+  margin-bottom: 5px;
+  height: 100%;
+  padding: 10px 20px;
+  /* transition: 0.3s ease-in-out;/ */
+  border-radius: 8px;
+  border: 1px solid #fff;
+}
+.tab:hover {
+  /* color: white; */
+  border: 1px solid #0d6efd;
+}
+.tab:active {
+  /* color: white; */
+  background-color: none;
+  border: 1px solid #0d6efd;
+}
+.activeTab {
+  color: white;
+  border: 1px solid #0d6efd;
+  /* background-color: rgb(216, 216, 216); */
+}
+
+.dashboardContent {
+  margin: 0;
+  padding-top: 10px;
+  padding-left: 70px;
+}

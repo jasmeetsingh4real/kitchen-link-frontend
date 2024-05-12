@@ -1,0 +1,20 @@
+.restDetails {
+  color: rgb(80, 80, 80);
+}
+.restDetails_heading {
+  font-weight: 500;
+  padding-bottom: 15px;
+}
+.restDetails_container {
+  padding: 20px 40px;
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: 8px;
+}
+.ownerName {
+  /* background-color: rgba(0, 183, 255, 0.212); */
+  text-transform: capitalize;
+  padding: 8px 0;
+  margin-right: 10px;
+  border-radius: 5px;
+  color: rgb(77, 77, 77);
+}

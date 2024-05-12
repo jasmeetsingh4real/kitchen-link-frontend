@@ -5,15 +5,18 @@ import { useEffect, useState } from "react";
 import uploadicon from "../../assets/restaurant/uploadicon.png";
 import { sellerAxios } from "../../axios/sellerAxios";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../../slices/userSlice";
 export const RestaurantImages = (props) => {
   const [showUploadImagePopup, setShowUploadImagePopup] = useState(false);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const submit = () => {
+    dispatch(userActions.updateImagesStatus(true));
     navigate("/seller/sellerDashboard");
   };
-
   const getImages = async () => {
     try {
       const apiRes = await sellerAxios.post("/master/getRestaurantImages", {});
@@ -23,6 +26,7 @@ export const RestaurantImages = (props) => {
           const response = await import(
             `../../ImageUploads/RestaurantImages/${imgObj?.fileName}`
           );
+
           temp.push({
             imgSrc: response?.default,
             imageName: imgObj?.fileName,
@@ -50,9 +54,19 @@ export const RestaurantImages = (props) => {
     setLoading(false);
   };
 
+  const savedRestaurantDetails = useSelector(
+    (state) => state?.user?.sellerDetails?.restaurantDetails
+  );
   useEffect(() => {
     getImages();
   }, []);
+  useEffect(() => {
+    if (!savedRestaurantDetails?.id) {
+      toast.info("Please complete the setup first.");
+      props.setIndex(0);
+    }
+  }, [savedRestaurantDetails]);
+
   return (
     <div className={`row ${styles.restaurantDetailsForm}`}>
       <div className="col-6">
@@ -128,7 +142,13 @@ export const RestaurantImages = (props) => {
           "No Images uploaded yet."
         )}
       </div>
-
+      <div className="text-end">
+        {images.length === 2 && (
+          <button className="btn btn-sm px-3 btn-success" onClick={submit}>
+            Next
+          </button>
+        )}
+      </div>
       <UploadImagePopup
         show={showUploadImagePopup}
         onHide={() => {

@@ -13,9 +13,15 @@ export const RestaurantDetails = (props) => {
     handleSubmit,
     formState: { errors },
     getValues,
+    setValue,
   } = useForm({
     resolver: zodResolver(RestaurantDetailsSchema),
   });
+  Object.keys(props?.restaurantDetails).forEach((fieldItem) => {
+    setValue(fieldItem, props?.restaurantDetails?.[fieldItem]);
+  });
+  setValue("restaurantName", "this is a test");
+
   const submit = (data) => {
     if (!props.restaurantDetails.openingTime) {
       toast.error("Please select a opening time");

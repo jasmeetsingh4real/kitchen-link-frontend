@@ -11,7 +11,6 @@ export const ProtectedRoute = (props) => {
     const response = await verifyAuthToken(authToken);
     if (response) setUserVerified(true);
     else {
-      Cookies.remove("authToken");
       setUserVerified(false);
       return navigate("/login");
     }

@@ -12,6 +12,8 @@ export const AppInput = (props) => {
         type="text"
         className="form-control"
         name={props.name}
+        value={props?.value}
+        onChange={props.onChange ? props.onChange : () => {}}
       />
       {props.errors?.[props.name] && (
         <p className="text-danger text-start small">
