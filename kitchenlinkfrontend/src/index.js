@@ -30,7 +30,7 @@ const router = createBrowserRouter(
       element: <App />,
       children: [
         {
-          path: "login",
+          path: "/",
           element: (
             <GuestRoute>
               <LoginPage />
@@ -68,7 +68,7 @@ const router = createBrowserRouter(
             {
               path: "setup",
               element: (
-                <SellerRoute>
+                <SellerRoute setupPage={true}>
                   <SetUp />
                 </SellerRoute>
               ),

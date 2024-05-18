@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import styles from "./SetUp.module.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
 import { RestaurantDetails } from "./setupComponents/RestaurantDetails";
 import { RestaurantLocationDetails } from "./setupComponents/RestaurantLocationDetails";
 import { RestaurantImages } from "./setupComponents/RestaurantImages";
 import { sellerAxios } from "../axios/sellerAxios";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { EditRestaurantDetailsSchema } from "../zodSchemas/restaurantSchemas";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { userActions } from "../slices/userSlice";
 export default function SetUp() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [index, setIndex] = useState(0);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const initialRestaurantValues = {
     restaurantName: "",
     openingTime: null,
@@ -23,25 +29,28 @@ export default function SetUp() {
     cityId: null,
     streetAddress: "",
   };
-  const [restaurantDetails, setRestaurantDetails] = useState(
-    initialRestaurantValues
+  const savedRestaurant = useSelector(
+    (state) => state.user.sellerDetails.restaurantDetails
   );
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    setValue,
+  } = useForm({
+    resolver: zodResolver(EditRestaurantDetailsSchema),
+    defaultValues: savedRestaurant || initialRestaurantValues,
+  });
 
-  const handleHookFormDetails = (data) => {
-    setRestaurantDetails((old) => {
-      return { ...old, ...data };
-    });
-  };
-
-  const saveRestaurantDetails = async () => {
+  const saveRestaurantDetails = async (data) => {
     try {
-      const apiRes = await sellerAxios.post(
-        "/master/createRestaurant",
-        restaurantDetails
-      );
+      const apiRes = await sellerAxios.post("/master/createRestaurant", data);
       if (apiRes.data.success) {
         toast.success("Details saved");
         setIndex(2);
+        navigate("?index=2");
+        dispatch(userActions.setSellerRestaurant(apiRes.data.data));
       } else {
         throw new Error(apiRes.data.errorMessage || "Something went wrong");
       }
@@ -50,33 +59,21 @@ export default function SetUp() {
     }
   };
 
-  const handleRestaurantDetails = (name, value) => {
-    setRestaurantDetails((old) => {
-      return { ...old, [name]: value };
-    });
-  };
-
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
-  // console.log(restaurantDetails);
 
-  const sellerDetails = useSelector((state) => state?.user?.sellerDetails);
-
+  const submit = (data) => {
+    console.log("here");
+    saveRestaurantDetails(data);
+  };
+  console.log(errors);
   useEffect(() => {
-    if (sellerDetails?.restaurantDetails && sellerDetails?.imagesSaved) {
-      navigate("/seller/sellerDashboard");
+    const curIndex = parseInt(searchParams.get("index"));
+    if (curIndex === 2) {
+      setIndex(curIndex);
     }
-    if (sellerDetails?.restaurantDetails) {
-      setRestaurantDetails((old) => {
-        return { ...old, ...sellerDetails?.restaurantDetails };
-      });
-    }
-    if (!sellerDetails?.imagesSaved) {
-      setIndex(2);
-    }
-  }, [sellerDetails]);
-
+  }, [searchParams, index]);
   return (
     <div className={styles.setup_page}>
       <div className={styles.heading_bg}></div>
@@ -88,34 +85,42 @@ export default function SetUp() {
           <span>Setup your restaurant</span>
         </div>
         <div className="container bg-white rounded shadow border  py-3 text-dark">
-          <Carousel
-            activeIndex={index}
-            onSelect={handleSelect}
-            interval={null}
-            controls={false}
-            indicatorLabels={false}
-            indicators={false}
-          >
-            <Carousel.Item>
-              <RestaurantDetails
-                handleRestaurantDetails={handleRestaurantDetails}
-                restaurantDetails={restaurantDetails}
-                setIndex={setIndex}
-                handleHookFormDetails={handleHookFormDetails}
-              />
-            </Carousel.Item>
-            <Carousel.Item>
-              <RestaurantLocationDetails
-                setIndex={setIndex}
-                handleRestaurantDetails={handleRestaurantDetails}
-                restaurantDetails={restaurantDetails}
-                saveRestaurantDetails={saveRestaurantDetails}
-              />
-            </Carousel.Item>
-            <Carousel.Item>
-              <RestaurantImages setIndex={setIndex} />
-            </Carousel.Item>
-          </Carousel>
+          {" "}
+          <form action="" onSubmit={handleSubmit(submit)}>
+            <Carousel
+              activeIndex={index}
+              onSelect={handleSelect}
+              interval={null}
+              controls={false}
+              indicatorLabels={false}
+              indicators={false}
+            >
+              <Carousel.Item>
+                <RestaurantDetails
+                  setValue={setValue}
+                  state={watch()}
+                  errors={errors}
+                  register={register}
+                  setIndex={setIndex}
+                />
+              </Carousel.Item>
+              <Carousel.Item>
+                <RestaurantLocationDetails
+                  setValue={setValue}
+                  state={watch()}
+                  errors={errors}
+                  register={register}
+                  setIndex={setIndex}
+                  saveRestaurantDetails={saveRestaurantDetails}
+                />
+                <button type="submit">Submit</button>
+              </Carousel.Item>
+
+              <Carousel.Item>
+                <RestaurantImages index={index} setIndex={setIndex} />
+              </Carousel.Item>
+            </Carousel>{" "}
+          </form>
         </div>
       </div>
     </div>

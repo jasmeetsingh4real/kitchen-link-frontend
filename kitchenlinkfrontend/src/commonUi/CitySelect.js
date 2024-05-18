@@ -33,9 +33,9 @@ export const CitySelect = (props) => {
     if (
       props.selectedCountry &&
       props.selectedState &&
-      props.selectedCountry.code &&
+      // props.selectedCountry.code &&
       props.selectedCountry.id &&
-      props.selectedState.code &&
+      // props.selectedState.code &&
       props.selectedState.id
     ) {
       getCities();
@@ -43,6 +43,19 @@ export const CitySelect = (props) => {
       setCities([]);
     }
   }, [props.selectedCountry, props.selectedState]);
+
+  useEffect(() => {
+    if (cities.length > 0 && props.selectedCityId) {
+      const selectedCity = cities.find((city) => {
+        if (city.value === props.selectedCityId) {
+          return true;
+        }
+      });
+      if (selectedCity) {
+        setSelectedOption(selectedCity);
+      }
+    }
+  }, [cities, props.selectedCityId]);
 
   return (
     <Select

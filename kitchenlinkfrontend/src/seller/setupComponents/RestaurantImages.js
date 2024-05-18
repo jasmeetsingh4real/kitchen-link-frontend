@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import uploadicon from "../../assets/restaurant/uploadicon.png";
 import { sellerAxios } from "../../axios/sellerAxios";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { userActions } from "../../slices/userSlice";
 export const RestaurantImages = (props) => {
   const [showUploadImagePopup, setShowUploadImagePopup] = useState(false);
@@ -29,6 +29,7 @@ export const RestaurantImages = (props) => {
 
           temp.push({
             imgSrc: response?.default,
+
             imageName: imgObj?.fileName,
             id: imgObj?.id,
           });
@@ -54,18 +55,16 @@ export const RestaurantImages = (props) => {
     setLoading(false);
   };
 
-  const savedRestaurantDetails = useSelector(
-    (state) => state?.user?.sellerDetails?.restaurantDetails
-  );
   useEffect(() => {
-    getImages();
-  }, []);
-  useEffect(() => {
-    if (!savedRestaurantDetails?.id) {
-      toast.info("Please complete the setup first.");
-      props.setIndex(0);
+    if (props.index == 2) {
+      getImages();
     }
-  }, [savedRestaurantDetails]);
+  }, [props.index]);
+  // useEffect(() => {
+  //   if (!savedRestaurantDetails?.id) {
+  //     props.setIndex(0);
+  //   }
+  // }, [savedRestaurantDetails]);
 
   return (
     <div className={`row ${styles.restaurantDetailsForm}`}>
@@ -143,7 +142,7 @@ export const RestaurantImages = (props) => {
         )}
       </div>
       <div className="text-end">
-        {images.length === 2 && (
+        {images.length > 2 && (
           <button className="btn btn-sm px-3 btn-success" onClick={submit}>
             Next
           </button>

@@ -52,7 +52,6 @@ export default function SignUpPage() {
         toast.success("User created successfully");
         isSeller ? navigate("/seller/sellerLogin") : navigate("/login");
       }
-      console.log(apiRes.data.errorMessage);
 
       if (!apiRes.data.success) {
         throw new Error(apiRes.data.errorMessage || "something went wrong");

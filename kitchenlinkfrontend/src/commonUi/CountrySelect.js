@@ -8,7 +8,7 @@ export const CountrySelect = (props) => {
   const [countries, setCountries] = useState([]);
   let id = null;
 
-  const getCountries = async (props) => {
+  const getCountries = async () => {
     try {
       const apiRes = await appAxios.post("/common/getCountriesByName", {
         keyword,
@@ -32,6 +32,20 @@ export const CountrySelect = (props) => {
       );
     }
   };
+
+  const getCountryById = async () => {
+    const apiRes = await appAxios.post("/common/getCountryById", {
+      id: props.countryId,
+    });
+    if (apiRes.data.success) {
+      setSelectedOption(apiRes.data.result);
+    }
+  };
+  useEffect(() => {
+    if (props.countryId) {
+      getCountryById();
+    }
+  }, [props.countryId]);
   useEffect(() => {
     clearTimeout(id);
     id = setTimeout(() => {

@@ -15,13 +15,13 @@ export const SellerDashboard = () => {
   const sellerDetails = useSelector((state) => state?.user?.sellerDetails);
 
   useEffect(() => {
-    if (!sellerDetails?.restaurantDetails && !sellerDetails?.imagesSaved) {
-      toast.info("Please complete the setup first.");
+    if (!sellerDetails?.restaurantDetails || !sellerDetails?.imagesSaved) {
       navigate("/seller/setup");
     }
   }, [sellerDetails]);
   useEffect(() => {
-    navigate(`${sellerDashbordTabs.EDIT_RESTAURANT_DETAILS}`);
+    if (sellerDetails?.restaurantDetails && sellerDetails?.imagesSaved)
+      navigate(`${sellerDashbordTabs.EDIT_RESTAURANT_DETAILS}`);
   }, []);
   return (
     <div>

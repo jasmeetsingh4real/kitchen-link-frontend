@@ -1,3 +1,7 @@
+.uploadedImages {
+  margin: 50px 0;
+}
+
 .restDetails {
   color: rgb(80, 80, 80);
 }
@@ -17,4 +21,37 @@
   margin-right: 10px;
   border-radius: 5px;
   color: rgb(77, 77, 77);
+}
+
+.imageContainer {
+  position: relative;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 190px;
+}
+
+.r_img {
+  background-color: black;
+  height: 150px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.r_img img {
+  height: 100%;
+  width: 100%;
+}
+
+.deleteBtn {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }

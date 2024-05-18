@@ -1,6 +1,6 @@
 export const AppInput = (props) => {
   return (
-    <div className="text-start">
+    <div className="text-start mb-2">
       <label className="small text-start small">
         {props.label}
         {props.required ? <span className="text-danger">*</span> : null}
@@ -9,10 +9,10 @@ export const AppInput = (props) => {
         {...props.register(props.name, {
           required: props?.required ? true : false,
         })}
+        defaultValue={props?.value}
         type="text"
         className="form-control"
         name={props.name}
-        value={props?.value}
         onChange={props.onChange ? props.onChange : () => {}}
       />
       {props.errors?.[props.name] && (

@@ -12,7 +12,7 @@ export const SellerNavBar = () => {
           </i>
         </h4>
       </div>
-      <div className="d-flex">
+      <div className="d-flex align-items-center justify-content-center">
         <span className={styles.userLogo}> {sellerDetails?.fullName[0]}</span>
         <span className="text-capitalize">{sellerDetails?.fullName}</span>
       </div>

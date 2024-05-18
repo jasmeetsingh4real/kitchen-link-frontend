@@ -31,7 +31,7 @@ Axios.interceptors.response.use(
   },
   (error) => {
     let errorMessage = "Something went wrong, Pleast try again later.";
-    if (error.response.status === 500) {
+    if (error?.response?.status === 500) {
       errorMessage =
         "Please check you internet connection, and try again later.";
     }

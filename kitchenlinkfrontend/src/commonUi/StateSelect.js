@@ -30,10 +30,11 @@ export const StateSelect = (props) => {
       console.log(err.message || "Something went wrong while fetching states.");
     }
   };
+
   useEffect(() => {
     if (
       props.selectedCountry &&
-      props.selectedCountry.code &&
+      // props.selectedCountry.code &&
       props.selectedCountry.id
     ) {
       getStates();
@@ -42,6 +43,18 @@ export const StateSelect = (props) => {
     }
   }, [props.selectedCountry]);
 
+  useEffect(() => {
+    if (states.length > 0 && props.stateId) {
+      const selectedState = states.find((state) => {
+        if (state.value.id === props.stateId) {
+          return true;
+        }
+      });
+      if (selectedState) {
+        setSelectedOption(selectedState);
+      }
+    }
+  }, [states, props.stateId]);
   return (
     <Select
       menuPortalTarget={document.body}

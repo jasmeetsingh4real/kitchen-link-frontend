@@ -107,7 +107,7 @@ export default function LoginPage() {
                   navigate("/createAccount");
                 }}
               >
-                Don't have an account?{" "}
+                Don't have an account?
                 <a href="#" color="#1D4A6A">
                   SignUp now
                 </a>
@@ -119,7 +119,7 @@ export default function LoginPage() {
                   navigate("/seller/sellerLogin");
                 }}
               >
-                login with your seller account{" "}
+                login with your seller account
               </p>
             </div>
           </form>
