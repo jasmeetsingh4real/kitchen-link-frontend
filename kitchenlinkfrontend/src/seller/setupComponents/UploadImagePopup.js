@@ -40,6 +40,9 @@ export const UploadImagePopup = (props) => {
         throw new Error(response?.data?.errorMessage || "something went wrong");
       }
     } catch (error) {
+      toast.warning(
+        "something went wrong, please try again or choose a different image"
+      );
       console.error("Error uploading image: ", error);
     }
   };

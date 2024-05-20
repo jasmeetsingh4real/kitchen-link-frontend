@@ -32,8 +32,9 @@ export const EditRestaurantDetailsPopup = (props) => {
       const apiRes = await sellerAxios.post("/master/createRestaurant", data);
       if (apiRes.data.success) {
         dispatch(userActions.setSellerRestaurant(apiRes.data.data));
-        toast.success("Details saved");
+        props.getRestaurantLocation();
         props.onHide();
+        toast.success("Details saved");
       } else {
         throw new Error(apiRes.data.errorMessage || "Something went wrong");
       }

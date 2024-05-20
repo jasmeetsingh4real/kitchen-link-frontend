@@ -36,13 +36,14 @@ export const CitySelect = (props) => {
       // props.selectedCountry.code &&
       props.selectedCountry.id &&
       // props.selectedState.code &&
-      props.selectedState.id
+      props.selectedState.id &&
+      keyword.trim().length > 0
     ) {
       getCities();
     } else {
       setCities([]);
     }
-  }, [props.selectedCountry, props.selectedState]);
+  }, [props.selectedCountry, props.selectedState, keyword]);
 
   useEffect(() => {
     if (cities.length > 0 && props.selectedCityId) {
@@ -56,6 +57,19 @@ export const CitySelect = (props) => {
       }
     }
   }, [cities, props.selectedCityId]);
+
+  useEffect(() => {
+    if (
+      props.selectedCountry &&
+      props.selectedState &&
+      // props.selectedCountry.code &&
+      props.selectedCountry.id &&
+      // props.selectedState.code &&
+      props.selectedState.id
+    ) {
+      getCities();
+    }
+  }, []);
 
   return (
     <Select

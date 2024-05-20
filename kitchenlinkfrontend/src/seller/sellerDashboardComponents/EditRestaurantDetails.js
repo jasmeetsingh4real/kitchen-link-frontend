@@ -211,6 +211,7 @@ export const EditRestaurantDetails = () => {
       />
       {showEditRestaurantDetailsPopup && (
         <EditRestaurantDetailsPopup
+          getRestaurantLocation={getRestaurantLocation}
           show={showEditRestaurantDetailsPopup}
           onHide={() => setShowEditRestaurantDetailsPopup(false)}
         />

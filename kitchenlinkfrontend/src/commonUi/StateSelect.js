@@ -35,13 +35,14 @@ export const StateSelect = (props) => {
     if (
       props.selectedCountry &&
       // props.selectedCountry.code &&
-      props.selectedCountry.id
+      props.selectedCountry.id &&
+      keyword.trim().length > 0
     ) {
       getStates();
     } else {
       setStates([]);
     }
-  }, [props.selectedCountry]);
+  }, [props.selectedCountry, keyword]);
 
   useEffect(() => {
     if (states.length > 0 && props.stateId) {
@@ -55,6 +56,13 @@ export const StateSelect = (props) => {
       }
     }
   }, [states, props.stateId]);
+
+  useEffect(() => {
+    if (props.selectedCountry && props.selectedCountry.id) {
+      getStates();
+    }
+  }, []);
+
   return (
     <Select
       menuPortalTarget={document.body}
