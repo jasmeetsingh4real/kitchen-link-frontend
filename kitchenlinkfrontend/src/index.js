@@ -21,7 +21,7 @@ import { LogoutSeller } from "./seller/LogoutSeller";
 import { UserLogout } from "./screens/UserLogout";
 import SetUp from "./seller/SetUp";
 import { EditRestaurantDetails } from "./seller/sellerDashboardComponents/EditRestaurantDetails";
-import { EditMenu } from "./seller/sellerDashboardComponents/EditMenu";
+import { EditFoodMenu } from "./seller/sellerDashboardComponents/EditFoodMenu";
 
 const router = createBrowserRouter(
   [
@@ -91,8 +91,8 @@ const router = createBrowserRouter(
                   element: <EditRestaurantDetails />,
                 },
                 {
-                  path: "editMenu",
-                  element: <EditMenu />,
+                  path: "editFoodMenu",
+                  element: <EditFoodMenu />,
                 },
               ],
             },

@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./restaurantform.module.css";
-import { UploadImagePopup } from "./UploadImagePopup";
 import { useEffect, useState } from "react";
 import uploadicon from "../../assets/restaurant/uploadicon.png";
 import { sellerAxios } from "../../axios/sellerAxios";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../slices/userSlice";
+import { UploadImagePopup } from "../../components/UploadImagePopup";
 export const RestaurantImages = (props) => {
   const [showUploadImagePopup, setShowUploadImagePopup] = useState(false);
   const [images, setImages] = useState([]);

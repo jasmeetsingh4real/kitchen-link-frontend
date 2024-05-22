@@ -10,7 +10,7 @@ export const AppInput = (props) => {
           required: props?.required ? true : false,
         })}
         defaultValue={props?.value}
-        type="text"
+        type={props.type || "text"}
         className="form-control"
         name={props.name}
         onChange={props.onChange ? props.onChange : () => {}}

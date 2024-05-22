@@ -3,7 +3,7 @@ import styles from "./editRestaurantDetails.module.css";
 import { useSelector } from "react-redux";
 import { sellerAxios } from "../../axios/sellerAxios";
 import { useEffect, useState } from "react";
-import { UploadImagePopup } from "../setupComponents/UploadImagePopup";
+import { UploadImagePopup } from "../../components/UploadImagePopup";
 import { toast } from "react-toastify";
 import { EditRestaurantDetailsPopup } from "./EditRestaurantDetailsPopup";
 
@@ -67,7 +67,7 @@ export const EditRestaurantDetails = () => {
   };
 
   useEffect(() => {
-    if (restaurantDetails && restaurantDetails.id) {
+    if (restaurantDetails && restaurantDetails?.id) {
       getRestaurantLocation();
       getImages();
     }

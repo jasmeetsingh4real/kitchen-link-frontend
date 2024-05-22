@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import styles from "./sellerDashboard.module.css";
 const sellerDashbordTabs = {
   EDIT_RESTAURANT_DETAILS: "editRestaurantDetails",
-  EDIT_MENU: "editMenu",
+  EDIT_FOOD_MENU: "editFoodMenu",
 };
 export const SellerDashboard = () => {
   const [key, setKey] = useState(sellerDashbordTabs.EDIT_RESTAURANT_DETAILS);
@@ -54,13 +54,14 @@ export const SellerDashboard = () => {
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link
-                  eventKey={sellerDashbordTabs.EDIT_MENU}
+                  eventKey={sellerDashbordTabs.EDIT_FOOD_MENU}
                   className="p-0"
                 >
                   <div
-                    onClick={() => setKey(sellerDashbordTabs.EDIT_MENU)}
+                    onClick={() => setKey(sellerDashbordTabs.EDIT_FOOD_MENU)}
                     className={`${styles.tab} ${
-                      key === sellerDashbordTabs.EDIT_MENU && styles.activeTab
+                      key === sellerDashbordTabs.EDIT_FOOD_MENU &&
+                      styles.activeTab
                     }`}
                   >
                     Food Menu

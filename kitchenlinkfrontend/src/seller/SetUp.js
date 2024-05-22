@@ -64,7 +64,6 @@ export default function SetUp() {
   };
 
   const submit = (data) => {
-    console.log("here");
     saveRestaurantDetails(data);
   };
   console.log(errors);

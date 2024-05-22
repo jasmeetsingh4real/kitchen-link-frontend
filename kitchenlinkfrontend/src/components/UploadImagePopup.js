@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import styles from "./restaurantform.module.css";
+import styles from "../seller/setupComponents/restaurantform.module.css";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
