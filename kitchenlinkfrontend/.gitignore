@@ -6,6 +6,7 @@
 .pnp.js
 
 src/ImageUploads/RestaurantImages/*
+src/ImageUploads/FoodItemImages/*
 
 # testing
 /coverage

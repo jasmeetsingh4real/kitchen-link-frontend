@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { EnumFoodItemCategory } from "../seller/sellerDashboardComponents/AddOrEditFoodItemPopup";
 import styles from "./foodItemCategorySelect.module.css";
 import { sellerAxios } from "../axios/sellerAxios";
+import { FoodCategoryLogo } from "../commonUi/FoodCategoryLogo";
 export const FoodItemCategorySelect = (props) => {
-  const [selectedItem, setSelectedItem] = useState(props.selected || null);
+  const [selectedItem, setSelectedItem] = useState(props.selected);
   const [customCategories, setCustomCategories] = useState([]);
 
   const getCustomCategories = async () => {
@@ -21,7 +22,9 @@ export const FoodItemCategorySelect = (props) => {
       props.onChange(selectedItem);
     }
   }, [selectedItem]);
-
+  useEffect(() => {
+    setSelectedItem(props.selected);
+  }, [props.selected]);
   return (
     <div>
       <label htmlFor="" className="small">
@@ -45,7 +48,7 @@ export const FoodItemCategorySelect = (props) => {
                 }`}
                 onClick={() => setSelectedItem(val)}
               >
-                {val}
+                {val} <FoodCategoryLogo category={val} />
               </div>
             </div>
           );
@@ -62,7 +65,7 @@ export const FoodItemCategorySelect = (props) => {
                   }`}
                   onClick={() => setSelectedItem(val)}
                 >
-                  {val}
+                  {val} <FoodCategoryLogo category={val} />
                 </div>
               </div>
             );

@@ -13,9 +13,8 @@ export const UploadImagePopup = (props) => {
     setPrev(URL.createObjectURL(event.target.files[0]));
   };
 
-  const authToken = Cookies.get("sellerAuthToken");
-
   const uploadImage = async () => {
+    const authToken = Cookies.get("sellerAuthToken");
     const formData = new FormData();
     formData.append("image", selectedFile);
 

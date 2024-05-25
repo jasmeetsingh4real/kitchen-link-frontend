@@ -1,0 +1,87 @@
+.foodItem {
+  position: relative;
+  background: rgba(236, 236, 236, 0.315);
+}
+.editButton {
+  width: max-content;
+  position: absolute;
+  top: 5px;
+  right: 0;
+}
+.foodItemImage {
+  height: 150px;
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 10px;
+  position: relative;
+}
+
+.foodItemBadge {
+  top: 5px;
+  right: 5px;
+  position: absolute;
+}
+
+.foodItemImage img {
+  width: 100%;
+}
+.category {
+  border: 1px solid rgb(212, 212, 212);
+  font-size: 12px;
+  margin-left: 10px;
+  background: white;
+  border-radius: 5px;
+  color: rgb(65, 65, 65);
+  font-weight: 400;
+  padding: 3px 10px;
+}
+
+.foodItemImagePreview_Placeholder {
+  height: 100px;
+  display: flex;
+  color: gray;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 5px solid gray;
+  border-radius: 20px;
+  width: 200px;
+  flex-direction: column;
+  transition: 0.3s ease-in-out;
+  padding: 10px;
+  font-size: 12px;
+}
+.foodItemImagePreview_Placeholder:hover {
+  background-color: rgba(128, 128, 128, 0.137);
+}
+.foodItemImage_btn {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+.imgPrev {
+  height: 100px;
+  width: 200px;
+  border-radius: 20px;
+  border: 5px solid gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.imgPrev img {
+  height: auto;
+  width: 100%;
+}
+.deleteImgPrev {
+  font-size: 10px;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  border-radius: 10px;
+}

@@ -54,7 +54,7 @@ export const EditRestaurantDetails = () => {
   const deleteImage = async (id, imageName) => {
     if (loading) return;
     setLoading(true);
-    const apiRes = await sellerAxios.post("/master/deleteImage", {
+    const apiRes = await sellerAxios.post("/master/deleteRestaurantImage", {
       id,
       imageName,
     });
