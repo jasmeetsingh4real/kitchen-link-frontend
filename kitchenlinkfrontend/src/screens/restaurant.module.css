@@ -1,0 +1,38 @@
+.restaurantCard {
+  height: 300px;
+}
+
+.restaurantImage {
+  border-radius: 10px;
+  height: 150px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.restaurantImage img {
+  min-width: 100%;
+  height: auto;
+}
+.restaurantName {
+  height: 30px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  color: white;
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.706),
+    rgba(0, 0, 0, 0.563),
+    rgba(0, 0, 0, 0)
+  );
+  width: 100%;
+  padding-left: 10px;
+}
+.restaurantCardDetails {
+  height: 150px;
+}
+.greyImage {
+  filter: grayscale();
+}

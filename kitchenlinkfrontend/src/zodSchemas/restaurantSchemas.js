@@ -7,7 +7,7 @@ export const RestaurantDetailsSchema = z.object({
 });
 
 export const EditRestaurantDetailsSchema = z.object({
-  id: z.number().optional(),
+  id: z.string().optional(),
   restaurantName: z.string().min(1, "PLease enter a valid Restaurant name"),
   openingTime: z.any().optional(),
   closingTime: z.any().optional(),

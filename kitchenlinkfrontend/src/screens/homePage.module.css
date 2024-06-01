@@ -1,0 +1,50 @@
+.homePage {
+}
+.homePageHeader {
+  padding: 0 100px;
+  padding-top: 100px;
+  height: 70vh;
+  background-image: linear-gradient(to left, #000000a8, #00000000),
+    url(../assets/homepage/homepagebg.jpg);
+  background-size: cover;
+}
+.headerFoodItemImage {
+  width: 100%;
+  background: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: infinite-rotate 60s linear infinite;
+}
+.headerFoodItemImage img {
+  height: 400px;
+}
+
+.homePageActions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  flex-direction: column;
+}
+.homePageActions h1 {
+  font-weight: 800;
+  font-size: 50px;
+}
+
+.reataurantSearchInput {
+  display: flex;
+  width: 100%;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+@keyframes infinite-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

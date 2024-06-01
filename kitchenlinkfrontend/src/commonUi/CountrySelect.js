@@ -6,7 +6,6 @@ export const CountrySelect = (props) => {
   const [selectedOption, setSelectedOption] = useState();
   const [keyword, setKeyword] = useState("");
   const [countries, setCountries] = useState([]);
-  let id = null;
 
   const getCountries = async () => {
     try {
@@ -46,15 +45,18 @@ export const CountrySelect = (props) => {
       getCountryById();
     }
   }, [props.countryId]);
+
+  let timerId = null;
+
   useEffect(() => {
-    clearTimeout(id);
-    id = setTimeout(() => {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => {
       if (keyword.trim()) {
         getCountries();
       }
     }, 400);
     return () => {
-      clearTimeout(id);
+      clearTimeout(timerId);
     };
   }, [keyword]);
 

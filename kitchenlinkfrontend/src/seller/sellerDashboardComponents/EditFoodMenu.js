@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { AddOrEditFoodItemPopup } from "./AddOrEditFoodItemPopup";
 import { sellerAxios } from "../../axios/sellerAxios";
-import img from "../../ImageUploads/FoodItemImages/17164973137571465939620872.jpeg";
 import styles from "./foodItems.module.css";
 import { FoodCategoryLogo } from "../../commonUi/FoodCategoryLogo";
 import { toast } from "react-toastify";

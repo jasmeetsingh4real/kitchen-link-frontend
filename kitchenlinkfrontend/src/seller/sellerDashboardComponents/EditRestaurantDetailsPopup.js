@@ -42,6 +42,7 @@ export const EditRestaurantDetailsPopup = (props) => {
       toast.error(err.message);
     }
   };
+
   return (
     <Modal
       onHide={props.onHide}
@@ -87,7 +88,7 @@ export const EditRestaurantDetailsPopup = (props) => {
                 showTimeOnly={true}
                 selected={state.openingTime}
                 label="Opening Time"
-                onChange={(date) => setValue("openingTime", date)}
+                onChange={(date) => setValue("openingTime", new Date(date))}
               />
               {errors && errors?.openingTime ? (
                 <p className="small m-0 p-0 text-danger">
@@ -100,7 +101,7 @@ export const EditRestaurantDetailsPopup = (props) => {
             <div className="col-6">
               <CustomDatePicker
                 showTimeOnly={true}
-                onChange={(date) => setValue("closingTime", date)}
+                onChange={(date) => setValue("closingTime", new Date(date))}
                 selected={state.closingTime}
                 label="Closing Time"
               />
@@ -146,7 +147,9 @@ export const EditRestaurantDetailsPopup = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={props.onHide}>Close</Button>
-          <button className="btn btn-success">Submit</button>
+          <button type="submit" className="btn btn-success">
+            Submit
+          </button>
         </Modal.Footer>
       </form>
     </Modal>

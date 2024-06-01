@@ -22,6 +22,7 @@ import { UserLogout } from "./screens/UserLogout";
 import SetUp from "./seller/SetUp";
 import { EditRestaurantDetails } from "./seller/sellerDashboardComponents/EditRestaurantDetails";
 import { EditFoodMenu } from "./seller/sellerDashboardComponents/EditFoodMenu";
+import { RestaurantList } from "./screens/RestaurantList";
 
 const router = createBrowserRouter(
   [
@@ -30,7 +31,15 @@ const router = createBrowserRouter(
       element: <App />,
       children: [
         {
-          path: "/",
+          index: true,
+          element: <HomePage />,
+        },
+        {
+          path: ":stateName",
+          element: <RestaurantList />,
+        },
+        {
+          path: "/login",
           element: (
             <GuestRoute>
               <LoginPage />
@@ -40,14 +49,6 @@ const router = createBrowserRouter(
         {
           path: "createAccount",
           element: <SignUpPage />,
-        },
-        {
-          path: "home",
-          element: (
-            <ProtectedRoute>
-              <HomePage />
-            </ProtectedRoute>
-          ),
         },
         {
           path: "logout",

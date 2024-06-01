@@ -65,6 +65,7 @@ export const StateSelect = (props) => {
 
   return (
     <Select
+      placeholder="Select State"
       menuPortalTarget={document.body}
       styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
       value={selectedOption}
