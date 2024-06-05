@@ -1,0 +1,84 @@
+.restaurantCarusal {
+  margin-top: 10px;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  border-radius: 10px;
+  z-index: 0;
+}
+.carusalImage {
+  height: 60vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.carusalImage img {
+  height: auto;
+  width: 100%;
+}
+.restaurantName {
+  z-index: 0;
+  bottom: 0px;
+  color: white;
+  position: absolute;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  background-image: linear-gradient(
+    to top,
+    black,
+    rgba(0, 0, 0, 0.629),
+    rgba(0, 0, 0, 0)
+  );
+}
+.restaurantTiming {
+  font-size: 12px;
+  color: rgb(236, 236, 236);
+}
+.greyImage {
+  filter: grayscale();
+}
+.foodItemsHeading {
+  padding: 10px;
+  font-size: 30px;
+  border-bottom: 1px solid lightgray;
+}
+.fooditemsList {
+  overflow-y: scroll;
+  height: 80vh;
+}
+.categoryHeading {
+  border-bottom: 1px solid lightgray;
+  padding: 10px 0;
+}
+.foodItemImage {
+  position: relative;
+  height: 120px;
+  width: 120px;
+  overflow: hidden;
+  border-radius: 10px;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.foodItemImage img {
+  width: 100%;
+}
+.dietryInfo {
+  height: 15px;
+  width: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  position: absolute;
+  font-size: 8px;
+  /* border-radius: 5px; */
+  /* border: 1px solid lightgray; */
+  top: 5px;
+  right: 5px;
+}

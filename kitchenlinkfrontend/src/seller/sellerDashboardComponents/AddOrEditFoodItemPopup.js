@@ -136,7 +136,7 @@ export const AddOrEditFoodItemPopup = (props) => {
             <div
               className={`my-4 col-12 d-flex flex-column justify-content-center align-items-center text-center`}
             >
-              {!prev && !props.foodItemData.imgSrc ? (
+              {!prev && !props.foodItemData?.imgSrc ? (
                 <label htmlFor="foodItemImage" role="button">
                   <div
                     className={` ${styles.foodItemImagePreview_Placeholder}`}

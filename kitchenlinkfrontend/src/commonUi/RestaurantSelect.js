@@ -5,7 +5,7 @@ export const RestaurantSelect = (props) => {
   const [restaurants, setRestaurants] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [selectedOption, setSelectedOption] = useState({
-    label: -undefined,
+    label: undefined,
     value: undefined,
   });
   const getRestaurants = async () => {

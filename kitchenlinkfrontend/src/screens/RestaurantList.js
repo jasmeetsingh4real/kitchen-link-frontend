@@ -6,18 +6,21 @@ import styles from "./restaurant.module.css";
 import { FoodCategoryLogo } from "../commonUi/FoodCategoryLogo";
 import moment from "moment";
 import { isRestaurantOpen } from "../helper/isRestaurantOpen";
+import { useLocation, useNavigate } from "react-router-dom";
 export const RestaurantList = () => {
   const [restaurants, setRestaurants] = useState([]);
-
+  const [searchedRestaurantName, setSearchedRestaurantName] = useState("");
+  const location = useLocation();
+  console.log(location);
   const searchedRestaurantDetails = useSelector(
     (state) => state?.searchDetails?.searchedState
   );
-
-  const getRestaurantsByStateId = async (stateId) => {
+  const navigate = useNavigate();
+  const getRestaurantsByStateName = async (stateName) => {
     try {
       const apiRes = await axios.post(
-        `${process.env.REACT_APP_API_URL}/common/getRestaurantsByStateId`,
-        { stateId }
+        `${process.env.REACT_APP_API_URL}/common/getRestaurantsByStateName`,
+        { stateName: decodeURIComponent(stateName) }
       );
       if (apiRes?.data?.success) {
         for (let res of apiRes.data.result) {
@@ -40,19 +43,18 @@ export const RestaurantList = () => {
     }
   };
   useEffect(() => {
-    if (searchedRestaurantDetails?.value?.id) {
-      getRestaurantsByStateId(searchedRestaurantDetails.value.id);
+    if (location.pathname.slice(1)) {
+      setSearchedRestaurantName(decodeURIComponent(location.pathname.slice(1)));
+      getRestaurantsByStateName(location.pathname.slice(1));
     }
-  }, [searchedRestaurantDetails]);
+  }, [location]);
 
   return (
     <div className="container">
-      <h4 className="py-3 ">
-        Restaurants in {searchedRestaurantDetails?.label}
-      </h4>
+      <h4 className="py-3 ">Restaurants in {searchedRestaurantName}</h4>
 
       <div className="row">
-        {restaurants.length &&
+        {restaurants.length > 0 &&
           restaurants.map((restaurant) => {
             const isOpen = isRestaurantOpen({
               openingTime: restaurant.openingTime,
@@ -106,7 +108,12 @@ export const RestaurantList = () => {
                         {moment(restaurant.closingTime).format("hh:mm A")}
                       </div>
                       <div>
-                        <button className="btn btn-sm btn-danger ">
+                        <button
+                          className="btn btn-sm btn-danger "
+                          onClick={() =>
+                            navigate(`restaurant?restId=${restaurant.id}`)
+                          }
+                        >
                           View
                           <i className="fa-solid fa-arrow-right ms-1"></i>
                         </button>

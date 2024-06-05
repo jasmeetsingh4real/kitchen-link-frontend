@@ -80,7 +80,7 @@ export const HomePage = () => {
                 <RestaurantSelect
                   stateId={selectedState.value && selectedState.value.id}
                   onChange={(val) => {
-                    navigate(`restaurants/${val.label}`);
+                    navigate(`restaurant?restId=${val.value}`);
                   }}
                 />
               </div>

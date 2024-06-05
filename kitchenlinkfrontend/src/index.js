@@ -23,6 +23,7 @@ import SetUp from "./seller/SetUp";
 import { EditRestaurantDetails } from "./seller/sellerDashboardComponents/EditRestaurantDetails";
 import { EditFoodMenu } from "./seller/sellerDashboardComponents/EditFoodMenu";
 import { RestaurantList } from "./screens/RestaurantList";
+import { SingleRestaurantPage } from "./screens/SingleRestaurantPage";
 
 const router = createBrowserRouter(
   [
@@ -37,6 +38,14 @@ const router = createBrowserRouter(
         {
           path: ":stateName",
           element: <RestaurantList />,
+        },
+        {
+          path: ":stateName/restaurant",
+          element: <SingleRestaurantPage />,
+        },
+        {
+          path: "/restaurant",
+          element: <SingleRestaurantPage />,
         },
         {
           path: "/login",
