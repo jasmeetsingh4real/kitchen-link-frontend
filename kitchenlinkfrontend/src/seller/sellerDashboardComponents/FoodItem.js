@@ -57,7 +57,7 @@ export const FoodItem = (props) => {
   }, [showFoodItemCollapse]);
   return (
     <div
-      className={`${styles.foodItem}  row border rounded p-2 mb-3 shadow shadow-sm`}
+      className={`${styles.foodItem}  row border rounded p-2 mb-3 shadow shadow-sm `}
     >
       <span className={styles.editButton}>
         <button

@@ -46,9 +46,20 @@
   font-size: 30px;
   border-bottom: 1px solid lightgray;
 }
+.foodItemsContainer {
+  height: 100vh;
+}
+.foodItemSidePanel {
+  max-height: 100%;
+  overflow-y: scroll;
+}
 .fooditemsList {
   overflow-y: scroll;
-  height: 80vh;
+  height: 100%;
+}
+.fooditemsList::-webkit-scrollbar,
+.foodItemSidePanel::-webkit-scrollbar {
+  display: none;
 }
 .categoryHeading {
   border-bottom: 1px solid lightgray;
@@ -65,6 +76,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .foodItemImage img {
   width: 100%;
 }
@@ -81,4 +93,18 @@
   /* border: 1px solid lightgray; */
   top: 5px;
   right: 5px;
+}
+.foodOptionImage {
+  position: relative;
+  height: 60px;
+  width: 60px;
+  overflow: hidden;
+  border-radius: 10px;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.foodOptionImage img {
+  width: 100%;
 }
