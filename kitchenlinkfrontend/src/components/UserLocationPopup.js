@@ -11,6 +11,7 @@ import { appAxios } from "../axios/appAxios";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { orderActions } from "../slices/userOrderSlice";
 export const UserLocationPopup = (props) => {
   const userDetails = useSelector((state) => state.user.userDetails);
   const [saveLocationDetails, setSaveLocationDetails] = useState(false); // this is a booleanused to identify weather to save users address in DB or not (for next order)
@@ -26,6 +27,7 @@ export const UserLocationPopup = (props) => {
     houseNo: "",
     streetNo: "",
   };
+  const navigate = useNavigate();
   const {
     watch,
     register,
@@ -38,7 +40,7 @@ export const UserLocationPopup = (props) => {
     defaultValues: initialValues,
   });
   const state = watch();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const getSavedLocation = async () => {
     const apiRes = await appAxios.get(
@@ -56,6 +58,7 @@ export const UserLocationPopup = (props) => {
   };
 
   const orderDetails = useSelector((state) => state.userOrder);
+
   const submit = async (data) => {
     if (
       !orderDetails?.totalAmount ||
@@ -72,7 +75,16 @@ export const UserLocationPopup = (props) => {
       orderItems: orderDetails.orderItems,
       saveLocationDetails, // this is a boolean used to identify weather to save users address in DB or not (for next order)
     });
+
+    if (apiRes?.data?.success && apiRes?.data?.result) {
+      navigate(`/checkout?orderId=${apiRes?.data?.result}`);
+      resetLocation();
+      dispatch(orderActions.clearUserOrder());
+    } else {
+      toast.error(apiRes?.data?.errorMessage || "Something went wrong");
+    }
   };
+
   const resetLocation = async () => {
     setLocationDetailsFound(false);
     setDeliveryAddress(undefined);

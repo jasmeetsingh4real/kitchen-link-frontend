@@ -1,10 +1,33 @@
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./checkoutpage.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { appAxios } from "../axios/appAxios";
+import { toast } from "react-toastify";
 export const CheckoutPage = () => {
   const [searchParams, setSerachParams] = useSearchParams();
   console.log(searchParams.get("orderId"));
+  const [orderDetails, setOrderDetails] = useState();
+  const [orderItems, setOrderItems] = useState([]);
+  const [deliveryAddress, setDeliveryAddress] = useState();
+  const navigate = useNavigate();
+  const getOrderDetails = async (orderId) => {
+    const apiRes = await appAxios.post("/user/getOrderDetails", { orderId });
+    if (apiRes?.data?.success) {
+      setOrderDetails(apiRes?.data?.result?.OrderInfo);
+      setOrderItems(apiRes?.data?.result?.orderItems);
+      setDeliveryAddress(apiRes?.data?.result?.OrderInfo.addressInfo);
+    } else {
+      toast.error(apiRes?.data?.errorMessage);
+    }
+  };
 
+  useEffect(() => {
+    if (searchParams.get("orderId")) {
+      getOrderDetails(searchParams.get("orderId"));
+    } else {
+      navigate("/");
+    }
+  }, [searchParams]);
   return (
     <div className={styles.CheckoutPage}>
       <div className="container pt-4">
@@ -13,16 +36,20 @@ export const CheckoutPage = () => {
           <div className="col-8 p-2">
             <div className="bg-white rounded py-4 p-5  ">
               <h5>
-                {" "}
                 <b>Delivery Address</b>
               </h5>
               <div className="mb-4">
+                <p className="mb-1 p-0 mt-0">{deliveryAddress?.userName}</p>
                 <p className="m-0">
-                  <i className="fa-solid fa-location-dot"></i> Lorem ipsum,
-                  dolor sit amet consectetur adipisicing elit.
+                  <i className="fa-solid fa-location-dot"></i>{" "}
+                  {deliveryAddress?.address} <br />
+                  <span className="small text-secondary">
+                    H.No: {deliveryAddress?.houseNo}, street:{" "}
+                    {deliveryAddress?.streetNo},
+                  </span>
                 </p>
                 <span className="small text-secondary">
-                  Pin, State , City ,Country
+                  {deliveryAddress?.pincode} {deliveryAddress?.locationString}
                 </span>
               </div>
               <div className="mb-4">
@@ -98,20 +125,19 @@ export const CheckoutPage = () => {
                 <h5 className="mb-3">
                   <b>Order Details</b>
                 </h5>
-                <div
-                  className={`${styles.orderItem} border my-2 rounded  shadow-sm`}
-                >
-                  <div className="d-flex">
-                    <div className={styles.checkoutPageImg}>
-                      <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0Lj3_8eh0xYQLDhyh1pYwOF6l00mL7hIfww&s"
-                        alt=""
-                      />
-                    </div>
-                    <div className="ms-2">Order Item name (qtx)</div>
-                  </div>
-                  <div>Price</div>
-                </div>
+                {orderItems.length > 0 &&
+                  orderItems.map((item, index) => {
+                    return (
+                      <div key={item.id} className={`${styles.orderItem}`}>
+                        <div className="d-flex">
+                          <div className="">
+                            {index + 1}. {item.name} ({item.quantity})
+                          </div>
+                        </div>
+                        <div>₹{item.totalAmount}</div>
+                      </div>
+                    );
+                  })}
               </div>
             </div>
           </div>
@@ -121,33 +147,33 @@ export const CheckoutPage = () => {
               <p className="mb-1 small d-flex justify-content-between">
                 <span>Amount:</span>
                 <span>
-                  <b>$788</b>
+                  <b> ₹{orderDetails?.totalAmount}</b>
                 </span>
               </p>
               <p className="mb-1 small d-flex justify-content-between">
                 <span>Discount:</span>
                 <span>
-                  <b>$0</b>
+                  <b>₹0</b>
                 </span>
               </p>
               <p className="mb-1 small d-flex justify-content-between">
                 <span>Dilevery Charges:</span>
                 <span>
-                  <b>$5</b>
+                  <b>₹0</b>
                 </span>
               </p>
               <hr />
               <p className="mb-1 small d-flex justify-content-between">
                 <span>Total Amount:</span>
                 <span>
-                  <b>$893</b>
+                  <b> ₹{orderDetails?.totalAmount}</b>
                 </span>
               </p>
               <p className={`small mt-4 text-secondary  ${styles.tandc}`}>
                 By clicking this you agree to our terms and conditions.
               </p>
               <button className={`btn btn-danger ${styles.checkoutBtn}`}>
-                Complete Payment
+                Proceed To Pay
               </button>
             </div>
           </div>

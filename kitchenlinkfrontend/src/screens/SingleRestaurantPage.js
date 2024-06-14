@@ -9,6 +9,8 @@ import { FoodCategoryLogo } from "../commonUi/FoodCategoryLogo";
 import { AddToOrderButton } from "../commonUi/AddToOrderButton";
 import { UserOrder } from "../components/UserOrder";
 import { UserLocationPopup } from "../components/UserLocationPopup";
+import { useDispatch, useSelector } from "react-redux";
+import { orderActions } from "../slices/userOrderSlice";
 
 export const itemType = {
   FOOD_ITEM: "food_item",
@@ -26,7 +28,12 @@ export const SingleRestaurantPage = () => {
   const [foodOptonsToShow, setFoodOptionsToShow] = useState(undefined);
   const [isOpen, setIsOpen] = useState();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const restaurantId = searchParams.get("restId");
+  const restaurantIdInRedux = useSelector(
+    (state) => state?.userOrder?.restaurantId
+  );
+
   const getRestaurantDetails = async (id) => {
     try {
       const apiRes = await axios.post(
@@ -106,7 +113,13 @@ export const SingleRestaurantPage = () => {
   useEffect(() => {
     if (restaurantId) {
       getRestaurantDetails(restaurantId);
-    } else navigate("/");
+      if (restaurantIdInRedux !== restaurantId) {
+        dispatch(orderActions.setRestaurantId(restaurantId));
+        dispatch(orderActions.clearUserOrder());
+      }
+    } else {
+      navigate("/");
+    }
   }, [searchParams]);
 
   useEffect(() => {
@@ -119,6 +132,7 @@ export const SingleRestaurantPage = () => {
       categoriseFoodItems(foodItems);
     }
   }, [foodItems]);
+
   return (
     <div className="container">
       <div className={styles.restaurantCarusal}>
