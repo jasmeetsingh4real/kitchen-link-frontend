@@ -1,7 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./userOrders.module.css";
 import { orderActions } from "../slices/userOrderSlice";
-export const UserOrder = () => {
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
+export const UserOrder = (props) => {
   const orderItems = useSelector((state) => state.userOrder.orderItems);
 
   const getTotalAmount = () => {
@@ -12,16 +16,39 @@ export const UserOrder = () => {
     return totalAmount;
   };
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const showLocationPopup = () => {
+    const authToken = Cookies.get("authToken");
+    if (!authToken) {
+      toast.warning("Please Login to create order");
+      navigate("/login");
+      return;
+    } else {
+      props.showLocationPopup();
+    }
+  };
+
+  useEffect(() => {
+    dispatch(orderActions.setTotalAmount(getTotalAmount()));
+  }, [orderItems]);
+
   return (
     <div className={styles.userOrders}>
-      {" "}
-      <div className={styles.checkout}>
-        Total Amount: <b>₹{getTotalAmount()}</b>
-        <br />
-        <button className={`mt-1 btn btn-danger ${styles.checkoutBtn}`}>
-          Proceed to pay <i className=" ms-2 small fa-solid fa-arrow-right"></i>
-        </button>
-      </div>
+      {orderItems.length > 0 ? (
+        <div className={styles.checkout}>
+          Total Amount: <b>₹{getTotalAmount()}</b>
+          <br />
+          <button
+            className={`mt-1 btn btn-danger ${styles.checkoutBtn}`}
+            onClick={showLocationPopup}
+          >
+            Place your order{" "}
+            <i className=" ms-2 small fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      ) : (
+        <p className="text-center">Add items to your order</p>
+      )}
       {orderItems.length > 0 &&
         orderItems.map((item) => {
           return (

@@ -24,6 +24,7 @@ import { EditRestaurantDetails } from "./seller/sellerDashboardComponents/EditRe
 import { EditFoodMenu } from "./seller/sellerDashboardComponents/EditFoodMenu";
 import { RestaurantList } from "./screens/RestaurantList";
 import { SingleRestaurantPage } from "./screens/SingleRestaurantPage";
+import { CheckoutPage } from "./screens/CheckoutPage";
 
 const router = createBrowserRouter(
   [
@@ -36,12 +37,21 @@ const router = createBrowserRouter(
           element: <HomePage />,
         },
         {
-          path: ":stateName",
-          element: <RestaurantList />,
+          path: "search",
+          children: [
+            {
+              path: ":stateName",
+              element: <RestaurantList />,
+            },
+            {
+              path: ":stateName/restaurant",
+              element: <SingleRestaurantPage />,
+            },
+          ],
         },
         {
-          path: ":stateName/restaurant",
-          element: <SingleRestaurantPage />,
+          path: "checkout",
+          element: <CheckoutPage />,
         },
         {
           path: "/restaurant",

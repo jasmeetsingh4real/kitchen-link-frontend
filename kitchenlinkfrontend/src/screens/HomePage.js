@@ -24,10 +24,9 @@ export const HomePage = () => {
 
   const handleStateSelect = async (value) => {
     dispatch(searchDetailsActions.setSearchedState(value));
-    navigate(value.label);
+    navigate(`search/${value.label}`);
   };
 
-  console.log(selectedState);
   return (
     <div className={styles.homePage}>
       <div className={styles.homePageHeader}>

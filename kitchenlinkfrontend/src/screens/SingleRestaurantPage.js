@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./SingleRestaurantPage.module.css";
 import moment from "moment";
 import { isRestaurantOpen } from "../helper/isRestaurantOpen";
 import { FoodCategoryLogo } from "../commonUi/FoodCategoryLogo";
 import { AddToOrderButton } from "../commonUi/AddToOrderButton";
 import { UserOrder } from "../components/UserOrder";
+import { UserLocationPopup } from "../components/UserLocationPopup";
 
 export const itemType = {
   FOOD_ITEM: "food_item",
@@ -15,6 +16,8 @@ export const itemType = {
 };
 
 export const SingleRestaurantPage = () => {
+  const [showLocationPopup, setShowLocationPopup] = useState(false);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [restaurntDetails, setRestaurntDetails] = useState(undefined);
   const [foodItems, setFoodItems] = useState([]);
@@ -22,6 +25,7 @@ export const SingleRestaurantPage = () => {
   const [categorisedFoodItems, setCategorisedFoodItems] = useState([]);
   const [foodOptonsToShow, setFoodOptionsToShow] = useState(undefined);
   const [isOpen, setIsOpen] = useState();
+  const navigate = useNavigate();
   const restaurantId = searchParams.get("restId");
   const getRestaurantDetails = async (id) => {
     try {
@@ -102,7 +106,7 @@ export const SingleRestaurantPage = () => {
   useEffect(() => {
     if (restaurantId) {
       getRestaurantDetails(restaurantId);
-    }
+    } else navigate("/");
   }, [searchParams]);
 
   useEffect(() => {
@@ -173,7 +177,7 @@ export const SingleRestaurantPage = () => {
                 );
               })}
           </div>
-          <UserOrder />
+          <UserOrder showLocationPopup={() => setShowLocationPopup(true)} />
         </div>
         <div className={`${styles.fooditemsList} col-9`}>
           {categorisedFoodItems.length > 0 &&
@@ -258,6 +262,14 @@ export const SingleRestaurantPage = () => {
             })}
         </div>
       </div>
+      <UserLocationPopup
+        cityId={restaurntDetails?.cityId}
+        restaurantId={restaurantId}
+        show={showLocationPopup}
+        onHide={() => setShowLocationPopup(false)}
+        selectedCountry={{ id: restaurntDetails?.countryId }}
+        selectedState={{ id: restaurntDetails?.stateId }}
+      />
     </div>
   );
 };

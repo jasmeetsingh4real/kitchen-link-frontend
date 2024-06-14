@@ -1,0 +1,58 @@
+.userLocationHeading {
+  position: relative;
+}
+.usserlocationCloseBtn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.autoLocation {
+  position: relative;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+  overflow: hidden;
+}
+.autoLocation img {
+  width: 100%;
+}
+.autoLocatonBtn {
+  position: absolute;
+}
+.savedLocation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+
+  flex-direction: column;
+}
+.userLocation {
+  position: relative;
+  margin-bottom: 5px;
+  width: 300px;
+  border: 1px solid rgb(203, 199, 199);
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  background-color: rgba(185, 185, 185, 0.178);
+}
+.alternateAddtessBtn {
+  margin-top: 5px;
+  width: 300px;
+  border: 1px solid rgb(203, 199, 199);
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgba(211, 211, 211, 0.115);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.deleteLocBtn {
+  top: 0px;
+  right: 5px;
+  color: rgb(219, 12, 12);
+  position: absolute;
+}

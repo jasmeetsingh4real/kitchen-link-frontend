@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   orderItems: [],
+  totalAmount: 0,
 };
 
 const userOrderSlice = createSlice({
@@ -32,6 +33,9 @@ const userOrderSlice = createSlice({
           (item) => item.itemId !== action.payload
         );
       }
+    },
+    setTotalAmount: (state, action) => {
+      state.totalAmount = action.payload;
     },
     clearUserOrder: (state, action) => {
       state.orderItems = [];

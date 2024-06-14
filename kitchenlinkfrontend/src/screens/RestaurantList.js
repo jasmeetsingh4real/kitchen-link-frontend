@@ -11,7 +11,7 @@ export const RestaurantList = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [searchedRestaurantName, setSearchedRestaurantName] = useState("");
   const location = useLocation();
-  console.log(location);
+
   const searchedRestaurantDetails = useSelector(
     (state) => state?.searchDetails?.searchedState
   );
@@ -42,10 +42,11 @@ export const RestaurantList = () => {
       console.log(err);
     }
   };
+
   useEffect(() => {
-    if (location.pathname.slice(1)) {
-      setSearchedRestaurantName(decodeURIComponent(location.pathname.slice(1)));
-      getRestaurantsByStateName(location.pathname.slice(1));
+    if (location.pathname.slice(8)) {
+      setSearchedRestaurantName(decodeURIComponent(location.pathname.slice(8)));
+      getRestaurantsByStateName(location.pathname.slice(8));
     }
   }, [location]);
 

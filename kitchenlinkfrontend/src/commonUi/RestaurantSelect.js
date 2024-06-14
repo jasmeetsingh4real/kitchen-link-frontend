@@ -12,7 +12,7 @@ export const RestaurantSelect = (props) => {
     const apiRes = await axios.post(
       `${process.env.REACT_APP_API_URL}/common/searchRestaurants`,
       {
-        stateId: props.stateId || 4007,
+        stateId: props.stateId || 4007, //state id of Haryana
         keyword,
       }
     );
@@ -27,7 +27,6 @@ export const RestaurantSelect = (props) => {
       setRestaurants(test);
     }
   };
-  console.log(restaurants);
   let timerId = undefined;
   useEffect(() => {
     clearTimeout(timerId);

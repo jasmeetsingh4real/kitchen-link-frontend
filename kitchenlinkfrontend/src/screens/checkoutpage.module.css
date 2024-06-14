@@ -1,0 +1,42 @@
+.CheckoutPage {
+  background-color: rgba(232, 232, 232, 0.461);
+  height: 100vh;
+}
+.paymentMethod {
+  background-color: rgba(237, 237, 237, 0.442);
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(158, 158, 158, 0.412);
+  padding: 10px;
+  max-width: 600px;
+}
+.checkoutPageImg {
+  padding: 3px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  background: #fff;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.orderItem {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.checkoutPageImg img {
+  height: 100%;
+}
+
+.checkoutBtn {
+  width: 100%;
+  border-radius: 0;
+  padding: 10px 0;
+}
+.tandc {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
