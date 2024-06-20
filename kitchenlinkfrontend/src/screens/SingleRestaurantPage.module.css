@@ -1,5 +1,5 @@
 .restaurantCarusal {
-  margin-top: 10px;
+  margin-top: 100px;
   justify-content: center;
   overflow: hidden;
   position: relative;
@@ -47,7 +47,7 @@
   border-bottom: 1px solid lightgray;
 }
 .foodItemsContainer {
-  height: 100vh;
+  height: max-content;
 }
 .foodItemSidePanel {
   max-height: 100%;

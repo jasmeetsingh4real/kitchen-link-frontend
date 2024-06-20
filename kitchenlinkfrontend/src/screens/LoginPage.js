@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./LoginPage.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { appAxios } from "../axios/appAxios";
 import { useDispatch } from "react-redux";
@@ -52,6 +52,9 @@ export default function LoginPage() {
 
   return (
     <div className={`${styles.login_page} text-center`}>
+      <Link className={styles.homePageBtn} to={"/"}>
+        <i className="fa-solid fa-chevron-left "></i> Home
+      </Link>
       <div className={styles.login_container}>
         <div className={styles.empty_container}></div>
         <div

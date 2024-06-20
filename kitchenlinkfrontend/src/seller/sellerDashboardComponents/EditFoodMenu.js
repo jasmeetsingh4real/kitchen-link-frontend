@@ -52,7 +52,7 @@ export const EditFoodMenu = () => {
     getFoodItems();
   }, []);
   return (
-    <div>
+    <div className={styles.foodMenu}>
       <div className="d-flex justify-content-between">
         <h3>Food Items</h3>
         <span>

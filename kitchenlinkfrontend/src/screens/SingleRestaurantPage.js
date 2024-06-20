@@ -172,8 +172,8 @@ export const SingleRestaurantPage = () => {
       <div className="pt-5">
         <p className={styles.foodItemsHeading}>Food Items</p>
       </div>
-      <div className={`row ${styles.foodItemsContainer}`}>
-        <div className={`col-3 ${styles.foodItemSidePanel}`}>
+      <div className={`row ${styles.foodItemsContainer} `}>
+        <div className={`col-3 ${styles.foodItemSidePanel} position-static `}>
           <div id="list-example" className="list-group">
             {categorisedFoodItems.length > 0 &&
               categorisedFoodItems?.map((item) => {
@@ -193,7 +193,7 @@ export const SingleRestaurantPage = () => {
           </div>
           <UserOrder showLocationPopup={() => setShowLocationPopup(true)} />
         </div>
-        <div className={`${styles.fooditemsList} col-9`}>
+        <div className={`${styles.fooditemsList} col-9 `}>
           {categorisedFoodItems.length > 0 &&
             categorisedFoodItems.map((category) => {
               return (

@@ -13,13 +13,13 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { orderActions } from "../slices/userOrderSlice";
 export const UserLocationPopup = (props) => {
-  const userDetails = useSelector((state) => state.user.userDetails);
+  const userDetails = useSelector((state) => state?.user?.userDetails);
   const [saveLocationDetails, setSaveLocationDetails] = useState(false); // this is a booleanused to identify weather to save users address in DB or not (for next order)
   const [loading, setLoading] = useState(true);
   const [locationDetailsFound, setLocationDetailsFound] = useState(false);
   const [deliveryAddress, setDeliveryAddress] = useState(undefined);
   const initialValues = {
-    userName: userDetails.fullName || "",
+    userName: userDetails?.fullName || "",
     id: null,
     address: "",
     pincode: "",
@@ -104,12 +104,12 @@ export const UserLocationPopup = (props) => {
   };
 
   useEffect(() => {
-    if (props?.cityId) setValue("cityId", props.cityId);
+    if (props?.cityId) setValue("cityId", props?.cityId);
   }, [props.cityId]);
 
   useEffect(() => {
-    if (userDetails.fullName) {
-      setValue("userName", userDetails.fullName);
+    if (userDetails?.fullName) {
+      setValue("userName", userDetails?.fullName);
     }
   }, [userDetails]);
   useEffect(() => {

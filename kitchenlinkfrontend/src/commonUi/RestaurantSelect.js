@@ -4,10 +4,12 @@ import axios from "axios";
 export const RestaurantSelect = (props) => {
   const [restaurants, setRestaurants] = useState([]);
   const [keyword, setKeyword] = useState("");
-  const [selectedOption, setSelectedOption] = useState({
-    label: undefined,
-    value: undefined,
-  });
+  const [selectedOption, setSelectedOption] = useState(
+    props?.selected || {
+      label: undefined,
+      value: undefined,
+    }
+  );
   const getRestaurants = async () => {
     const apiRes = await axios.post(
       `${process.env.REACT_APP_API_URL}/common/searchRestaurants`,
@@ -41,8 +43,13 @@ export const RestaurantSelect = (props) => {
     <Select
       placeholder="Search Restaurant..."
       menuPortalTarget={document.body}
-      styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-      value={selectedOption}
+      styles={
+        ({
+          menuPortal: (base) => ({ ...base, zIndex: 0 }),
+        },
+        props?.styles)
+      }
+      value={selectedOption?.value ? selectedOption : null}
       onInputChange={(inpValue) => {
         setKeyword(inpValue);
       }}

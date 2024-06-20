@@ -1,0 +1,20 @@
+.footer {
+  padding: 0 100px;
+  height: 300px;
+  background-color: #2a2c36;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.subHeading {
+  font-size: 12px;
+}
+
+.heading {
+  font-weight: 700;
+}
+.sendButton {
+  background-color: #7d7aff;
+  color: white;
+}

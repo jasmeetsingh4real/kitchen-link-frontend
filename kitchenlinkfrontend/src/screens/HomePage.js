@@ -3,13 +3,16 @@ import pizza from "../assets/homepage/pizza.png";
 import doosa from "../assets/homepage/doosa.png";
 import pasta from "../assets/homepage/pasta.png";
 import noodles from "../assets/homepage/noodles.png";
-import { Carousel } from "react-bootstrap";
+import { Carousel, Navbar } from "react-bootstrap";
 import { StateSelect } from "../commonUi/StateSelect";
 import { RestaurantSelect } from "../commonUi/RestaurantSelect";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { searchDetailsActions } from "../slices/searchDetailsSlice";
+import { UserNavBar } from "../components/UserNavBar";
+import { KeyFeatures } from "./HomePageComponents/KeyFeatures";
+import { MonthsHighLights } from "./HomePageComponents/MonthsHighLights";
 export const HomePage = () => {
   const [selectedState, setSelectedState] = useState({
     label: "Haryana",
@@ -26,9 +29,16 @@ export const HomePage = () => {
     dispatch(searchDetailsActions.setSearchedState(value));
     navigate(`search/${value.label}`);
   };
+  const customStyles = {
+    control: (base) => ({
+      ...base,
+      border: "none",
+    }),
+  };
 
   return (
     <div className={styles.homePage}>
+      <UserNavBar />
       <div className={styles.homePageHeader}>
         <div className="row h-100">
           <div className="col-6 h-100 d-flex align-items-center justify-content-center">
@@ -65,11 +75,12 @@ export const HomePage = () => {
           <div className={`${styles.homePageActions} col-6 `}>
             <h1 className="text-white">Kitchen Link</h1>
             <p className="text-white">
-              <i>Delicious food on your door-steps</i>
+              <i>Delicious food on your door steps</i>
             </p>
             <div className={`${styles.reataurantSearchInput} row`}>
               <div className="col-5">
                 <StateSelect
+                  styles={customStyles}
                   selectedCountry={{ code: "IN", id: 101 }}
                   onChange={handleStateSelect}
                   stateId={selectedState.value.id}
@@ -77,6 +88,7 @@ export const HomePage = () => {
               </div>
               <div className="col-7">
                 <RestaurantSelect
+                  styles={customStyles}
                   stateId={selectedState.value && selectedState.value.id}
                   onChange={(val) => {
                     navigate(`restaurant?restId=${val.value}`);
@@ -85,8 +97,10 @@ export const HomePage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div>{" "}
       </div>
+      <KeyFeatures />
+      <MonthsHighLights />
     </div>
   );
 };

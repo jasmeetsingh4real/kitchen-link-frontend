@@ -51,7 +51,7 @@ export const RestaurantList = () => {
   }, [location]);
 
   return (
-    <div className="container">
+    <div className={`container ${styles.restaurantList}`}>
       <h4 className="py-3 ">Restaurants in {searchedRestaurantName}</h4>
 
       <div className="row">
@@ -63,7 +63,7 @@ export const RestaurantList = () => {
             });
 
             return (
-              <div className="col-4 p-4" key={restaurant.id}>
+              <div className={`col-4 p-4 `} key={restaurant.id}>
                 <div
                   className={`${styles.restaurantCard}  p-2 shadow border rounded h-100`}
                 >

@@ -12,6 +12,6 @@ export const GuestRoute = (props) => {
   }
   const authToken = Cookies.get("authToken");
   if (authToken && !props.isSellerRoute) {
-    return <Navigate to={"/home"} />;
+    return <Navigate to={"/"} />;
   } else return <>{props.children}</>;
 };

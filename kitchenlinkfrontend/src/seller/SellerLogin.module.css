@@ -6,13 +6,22 @@
 }
 
 .seller_login_page {
+  width: 100%;
+  position: absolute;
+  z-index: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background-color: #ffaa05;
 }
-
+.homePageBtn {
+  position: absolute;
+  top: 20px;
+  left: 60px;
+  color: black;
+  text-decoration: none;
+}
 .seller_login_container {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;

@@ -65,10 +65,12 @@ export const StateSelect = (props) => {
 
   return (
     <Select
-      placeholder="Select State"
+      placeholder="Search State..."
       menuPortalTarget={document.body}
-      styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-      value={selectedOption}
+      styles={
+        ({ menuPortal: (base) => ({ ...base, zIndex: 0 }) }, props?.styles)
+      }
+      value={selectedOption ? selectedOption : null}
       onInputChange={(inpValue) => {
         setKeyword(inpValue);
       }}

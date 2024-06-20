@@ -1,5 +1,5 @@
 .dashboard {
-  height: 90vh;
+  min-height: 90vh;
 }
 .tab {
   color: black;

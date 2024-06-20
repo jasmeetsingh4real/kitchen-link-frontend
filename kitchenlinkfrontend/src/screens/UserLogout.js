@@ -9,7 +9,6 @@ export const UserLogout = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(userActions.logoutUser());
-    toast.warning("Loged out");
     navigate("/login");
   }, []);
   return <></>;

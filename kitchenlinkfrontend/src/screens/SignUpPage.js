@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./SignUpPage.module.css";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { appAxios } from "../axios/appAxios";
 
@@ -74,6 +74,9 @@ export default function SignUpPage() {
         isSeller ? ` ${styles.green_bg} ` : `${styles.yellow_bg} `
       }  ${styles.signup_page} text-center`}
     >
+      <Link className={styles.homePageBtn} to={"/"}>
+        <i className="fa-solid fa-chevron-left "></i> Home
+      </Link>
       <div
         className={`${
           isSeller ? ` ${styles.green_image} ` : ` ${styles.yellow_image} `
