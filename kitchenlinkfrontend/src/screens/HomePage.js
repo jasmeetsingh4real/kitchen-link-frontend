@@ -26,6 +26,7 @@ export const HomePage = () => {
   const navigate = useNavigate();
 
   const handleStateSelect = async (value) => {
+    console.log(value);
     dispatch(searchDetailsActions.setSearchedState(value));
     navigate(`search/${value.label}`);
   };
@@ -83,7 +84,7 @@ export const HomePage = () => {
                   styles={customStyles}
                   selectedCountry={{ code: "IN", id: 101 }}
                   onChange={handleStateSelect}
-                  stateId={selectedState.value.id}
+                  // stateId={selectedState.value.id}
                 />{" "}
               </div>
               <div className="col-7">

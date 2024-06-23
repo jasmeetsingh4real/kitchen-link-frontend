@@ -1,14 +1,16 @@
 .sellerNav {
   height: 60px;
   background: white;
-  position: static;
-  z-index: 10;
+  position: fixed;
+  z-index: 999;
   width: 100%;
   color: black;
   display: flex;
   align-items: center;
   padding: 30px 40px;
   justify-content: space-between;
+  border-bottom: 1px solid rgb(207, 207, 207);
+  background-color: white;
 }
 .userLogo {
   font-family: Georgia, "Times New Roman", Times, serif;

@@ -1,5 +1,6 @@
 .restaurantList {
   margin-top: 100px;
+  min-height: 100vh;
 }
 
 .restaurantCard {
@@ -39,4 +40,8 @@
 }
 .greyImage {
   filter: grayscale();
+}
+.headingStateName {
+  color: rgb(77, 77, 77);
+  font-weight: 800;
 }

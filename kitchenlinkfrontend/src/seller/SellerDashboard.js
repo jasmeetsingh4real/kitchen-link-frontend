@@ -24,7 +24,7 @@ export const SellerDashboard = () => {
       navigate(`${sellerDashbordTabs.EDIT_RESTAURANT_DETAILS}`);
   }, []);
   return (
-    <div>
+    <div className={styles.sellerDashboardPage}>
       <Tab.Container
         id="controlled-tab-example"
         activeKey={key}

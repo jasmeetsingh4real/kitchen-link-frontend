@@ -23,6 +23,13 @@ export const UserNavBar = () => {
           <Link className={styles.navLinks} to={"/logout"}>
             Logout
           </Link>
+          <Link
+            to={"/createAccount?isSellerSignup=true"}
+            className={styles.navLinks}
+            role="button"
+          >
+            Add Restaurant
+          </Link>
           <div className={styles.navLinks}>
             <span className={styles.userLogo}> {userDetails?.fullName[0]}</span>
             <span className="text-capitalize text-white">

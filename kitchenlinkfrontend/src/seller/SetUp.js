@@ -66,7 +66,6 @@ export default function SetUp() {
   const submit = (data) => {
     saveRestaurantDetails(data);
   };
-  console.log(errors);
   useEffect(() => {
     const curIndex = parseInt(searchParams.get("index"));
     if (curIndex === 2) {

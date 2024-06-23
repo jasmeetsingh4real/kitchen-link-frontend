@@ -32,6 +32,7 @@ export const RestaurantLocationDetails = (props) => {
               stateId={props.state.stateId || null}
               selectedCountry={{ id: props.state.countryId || null }}
               onChange={(selectedOption) => {
+                console.log(selectedOption);
                 props.setValue("stateId", selectedOption.value.id);
               }}
             />
