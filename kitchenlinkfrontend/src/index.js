@@ -8,7 +8,6 @@ import LoginPage from "./screens/LoginPage";
 import SignUpPage from "./screens/SignUpPage";
 import { HomePage } from "./screens/HomePage";
 import { GuestRoute } from "./guards/GuestRoute";
-import { ProtectedRoute } from "./guards/ProtectedRoute";
 
 import { SellerDashboard } from "./seller/SellerDashboard";
 import SellerLogin from "./seller/SellerLogin";
@@ -54,11 +53,11 @@ const router = createBrowserRouter(
           element: <CheckoutPage />,
         },
         {
-          path: "/restaurant",
+          path: "restaurant",
           element: <SingleRestaurantPage />,
         },
         {
-          path: "/login",
+          path: "login",
           element: (
             <GuestRoute>
               <LoginPage />

@@ -3,12 +3,13 @@ import styles from "./checkoutpage.module.css";
 import { useEffect, useState } from "react";
 import { appAxios } from "../axios/appAxios";
 import { toast } from "react-toastify";
+import { TestPG } from "../paymentGateway/TestPG";
 export const CheckoutPage = () => {
   const [searchParams, setSerachParams] = useSearchParams();
-  console.log(searchParams.get("orderId"));
   const [orderDetails, setOrderDetails] = useState();
   const [orderItems, setOrderItems] = useState([]);
   const [deliveryAddress, setDeliveryAddress] = useState();
+  const [showPaymentGateway, setShowPaymentGateway] = useState(false);
   const navigate = useNavigate();
   const getOrderDetails = async (orderId) => {
     const apiRes = await appAxios.post("/user/getOrderDetails", { orderId });
@@ -21,7 +22,13 @@ export const CheckoutPage = () => {
     }
   };
 
+  const handleSuccessfullPayment = () => {
+    setShowPaymentGateway(false);
+    toast.success("Payment successfull");
+  };
+
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (searchParams.get("orderId")) {
       getOrderDetails(searchParams.get("orderId"));
     } else {
@@ -172,13 +179,26 @@ export const CheckoutPage = () => {
               <p className={`small mt-4 text-secondary  ${styles.tandc}`}>
                 By clicking this you agree to our terms and conditions.
               </p>
-              <button className={`btn btn-danger ${styles.checkoutBtn}`}>
+              <button
+                className={`btn btn-danger ${styles.checkoutBtn}`}
+                onClick={() => {
+                  setShowPaymentGateway(true);
+                }}
+              >
                 Proceed To Pay
               </button>
             </div>
           </div>
         </div>
       </div>
+      {orderDetails?.id && showPaymentGateway && (
+        <TestPG
+          orderId={orderDetails.id}
+          show={showPaymentGateway}
+          onHide={() => setShowPaymentGateway(false)}
+          handleSuccessfullPayment={handleSuccessfullPayment}
+        />
+      )}
     </div>
   );
 };
