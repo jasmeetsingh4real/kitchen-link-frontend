@@ -10,6 +10,7 @@ export const CheckoutPage = () => {
   const [orderItems, setOrderItems] = useState([]);
   const [deliveryAddress, setDeliveryAddress] = useState();
   const [showPaymentGateway, setShowPaymentGateway] = useState(false);
+  const [deliveryNotes, setdeliveryNotes] = useState("");
   const navigate = useNavigate();
   const getOrderDetails = async (orderId) => {
     const apiRes = await appAxios.post("/user/getOrderDetails", { orderId });
@@ -22,9 +23,31 @@ export const CheckoutPage = () => {
     }
   };
 
-  const handleSuccessfullPayment = () => {
+  const handleSuccessfullPayment = async () => {
     setShowPaymentGateway(false);
+    //create delivery
+
+    const apiRes = await appAxios.post("/payment/initiateDelivery", {
+      orderId: orderDetails.id,
+      deliveryNotes,
+    });
+    if (!apiRes.data.success) {
+      toast.error(apiRes.data.errorMessage);
+      handleFailure();
+      return;
+    }
+    navigate(`/trackorder?orderId=${orderDetails.id}`);
     toast.success("Payment successfull");
+  };
+
+  const handleFailure = () => {
+    setShowPaymentGateway(false);
+    if (searchParams.get("redirect")) {
+      navigate(
+        `${searchParams.get("redirect")}?restId=${orderDetails.restaurantId}`
+      );
+    }
+    toast.warning("Payment canceled");
   };
 
   useEffect(() => {
@@ -141,7 +164,7 @@ export const CheckoutPage = () => {
                             {index + 1}. {item.name} ({item.quantity})
                           </div>
                         </div>
-                        <div>₹{item.totalAmount}</div>
+                        <div>₹{item.totalAmount * item.quantity}</div>
                       </div>
                     );
                   })}
@@ -176,6 +199,15 @@ export const CheckoutPage = () => {
                   <b> ₹{orderDetails?.totalAmount}</b>
                 </span>
               </p>
+              <label htmlFor="" className="small mt-2">
+                Add delivery notes
+              </label>
+              <textarea
+                name=""
+                className="form-control small"
+                id=""
+                onChange={(e) => setdeliveryNotes(e.target.value)}
+              ></textarea>
               <p className={`small mt-4 text-secondary  ${styles.tandc}`}>
                 By clicking this you agree to our terms and conditions.
               </p>
@@ -195,8 +227,11 @@ export const CheckoutPage = () => {
         <TestPG
           orderId={orderDetails.id}
           show={showPaymentGateway}
-          onHide={() => setShowPaymentGateway(false)}
+          onHide={() => {
+            setShowPaymentGateway(false);
+          }}
           handleSuccessfullPayment={handleSuccessfullPayment}
+          handleFailure={handleFailure}
         />
       )}
     </div>

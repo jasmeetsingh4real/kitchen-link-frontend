@@ -24,6 +24,7 @@ import { EditFoodMenu } from "./seller/sellerDashboardComponents/EditFoodMenu";
 import { RestaurantList } from "./screens/RestaurantList";
 import { SingleRestaurantPage } from "./screens/SingleRestaurantPage";
 import { CheckoutPage } from "./screens/CheckoutPage";
+import { TrackOrder } from "./screens/TrackOrder";
 
 const router = createBrowserRouter(
   [
@@ -51,6 +52,10 @@ const router = createBrowserRouter(
         {
           path: "checkout",
           element: <CheckoutPage />,
+        },
+        {
+          path: "trackorder",
+          element: <TrackOrder />,
         },
         {
           path: "restaurant",

@@ -10,7 +10,7 @@ import { useEffect, useInsertionEffect, useState } from "react";
 import { appAxios } from "../axios/appAxios";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { orderActions } from "../slices/userOrderSlice";
 export const UserLocationPopup = (props) => {
   const userDetails = useSelector((state) => state?.user?.userDetails);
@@ -27,6 +27,7 @@ export const UserLocationPopup = (props) => {
     houseNo: "",
     streetNo: "",
   };
+  const location = useLocation();
   const navigate = useNavigate();
   const {
     watch,
@@ -77,7 +78,9 @@ export const UserLocationPopup = (props) => {
     });
 
     if (apiRes?.data?.success && apiRes?.data?.result) {
-      navigate(`/checkout?orderId=${apiRes?.data?.result}`);
+      navigate(
+        `/checkout?orderId=${apiRes?.data?.result}&redirect=${location.pathname}`
+      );
       resetLocation();
       dispatch(orderActions.clearUserOrder());
     } else {

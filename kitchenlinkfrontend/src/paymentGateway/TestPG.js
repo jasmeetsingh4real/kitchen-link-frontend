@@ -4,36 +4,32 @@ import { toast } from "react-toastify";
 import { useEffect } from "react";
 
 export const TestPG = (props) => {
-  const updatePaymentStatus = async () => {};
-
   const initializePayment = async () => {
     const apiRes = await appAxios.post("/payment/initializePayment", {
       orderId: props.orderId,
       mode: "upi",
     });
     if (!apiRes?.data?.success) {
+      props.handleFailure();
       toast.error("Something went wrong");
       return;
     }
-
-    // on successfull initialization, call payment gateway (with required authentication data) for payment
-    // after a successfull payment, verify the payment and update the status of transaction in the database
-    // on payment failour, show user the error message
-    const paymentRes = await createTestPayment();
-    if (paymentRes) {
-      const apiRes = await appAxios.post("/payment/verifyPayment", {
-        orderId: props.orderId,
-      });
-      if (apiRes.data.success) {
-        props.handleSuccessfullPayment();
-      } else {
-        toast.error("Something went wrong");
-      }
+  };
+  const verifyPayment = async () => {
+    const apiRes = await appAxios.post("/payment/verifyPayment", {
+      orderId: props.orderId,
+    });
+    if (apiRes.data.success) {
+      props.handleSuccessfullPayment();
+    } else {
+      props.handleFailure();
+      toast.error("Something went wrong");
     }
   };
-
   const createTestPayment = async () => {
-    return true;
+    //on successful payment
+
+    verifyPayment();
   };
 
   useEffect(() => {
@@ -44,16 +40,26 @@ export const TestPG = (props) => {
     <Modal
       show={props.show}
       onHide={props.onHide}
-      size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Paymet</Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Test Payment Gateway
+        </Modal.Title>
       </Modal.Header>
-      <Modal.Body>test payment</Modal.Body>
+
+      <div className="p-3">
+        This is a demonstration of a payment. Click on complete payment to
+        simulate a successful transaction.
+      </div>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <button className="btn btn-secondary" onClick={props.handleFailure}>
+          Cancel Payment
+        </button>
+        <button className="btn btn-primary" onClick={createTestPayment}>
+          Complete Payment
+        </button>
       </Modal.Footer>
     </Modal>
   );
