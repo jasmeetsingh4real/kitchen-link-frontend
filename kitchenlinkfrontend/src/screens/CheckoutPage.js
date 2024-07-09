@@ -36,7 +36,7 @@ export const CheckoutPage = () => {
       handleFailure();
       return;
     }
-    navigate(`/trackorder?orderId=${orderDetails.id}`);
+    navigate(`/trackorder?deliveryId=${apiRes.data.result}`);
     toast.success("Payment successfull");
   };
 
@@ -47,7 +47,6 @@ export const CheckoutPage = () => {
         `${searchParams.get("redirect")}?restId=${orderDetails.restaurantId}`
       );
     }
-    toast.warning("Payment canceled");
   };
 
   useEffect(() => {
