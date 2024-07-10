@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { ParseStatus, z } from "zod";
 
 export const RestaurantDetailsSchema = z.object({
   restaurantName: z.string().min(1, "Please Enter a valid Restaurant name."),
@@ -28,4 +28,9 @@ export const foodItemSchema = z.object({
   price: z.number().positive(),
   ingredients: z.string().optional(),
   dietryInfo: z.enum(["veg", "non_veg"]),
+});
+
+export const userLoginDetailsSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1, "Please enter a valid password"),
 });

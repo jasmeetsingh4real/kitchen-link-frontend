@@ -1,39 +1,55 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./LoginPage.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { appAxios } from "../axios/appAxios";
 import { useDispatch } from "react-redux";
 import { userActions } from "../slices/userSlice";
+import { useForm } from "react-hook-form";
+import { userLoginDetailsSchema } from "../zodSchemas/restaurantSchemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AppInput } from "../commonUi/AppInpurt";
 const userRoles = {
   USER: "user",
   SELLER: "seller",
 };
 export default function LoginPage() {
-  const [userDetails, setUserDetails] = useState({
-    email: "",
-    password: "",
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    setValue,
+  } = useForm({
+    resolver: zodResolver(userLoginDetailsSchema),
   });
+  const state = watch();
+  const [emailIsValid, setEmailIsValid] = useState(true);
+  const [isTyping, setIsTyping] = useState(false);
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleUserDetails = (e) => {
-    setUserDetails((old) => {
-      let name = e.target.name;
-      return { ...old, [name]: e.target.value };
-    });
+
+  const checkEmailValidity = async () => {
+    const apiRes = await appAxios.post("/auth/checkEmailValidity", { email });
+    if (apiRes?.data?.success) {
+      if (apiRes.data.result) {
+        setEmailIsValid(true);
+      } else {
+        setEmailIsValid(false);
+      }
+    }
   };
 
-  const loginUser = async () => {
+  const loginUser = async (userDetails) => {
     try {
       const apiRes = await appAxios.post("/auth/login", userDetails, {
         withCredentials: true,
       });
       if (apiRes.data.success) {
         toast.success("Login Successful!");
-        setUserDetails({
-          email: "",
-          password: "",
-        });
+        setValue("email", "");
+        setValue("password", "");
 
         if (apiRes.data.data?.role === userRoles.SELLER) {
           dispatch(userActions.setSeller(apiRes.data.data));
@@ -50,6 +66,22 @@ export default function LoginPage() {
     }
   };
 
+  const submit = (data) => {
+    loginUser(data);
+  };
+  let timeOutId = null;
+
+  useEffect(() => {
+    setIsTyping(true);
+    clearTimeout(timeOutId);
+    timeOutId = setTimeout(() => {
+      setIsTyping(false);
+      checkEmailValidity();
+    }, 1000);
+    return () => {
+      clearTimeout(timeOutId);
+    };
+  }, [email]);
   return (
     <div className={`${styles.login_page} text-center`}>
       <Link className={styles.homePageBtn} to={"/"}>
@@ -60,14 +92,14 @@ export default function LoginPage() {
         <div
           className={`${styles.user_details_container}  d-flex align-items-center col-xl-5 col-12`}
         >
-          <form action="">
+          <form action="" onSubmit={handleSubmit(submit)}>
             <div className="form-group mb-2  ">
               <h2 className={`${styles.login_heading} mb-1 `}>
                 Welcome to <i>KitchenLink!</i>
               </h2>
               <h3 className={styles.login_subheading}>Login now</h3>
             </div>
-            <div className="mb-3">
+            {/* <div className="mb-3">
               <input
                 name="email"
                 type="text"
@@ -86,7 +118,40 @@ export default function LoginPage() {
                 onChange={handleUserDetails}
                 className={`form-control rounded-5 ${styles.custom_input}`}
               />
-            </div>
+            </div> */}
+
+            <AppInput
+              register={register}
+              name="email"
+              inpClassName={`form-control rounded-5 ${styles.custom_input}`}
+              placeholder="Registered Email"
+              value={state.email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+            />
+            <p
+              className={`${
+                emailIsValid ? "text-success" : "text-danger"
+              } small text-start ms-3`}
+            >
+              {email.length
+                ? !isTyping
+                  ? emailIsValid
+                    ? "valid email"
+                    : "user not found"
+                  : ""
+                : ""}
+            </p>
+            <AppInput
+              register={register}
+              inpClassName={`form-control rounded-5 ${styles.custom_input}`}
+              placeholder="Password"
+              name="password"
+              type="password"
+              errors={errors}
+              value={state.password}
+            />
+
             <p className="mb-3" role="button">
               Forgot Password?
             </p>
@@ -94,10 +159,11 @@ export default function LoginPage() {
             <div className="mb-1">
               <button
                 className={`${styles.edit_btn} ${styles.custom_input}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  loginUser();
-                }}
+                // onClick={(e) => {
+                //   e.preventDefault();
+                //   loginUser();
+                // }}
+                type="submit"
               >
                 Login
               </button>

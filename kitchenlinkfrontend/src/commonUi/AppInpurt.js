@@ -11,7 +11,10 @@ export const AppInput = (props) => {
         })}
         defaultValue={props?.value}
         type={props.type || "text"}
-        className="form-control"
+        className={`form-control ${
+          props.inpClassName ? props.inpClassName : ""
+        }`}
+        placeholder={props?.placeholder || ""}
         name={props.name}
         onChange={props.onChange ? props.onChange : () => {}}
       />
