@@ -34,3 +34,14 @@ export const userLoginDetailsSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1, "Please enter a valid password"),
 });
+
+export const restaurantStaffSchema = z.object({
+  staffName: z.string().min(1),
+  role: z.enum(["delivery", "admin", "employee", "chef"]),
+  age: z.string().min(1),
+  phoneNo: z.string().min(1),
+  email: z.string().email(),
+  isActive: z.boolean(),
+  salary: z.string().min(1),
+  password: z.string().min(1),
+});

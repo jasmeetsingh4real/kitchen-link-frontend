@@ -7,6 +7,7 @@ import styles from "./sellerDashboard.module.css";
 const sellerDashbordTabs = {
   EDIT_RESTAURANT_DETAILS: "editRestaurantDetails",
   EDIT_FOOD_MENU: "editFoodMenu",
+  MANAGE_STAFF: "manageStaff",
 };
 export const SellerDashboard = () => {
   const [key, setKey] = useState(sellerDashbordTabs.EDIT_RESTAURANT_DETAILS);
@@ -65,6 +66,22 @@ export const SellerDashboard = () => {
                     }`}
                   >
                     Food Menu
+                  </div>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  eventKey={sellerDashbordTabs.MANAGE_STAFF}
+                  className="p-0"
+                >
+                  <div
+                    onClick={() => setKey(sellerDashbordTabs.MANAGE_STAFF)}
+                    className={`${styles.tab} ${
+                      key === sellerDashbordTabs.MANAGE_STAFF &&
+                      styles.activeTab
+                    }`}
+                  >
+                    Manage Staff
                   </div>
                 </Nav.Link>
               </Nav.Item>
