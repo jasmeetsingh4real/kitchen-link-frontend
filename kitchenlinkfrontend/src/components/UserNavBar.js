@@ -17,11 +17,8 @@ export const UserNavBar = () => {
     <div className={styles.userNav}>
       {loggedIn ? (
         <>
-          <Link className={styles.navLinks} to={"/"}>
-            Home
-          </Link>
-          <Link className={styles.navLinks} to={"/logout"}>
-            Logout
+          <Link className={styles.navLinks} to={"/userOrders"}>
+            My Orders
           </Link>
           <Link
             to={"/createAccount?isSellerSignup=true"}
@@ -29,6 +26,9 @@ export const UserNavBar = () => {
             role="button"
           >
             Add Restaurant
+          </Link>{" "}
+          <Link className={styles.navLinks} to={"/logout"}>
+            Logout
           </Link>
           <div className={styles.navLinks}>
             <span className={styles.userLogo}> {userDetails?.fullName[0]}</span>
@@ -39,9 +39,6 @@ export const UserNavBar = () => {
         </>
       ) : (
         <>
-          <Link className={styles.navLinks} to={"/"}>
-            Home
-          </Link>
           <Link
             to={"/createAccount?isSellerSignup=true"}
             className={styles.navLinks}

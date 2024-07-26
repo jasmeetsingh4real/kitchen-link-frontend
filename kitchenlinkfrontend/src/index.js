@@ -26,6 +26,7 @@ import { SingleRestaurantPage } from "./screens/SingleRestaurantPage";
 import { CheckoutPage } from "./screens/CheckoutPage";
 import { TrackOrder } from "./screens/TrackOrder";
 import { ManageStaff } from "./seller/sellerDashboardComponents/ManageStaff";
+import { UserOrders } from "./screens/UserOrders";
 
 const router = createBrowserRouter(
   [
@@ -57,6 +58,14 @@ const router = createBrowserRouter(
         {
           path: "trackorder",
           element: <TrackOrder />,
+        },
+        {
+          path: "restaurant",
+          element: <SingleRestaurantPage />,
+        },
+        {
+          path: "userOrders",
+          element: <UserOrders />,
         },
         {
           path: "restaurant",

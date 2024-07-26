@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styles from "./sellerDashboard.module.css";
+import { appAxios } from "../axios/appAxios";
+import { sellerAxios } from "../axios/sellerAxios";
 const sellerDashbordTabs = {
   EDIT_RESTAURANT_DETAILS: "editRestaurantDetails",
   EDIT_FOOD_MENU: "editFoodMenu",
@@ -20,9 +22,11 @@ export const SellerDashboard = () => {
       navigate("/seller/setup");
     }
   }, [sellerDetails]);
+
   useEffect(() => {
-    if (sellerDetails?.restaurantDetails && sellerDetails?.imagesSaved)
+    if (sellerDetails?.restaurantDetails && sellerDetails?.imagesSaved) {
       navigate(`${sellerDashbordTabs.EDIT_RESTAURANT_DETAILS}`);
+    }
   }, []);
   return (
     <div className={styles.sellerDashboardPage}>

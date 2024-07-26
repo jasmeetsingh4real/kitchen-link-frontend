@@ -3,7 +3,7 @@ import { AppInput } from "../../commonUi/AppInpurt";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { restaurantStaffSchema } from "../../zodSchemas/restaurantSchemas";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { sellerAxios } from "../../axios/sellerAxios";
 import { toast } from "react-toastify";
 
@@ -14,19 +14,28 @@ export const CreateStaffModal = (props) => {
     watch,
     formState: { errors },
     setValue,
+    reset,
   } = useForm({
     resolver: zodResolver(restaurantStaffSchema),
-    defaultValues: {
-      isActive: true,
-      role: "delivery",
-    },
+    defaultValues: props.staff
+      ? {
+          ...props.staff,
+          age: props.staff.age.toString(),
+          salary: props.staff.salary.toString(),
+        }
+      : {
+          isActive: true,
+          role: "delivery",
+        },
   });
   const state = watch();
+  const [showPassword, setShowPassword] = useState(false);
   const submit = async (data) => {
-    console.log(data);
     const apiRes = await sellerAxios.post("/master/createStaff", data);
     if (apiRes?.data?.success) {
-      toast.success("Staff Created");
+      toast.success("Saved");
+      props.onHide();
+      props.onSaveStaff();
     } else {
       toast.error(apiRes?.data?.errorMessage);
     }
@@ -42,7 +51,7 @@ export const CreateStaffModal = (props) => {
       <form action="" onSubmit={handleSubmit(submit)}>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Create new staff
+            {props.staff ? "Edit Staff" : "Create new staff"}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -121,19 +130,33 @@ export const CreateStaffModal = (props) => {
             type="number"
             errors={errors}
           />
+          <label className="m-0 small p-0">
+            Password{" "}
+            <span className="text-secondary small ms-1 " role="button">
+              {showPassword ? (
+                <i
+                  className="fa-solid fa-eye"
+                  onMouseUp={() => setShowPassword(false)}
+                ></i>
+              ) : (
+                <i
+                  className="fa-solid fa-eye-slash"
+                  onMouseDown={() => setShowPassword(true)}
+                ></i>
+              )}
+            </span>{" "}
+          </label>
           <AppInput
             register={register}
             name="password"
-            label="Password"
             value={state?.password}
-            type="password"
+            type={showPassword ? "text" : "password"}
             errors={errors}
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
           <button type="submit" className="btn btn-success">
-            Submit
+            {props.staff ? "Save Changes" : "Submit"}
           </button>
         </Modal.Footer>
       </form>

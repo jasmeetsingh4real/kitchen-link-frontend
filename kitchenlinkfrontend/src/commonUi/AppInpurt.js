@@ -1,10 +1,12 @@
 export const AppInput = (props) => {
   return (
     <div className="text-start mb-2">
-      <label className="small text-start small">
-        {props.label}
-        {props.required ? <span className="text-danger">*</span> : null}
-      </label>
+      {props?.label && (
+        <label className="small text-start small">
+          {props.label}
+          {props.required ? <span className="text-danger">*</span> : null}
+        </label>
+      )}
       <input
         {...props.register(props.name, {
           required: props?.required ? true : false,

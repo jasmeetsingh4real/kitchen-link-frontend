@@ -41,7 +41,7 @@ export default function SellerLogin() {
           navigate("/seller/sellerDashboard");
         } else {
           dispatch(userActions.setUser(apiRes.data.data));
-          navigate("/home");
+          navigate("/");
         }
       } else {
         throw new Error(apiRes.data.errorMessage || "Invalid Credentials");

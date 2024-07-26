@@ -106,10 +106,12 @@ export const TrackOrder = () => {
                 {deliveryAddress?.address}, H.No - {deliveryAddress?.houseNo} (
                 {deliveryAddress?.pincode})
               </div>
-              <div className="border p-2 mb-3 rounded shadow-sm">
-                <h5 className="">Delivery Notes</h5>
-                {deliveryDetails?.deliveryNotes}
-              </div>
+              {deliveryDetails?.deliveryNotes && (
+                <div className="border p-2 mb-3 rounded shadow-sm">
+                  <h5 className="">Delivery Notes</h5>
+                  {deliveryDetails?.deliveryNotes}
+                </div>
+              )}
             </div>
           </div>
           <div className="col-6">
