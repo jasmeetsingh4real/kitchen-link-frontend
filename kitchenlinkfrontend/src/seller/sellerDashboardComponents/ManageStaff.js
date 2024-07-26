@@ -4,12 +4,12 @@ import { sellerAxios } from "../../axios/sellerAxios";
 import { toast } from "react-toastify";
 import { ProgressBar } from "react-bootstrap";
 import styles from "./manageStaff.module.css";
+import { useNavigate } from "react-router-dom";
 export const ManageStaff = () => {
   const [showCreateStaffModal, setShowCreateStaffModal] = useState(false);
   const [staffArr, setStaffArr] = useState([]);
   const [staffToEdit, setStaffToEdit] = useState();
   const [loading, setLoading] = useState(false);
-
   const getRestaurantStaffs = async () => {
     setLoading(true);
     const apiRes = await sellerAxios.post("/master/getRestaurantStaffs", {});
@@ -29,6 +29,13 @@ export const ManageStaff = () => {
     } else {
       toast.error(apiRes?.data?.errorMessage || "Something went wrong");
     }
+  };
+
+  const jumplogin = (userDetails) => {
+    window.open(
+      `${process.env.REACT_APP_DeliveryMsBaseURL}login?isRedirected=true&staffEmail=${userDetails.email}&password=${userDetails.password}`,
+      "_blank"
+    );
   };
 
   useEffect(() => {
@@ -89,6 +96,11 @@ export const ManageStaff = () => {
                   className="fa-solid fa-trash-can ms-4 text-danger"
                   role="button"
                   onClick={() => deleteStaff(staff.id)}
+                ></i>
+                <i
+                  className="ms-4  fa-solid fa-right-to-bracket"
+                  role="button"
+                  onClick={() => jumplogin(staff)}
                 ></i>
               </div>
             </div>

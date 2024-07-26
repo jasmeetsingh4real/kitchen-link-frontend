@@ -38,7 +38,7 @@ export const UserOrders = () => {
                     {orderItem?.delivery?.status}
                   </div>
                   <div className={styles.createdDate}>
-                    {moment(orderItem.ceatedAt).format("DD/MM/YYYY")}
+                    {moment(orderItem.createdAt).format("DD/MM/YYYY hh:mm a")}
                   </div>
                 </div>
                 <div className="d-flex align-items-center">
