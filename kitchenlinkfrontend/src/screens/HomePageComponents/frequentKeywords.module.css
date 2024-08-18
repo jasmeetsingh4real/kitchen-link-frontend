@@ -1,0 +1,12 @@
+.FequentKeyWords {
+  /* border: 1px solid black; */
+  padding: 50px 0;
+  min-height: 400px;
+  margin-bottom: 100px;
+}
+.button {
+  border: 1px solid gray;
+  font-size: 20px;
+  padding: 10px;
+  font-weight: 300;
+}

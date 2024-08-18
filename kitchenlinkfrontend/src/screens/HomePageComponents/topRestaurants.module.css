@@ -1,0 +1,55 @@
+.TopRestaurants {
+  margin-top: 50px;
+}
+.TopRestaurants_content {
+  display: flex;
+  height: 210px;
+  margin-bottom: 0px;
+}
+.TopRestaurants_content div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+.TopRestaurants_content_heading {
+  font-size: 30px;
+}
+
+.TopRestaurants_content_heading div {
+  font-size: 40px;
+  color: rgb(53, 146, 24);
+}
+.TopRestaurants_content_para {
+  padding: 0 100px;
+}
+.restaurantCarusal {
+  margin-bottom: 100px;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  border-radius: 10px;
+  z-index: 0;
+  padding: 0 100px;
+}
+.carusalImage {
+  height: 45vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.carusalImage img {
+  height: auto;
+  width: 100%;
+}
+.carousel_text {
+  background: radial-gradient(
+    circle,
+    rgba(27, 24, 24, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}

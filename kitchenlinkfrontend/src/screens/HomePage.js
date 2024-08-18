@@ -13,6 +13,8 @@ import { searchDetailsActions } from "../slices/searchDetailsSlice";
 import { UserNavBar } from "../components/UserNavBar";
 import { KeyFeatures } from "./HomePageComponents/KeyFeatures";
 import { MonthsHighLights } from "./HomePageComponents/MonthsHighLights";
+import { TopRestaurants } from "./HomePageComponents/TopResrturants";
+import { FequentKeyWords } from "./HomePageComponents/FequentKeyWords";
 export const HomePage = () => {
   const [selectedState, setSelectedState] = useState({
     label: "Haryana",
@@ -100,8 +102,23 @@ export const HomePage = () => {
           </div>
         </div>{" "}
       </div>
-      <KeyFeatures />
-      <MonthsHighLights />
+      {/* <KeyFeatures /> */}
+
+      <div className={styles.homepageItems_container}>
+        <h3 className={` ${styles.monthsHighlightsHeading}`}>
+          Our Top Rated Items
+        </h3>
+        <MonthsHighLights />
+        <div>
+          <TopRestaurants />
+        </div>
+        <div>
+          <h3 className={` ${styles.monthsHighlightsHeading}`}>
+            Frequenty Searched Keywords
+          </h3>
+          <FequentKeyWords />
+        </div>
+      </div>
     </div>
   );
 };
