@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../screens/trackorder.module.css";
-
+import pan from "../assets/deliverystatus/pan.png";
+import deliveryman from "../assets/deliverystatus/deliveyman.png";
 const deliveryStatusProgresion = [
   "pending",
   "being_prepared",
@@ -18,13 +19,13 @@ const _getItemDetails = (ItemType) => {
       };
     case "being_prepared":
       return {
-        logo: <i className="fa-solid fa-fire"></i>,
+        logo: <img className={styles.deliveryStatusLogo} src={pan} />,
         description: "Your order is being prepared..",
         label: "Being Prepared",
       };
     case "in_transit":
       return {
-        logo: <i className="fa-solid fa-spinner"></i>,
+        logo: <img className={styles.deliveryStatusLogo} src={deliveryman} />,
         description: "Your order is on the way..",
         label: "In-Transit",
       };
@@ -72,16 +73,18 @@ export const DeliveryProgressItem = (props) => {
     handleProgressAnimation(props.currentDeliveryStatus);
   }, [props.currentDeliveryStatus]);
   return (
-    <div
-      className={` border rounded mb-4  ${styles.progressItem} ${styles[progressAnimation]}`}
-    >
+    <div className={`mb-4 ${styles.progressItem} `}>
       <div
-        className={`d-flex align-items-center justify-content-center ${styles.progressItemIcon}`}
+        className={`d-flex align-items-center justify-content-center mb-3 ${styles[progressAnimation]}  ${styles.progressItemIcon}`}
       >
         {_getItemDetails(props.itemType).logo}
       </div>
-      <div className="p-2 d-flex justify-content-center flex-column">
-        {_getItemDetails(props.itemType).label}
+      <div
+        className={`p-2 d-flex justify-content-center flex-column text-center ${
+          progressAnimation === "muted" ? "text-muted" : " text-success"
+        }`}
+      >
+        <b>{_getItemDetails(props.itemType).label}</b>
         <p className=" small m-0 p-0">
           {_getItemDetails(props.itemType).description}
         </p>

@@ -5,6 +5,7 @@
 }
 .orderDetails {
   height: 100%;
+  width: 200px;
 }
 
 .trackOrderContainer {
@@ -13,14 +14,18 @@
 }
 
 .traker {
+  height: 200px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 .progressItem {
+  font-size: 14px;
   display: flex;
-  height: 70px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100px;
   width: 300px;
 }
 .progressItemIcon {
@@ -29,6 +34,7 @@
 }
 .muted {
   color: rgb(185, 185, 185);
+  filter: grayscale(100%);
 }
 
 .success {
@@ -37,11 +43,14 @@
 }
 .glowing {
   color: #0fab0f;
-
-  animation: shadows 3s infinite;
+  animation: shadows 1s infinite;
+}
+.deliveryStatusLogo {
+  height: 60px;
+  width: 70px;
 }
 @keyframes shadows {
-  0% {
+  /* 0% {
     box-shadow: 0px 0px 10px 3px #0fab0fab;
   }
   25% {
@@ -55,5 +64,14 @@
   }
   100% {
     box-shadow: 0px 0px 10px 3px #0fab0fab;
+  } */
+  0% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(-5px);
   }
 }

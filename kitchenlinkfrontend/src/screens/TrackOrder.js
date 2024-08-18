@@ -68,82 +68,72 @@ export const TrackOrder = () => {
   return (
     <div className={styles.trackorder}>
       <div className={` bg-white  rounded ${styles.trackOrderContainer}`}>
-        <h4>Track your order</h4>
-        <div className="row">
-          <div className="col-6 px-4 py-2 d-flex flec-column justify-content-center ">
-            <div
-              className={`d-flex flex-column mt-4 w-100 ${styles.orderDetails}`}
-            >
-              <div className="border p-2 mb-3 rounded shadow-sm">
-                <h5>Order details</h5>{" "}
-                <ol>
-                  {deliveryDetails?.order &&
-                    deliveryDetails?.order?.order_items.map((item, index) => {
-                      return (
-                        <li key={index}>
-                          <div className="d-flex justify-content-between">
-                            <div>
-                              {item?.name} ({item.quantity})
-                            </div>
-                            <div>₹{item.totalAmount * item.quantity}</div>
-                          </div>
-                        </li>
-                      );
-                    })}
-
-                  <div className="my-2">
-                    <b>
-                      <div className="d-flex justify-content-between">
-                        <div>Total</div>
-                        <div>₹{deliveryDetails?.order?.totalAmount}</div>
+        <div className="mb-1 ">
+          <h5 className="text-center mb-4 pb-4">Order Progress</h5>
+          <div className={styles.traker}>
+            <DeliveryProgressItem
+              itemType={"pending"}
+              currentDeliveryStatus={currentDeliveryStatus}
+            />
+            <div className="h-50">
+              <i className="fa-solid fa-angles-right"></i>
+            </div>
+            <DeliveryProgressItem
+              itemType={"being_prepared"}
+              currentDeliveryStatus={currentDeliveryStatus}
+            />
+            <div className="h-50">
+              <i className="fa-solid fa-angles-right"></i>
+            </div>
+            <DeliveryProgressItem
+              itemType={"in_transit"}
+              currentDeliveryStatus={currentDeliveryStatus}
+            />
+            <div className="h-50">
+              <i className="fa-solid fa-angles-right"></i>
+            </div>
+            <DeliveryProgressItem
+              itemType={"delivered"}
+              currentDeliveryStatus={currentDeliveryStatus}
+            />
+          </div>
+        </div>{" "}
+        <h5 className="mb-2 p-0 mt-0">Order details</h5>{" "}
+        <div className={`d-flex flex-column w-100 ${styles.orderDetails}`}>
+          <ol>
+            {deliveryDetails?.order &&
+              deliveryDetails?.order?.order_items.map((item, index) => {
+                return (
+                  <li key={index} className="border-bottom">
+                    <div className="d-flex justify-content-between">
+                      <div>
+                        {item?.name} ({item.quantity})
                       </div>
-                    </b>
-                  </div>
-                </ol>{" "}
-              </div>
-              <div className="border p-2 mb-3 rounded shadow-sm">
-                <h5 className="">Address Details</h5>
-                {deliveryAddress?.address}, H.No - {deliveryAddress?.houseNo} (
-                {deliveryAddress?.pincode})
-              </div>
-              {deliveryDetails?.deliveryNotes && (
-                <div className="border p-2 mb-3 rounded shadow-sm">
-                  <h5 className="">Delivery Notes</h5>
-                  {deliveryDetails?.deliveryNotes}
+                      <div>₹{item.totalAmount * item.quantity}</div>
+                    </div>
+                  </li>
+                );
+              })}
+
+            <div className="my-2">
+              <b>
+                <div className="d-flex justify-content-between">
+                  <div>Total</div>
+                  <div>₹{deliveryDetails?.order?.totalAmount}</div>
                 </div>
-              )}
+              </b>
             </div>
-          </div>
-          <div className="col-6">
-            <h5 className="text-center mb-3">Order Progress</h5>
-            <div className={styles.traker}>
-              <DeliveryProgressItem
-                itemType={"pending"}
-                currentDeliveryStatus={currentDeliveryStatus}
-              />
-              <DeliveryProgressItem
-                itemType={"being_prepared"}
-                currentDeliveryStatus={currentDeliveryStatus}
-              />
-              <DeliveryProgressItem
-                itemType={"in_transit"}
-                currentDeliveryStatus={currentDeliveryStatus}
-              />
-              <DeliveryProgressItem
-                itemType={"delivered"}
-                currentDeliveryStatus={currentDeliveryStatus}
-              />
-            </div>
-          </div>
+          </ol>{" "}
+        </div>{" "}
+        <div className="mb-3">
+          <h5 className="">Address Details</h5>
+          {deliveryAddress?.address}, H.No - {deliveryAddress?.houseNo} (
+          {deliveryAddress?.pincode})
         </div>
-        {currentDeliveryStatus === "delivered" && (
-          <div className="d-flex justify-content-end">
-            <button
-              className="btn btn-sm btn-outline-success "
-              onClick={() => navigate("/")}
-            >
-              Go To Home Page
-            </button>
+        {deliveryDetails?.deliveryNotes && (
+          <div className="p-2 mb-3">
+            <h5 className="">Delivery Notes</h5>
+            {deliveryDetails?.deliveryNotes}
           </div>
         )}
       </div>
