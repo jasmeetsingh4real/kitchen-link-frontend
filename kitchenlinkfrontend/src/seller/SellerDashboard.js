@@ -10,6 +10,7 @@ const sellerDashbordTabs = {
   EDIT_RESTAURANT_DETAILS: "editRestaurantDetails",
   EDIT_FOOD_MENU: "editFoodMenu",
   MANAGE_STAFF: "manageStaff",
+  COMING_SOON: "comingSoon",
 };
 export const SellerDashboard = () => {
   const [key, setKey] = useState(sellerDashbordTabs.EDIT_RESTAURANT_DETAILS);
@@ -86,6 +87,73 @@ export const SellerDashboard = () => {
                     }`}
                   >
                     Manage Staff
+                  </div>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  eventKey={sellerDashbordTabs.COMING_SOON}
+                  className="p-0"
+                >
+                  <div
+                    onClick={() => setKey(sellerDashbordTabs.COMING_SOON)}
+                    className={`${styles.tab} ${
+                      key === sellerDashbordTabs.COMING_SOON && styles.activeTab
+                    }`}
+                  >
+                    Inventory
+                  </div>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  // eventKey={sellerDashbordTabs.COMING_SOON}
+                  className="p-0"
+                >
+                  <div
+                    // onClick={() => setKey(sellerDashbordTabs.COMING_SOON)}
+                    className={`${styles.tab} `}
+                  >
+                    Customers
+                  </div>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  // eventKey={sellerDashbordTabs.COMING_SOON}
+                  className="p-0"
+                >
+                  <div
+                    // onClick={() => setKey(sellerDashbordTabs.COMING_SOON)}
+                    className={`${styles.tab} `}
+                  >
+                    Sales and Transactions
+                  </div>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  // eventKey={sellerDashbordTabs.COMING_SOON}
+                  className="p-0"
+                >
+                  <div
+                    // onClick={() => setKey(sellerDashbordTabs.COMING_SOON)}
+                    className={`${styles.tab} `}
+                  >
+                    Feedback and Reviews
+                  </div>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  // eventKey={sellerDashbordTabs.EXPENCES}
+                  className="p-0"
+                >
+                  <div
+                    // onClick={() => setKey(sellerDashbordTabs.EXPENCES)}
+                    className={`${styles.tab} `}
+                  >
+                    Expenses
                   </div>
                 </Nav.Link>
               </Nav.Item>

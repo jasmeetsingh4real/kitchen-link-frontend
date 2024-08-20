@@ -27,6 +27,8 @@ import { CheckoutPage } from "./screens/CheckoutPage";
 import { TrackOrder } from "./screens/TrackOrder";
 import { ManageStaff } from "./seller/sellerDashboardComponents/ManageStaff";
 import { UserOrders } from "./screens/UserOrders";
+import { ProtectedRoute } from "./guards/ProtectedRoute";
+import { ComingSoon } from "./screens/ComingSoon";
 
 const router = createBrowserRouter(
   [
@@ -53,11 +55,19 @@ const router = createBrowserRouter(
         },
         {
           path: "checkout",
-          element: <CheckoutPage />,
+          element: (
+            <ProtectedRoute>
+              <CheckoutPage />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "trackorder",
-          element: <TrackOrder />,
+          element: (
+            <ProtectedRoute>
+              <TrackOrder />,
+            </ProtectedRoute>
+          ),
         },
         {
           path: "restaurant",
@@ -65,12 +75,13 @@ const router = createBrowserRouter(
         },
         {
           path: "userOrders",
-          element: <UserOrders />,
+          element: (
+            <ProtectedRoute>
+              <UserOrders />,
+            </ProtectedRoute>
+          ),
         },
-        {
-          path: "restaurant",
-          element: <SingleRestaurantPage />,
-        },
+
         {
           path: "login",
           element: (
@@ -131,6 +142,10 @@ const router = createBrowserRouter(
                 {
                   path: "manageStaff",
                   element: <ManageStaff />,
+                },
+                {
+                  path: "comingSoon",
+                  element: <ComingSoon />,
                 },
               ],
             },

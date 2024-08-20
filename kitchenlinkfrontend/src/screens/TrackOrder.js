@@ -69,7 +69,9 @@ export const TrackOrder = () => {
     <div className={styles.trackorder}>
       <div className={` bg-white  rounded ${styles.trackOrderContainer}`}>
         <div className="mb-1 ">
-          <h5 className="text-center mb-4 pb-4">Order Progress</h5>
+          <h5 className="text-center mb-4 pb-4 text-capitalize">
+            Order Progress ({currentDeliveryStatus})
+          </h5>
           <div className={styles.traker}>
             <DeliveryProgressItem
               itemType={"pending"}
