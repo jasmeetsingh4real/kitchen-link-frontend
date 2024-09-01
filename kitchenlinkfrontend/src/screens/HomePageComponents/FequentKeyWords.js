@@ -41,7 +41,7 @@ export const FequentKeyWords = () => {
         return (
           <button
             key={keyword}
-            className={`${styles.button} btn btn-outline-secondary shadow m-3 text-capitalize`}
+            className={`${styles.button} btn btn-outline-secondary shadow m-md-3 m-2 text-capitalize`}
           >
             {keyword}
             <i className=" fs-6 text-muted ms-1 fa-solid fa-up-right-from-square"></i>

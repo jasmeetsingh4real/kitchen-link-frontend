@@ -53,3 +53,23 @@
     rgba(255, 255, 255, 0) 100%
   );
 }
+
+@media (max-width: 780px) {
+  .TopRestaurants_content_heading {
+    font-size: 12px;
+  }
+  .TopRestaurants_content_heading div {
+    font-size: 20px;
+  }
+  .TopRestaurants_content_para {
+    font-size: 12px;
+    padding: 10px;
+  }
+  .restaurantCarusal {
+    padding: 0 10px;
+    margin-bottom: 10px;
+  }
+  .TopRestaurants_content {
+    height: 120px;
+  }
+}

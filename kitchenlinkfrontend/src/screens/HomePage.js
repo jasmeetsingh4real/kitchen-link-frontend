@@ -43,11 +43,13 @@ export const HomePage = () => {
     <div className={styles.homePage}>
       <UserNavBar />
       <div className={styles.homePageHeader}>
-        <div className="row h-100">
-          <div className="col-6 h-100 d-flex align-items-center justify-content-center">
+        <div className="d-flex align-items-center justify-content-center h-100">
+          <div
+            className={`${styles.homePageCarousel}   h-100 d-flex align-items-center justify-content-center`}
+          >
             <Carousel
               fade
-              className="w-100"
+              className={`${styles.homePageCarousel} w-100`}
               nextIcon={false}
               prevIcon={false}
               indicators={false}
@@ -75,10 +77,12 @@ export const HomePage = () => {
               </Carousel.Item>
             </Carousel>
           </div>
-          <div className={`${styles.homePageActions} col-6 `}>
+          <div className={`${styles.homePageActions} `}>
             <h1 className="text-white">Kitchen Link</h1>
             <p className="text-white">
-              <i>Delicious food on your door steps</i>
+              <i className={styles.subHeading}>
+                Delicious food on your door steps
+              </i>
             </p>
             <div className={`${styles.reataurantSearchInput} row`}>
               <div className="col-5">

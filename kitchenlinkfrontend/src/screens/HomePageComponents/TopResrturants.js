@@ -51,7 +51,7 @@ export const TopRestaurants = () => {
                   <img
                     src={restaurant.imgUrl}
                     alt="Restaurant image"
-                    className={`${!false && styles.greyImage}`}
+                    className={`${styles.greyImage}`}
                   />
                   <Carousel.Caption>
                     <a

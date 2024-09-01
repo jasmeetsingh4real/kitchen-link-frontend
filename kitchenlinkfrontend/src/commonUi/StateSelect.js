@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { appAxios } from "../axios/appAxios";
-
+import styles from "./selectStyles.module.css";
 export const StateSelect = (props) => {
   const [selectedOption, setSelectedOption] = useState();
   const [keyword, setKeyword] = useState("");
@@ -67,6 +67,7 @@ export const StateSelect = (props) => {
     : { menuPortal: (base) => ({ ...base, zIndex: 9999 }) };
   return (
     <Select
+      className={styles.selectInp}
       placeholder="Search State..."
       menuPortalTarget={document.body}
       styles={inpStyle}

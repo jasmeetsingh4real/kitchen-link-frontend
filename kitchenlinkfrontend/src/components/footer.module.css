@@ -18,3 +18,14 @@
   background-color: #7d7aff;
   color: white;
 }
+@media (max-width: 780px) {
+  .footer {
+    padding: 0 10px;
+  }
+  .heading {
+    font-size: 12px;
+  }
+  .subHeading {
+    font-size: 8px;
+  }
+}

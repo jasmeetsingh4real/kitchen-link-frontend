@@ -10,3 +10,14 @@
   padding: 10px;
   font-weight: 300;
 }
+
+@media (max-width: 770px) {
+  .FequentKeyWords {
+    padding: 10px 0;
+  }
+  .button {
+    padding: 5px;
+    font-size: 12px;
+    margin: 5px;
+  }
+}
