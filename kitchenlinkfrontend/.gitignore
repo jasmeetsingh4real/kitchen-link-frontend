@@ -8,6 +8,10 @@
 src/ImageUploads/RestaurantImages/*
 src/ImageUploads/FoodItemImages/*
 
+!src/ImageUploads/FoodItemImages/*.txt
+
+!src/ImageUploads/RestaurantImages/*.txt
+
 # testing
 /coverage
 
