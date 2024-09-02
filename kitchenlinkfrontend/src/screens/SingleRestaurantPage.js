@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Carousel } from "react-bootstrap";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./SingleRestaurantPage.module.css";
@@ -11,10 +11,24 @@ import { UserOrder } from "../components/UserOrder";
 import { UserLocationPopup } from "../components/UserLocationPopup";
 import { useDispatch, useSelector } from "react-redux";
 import { orderActions } from "../slices/userOrderSlice";
+import { hungryHubData, hungryHubFoodItems } from "../dummyData/data";
 
 export const itemType = {
   FOOD_ITEM: "food_item",
   FOOD_ITEM_OPTION: "food_item_option",
+};
+
+const dummyApiRes = {
+  data: {
+    success: true,
+    result: hungryHubData,
+  },
+};
+const dummyApiRes2 = {
+  data: {
+    success: true,
+    result: hungryHubFoodItems,
+  },
 };
 
 export const SingleRestaurantPage = () => {
@@ -36,12 +50,13 @@ export const SingleRestaurantPage = () => {
 
   const getRestaurantDetails = async (id) => {
     try {
-      const apiRes = await axios.post(
-        `${process.env.REACT_APP_API_URL}/common/getRestaurantDetailsById`,
-        {
-          id,
-        }
-      );
+      // const apiRes = await axios.post(
+      //   `${process.env.REACT_APP_API_URL}/common/getRestaurantDetailsById`,
+      //   {
+      //     id,
+      //   }
+      // );
+      const apiRes = dummyApiRes;
       if (apiRes?.data.success) {
         if (apiRes.data.result.images.length > 0) {
           for (let image of apiRes.data.result.images) {
@@ -65,10 +80,11 @@ export const SingleRestaurantPage = () => {
   };
 
   const getRestaurantFoodItems = async (restaurantId) => {
-    const apiRes = await axios.post(
-      `${process.env.REACT_APP_API_URL}/common/getRestaurantFoodItems`,
-      { restaurantId }
-    );
+    const apiRes = dummyApiRes2;
+    // const apiRes = await axios.post(
+    //   `${process.env.REACT_APP_API_URL}/common/getRestaurantFoodItems`,
+    //   { restaurantId }
+    // );
     if (apiRes.data.success) {
       if (apiRes.data.result.length) {
         for (let foodItem of apiRes.data.result) {

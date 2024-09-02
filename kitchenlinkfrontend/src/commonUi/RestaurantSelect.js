@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import axios from "axios";
+import { restaurantSearchRes } from "../dummyData/data";
+
+const dummyApiRes = {
+  data: {
+    success: true,
+    result: restaurantSearchRes,
+  },
+};
 export const RestaurantSelect = (props) => {
   const [restaurants, setRestaurants] = useState([]);
   const [keyword, setKeyword] = useState("");
@@ -11,13 +19,14 @@ export const RestaurantSelect = (props) => {
     }
   );
   const getRestaurants = async () => {
-    const apiRes = await axios.post(
-      `${process.env.REACT_APP_API_URL}/common/searchRestaurants`,
-      {
-        stateId: props.stateId || 4007, //state id of Haryana
-        keyword,
-      }
-    );
+    const apiRes = dummyApiRes;
+    // const apiRes = await axios.post(
+    //   `${process.env.REACT_APP_API_URL}/common/searchRestaurants`,
+    //   {
+    //     stateId: props.stateId || 4007, //state id of Haryana
+    //     keyword,
+    //   }
+    // );
     if (apiRes.data.success && apiRes.data.result.length > 0) {
       let test = [];
       apiRes.data.result.forEach((item) => {

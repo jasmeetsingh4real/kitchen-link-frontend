@@ -2,6 +2,15 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { appAxios } from "../axios/appAxios";
 import styles from "./selectStyles.module.css";
+import { stateSearchRes } from "../dummyData/data";
+
+const dummyApiRes = {
+  data: {
+    success: true,
+    result: stateSearchRes,
+  },
+};
+
 export const StateSelect = (props) => {
   const [selectedOption, setSelectedOption] = useState();
   const [keyword, setKeyword] = useState("");
@@ -9,10 +18,11 @@ export const StateSelect = (props) => {
   let id = null;
   const getStates = async () => {
     try {
-      const apiRes = await appAxios.post("/common/getStatesByCountryCode", {
-        countryCode: props.selectedCountry.code,
-        countryId: props.selectedCountry.id,
-      });
+      const apiRes = dummyApiRes;
+      // const apiRes = await appAxios.post("/common/getStatesByCountryCode", {
+      //   countryCode: props.selectedCountry.code,
+      //   countryId: props.selectedCountry.id,
+      // });
       if (apiRes?.data?.success && apiRes?.data?.result.length > 0) {
         const tempArr = [];
         apiRes.data.result.forEach((state) => {

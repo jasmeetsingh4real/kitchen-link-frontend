@@ -8,6 +8,22 @@ import moment from "moment";
 import { isRestaurantOpen } from "../helper/isRestaurantOpen";
 import { useLocation, useNavigate } from "react-router-dom";
 import { handleScroll } from "../helper/infiniteScrollHelper";
+import { haryanaRestaurantsRes } from "../dummyData/data";
+
+const dummyApiRes = {
+  data: {
+    success: true,
+    result: haryanaRestaurantsRes,
+    pagination: {
+      perPage: 6,
+      recordsToSkip: 0,
+      page: 1,
+      totalRecords: 11,
+      totalPages: 2,
+    },
+  },
+};
+
 export const RestaurantList = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -28,10 +44,11 @@ export const RestaurantList = () => {
     if (loading) return;
     setLoading(true);
     try {
-      const apiRes = await axios.post(
-        `${process.env.REACT_APP_API_URL}/common/getRestaurantsByStateName`,
-        { stateName: decodeURIComponent(stateName), page }
-      );
+      const apiRes = dummyApiRes;
+      // const apiRes = await axios.post(
+      //   `${process.env.REACT_APP_API_URL}/common/getRestaurantsByStateName`,
+      //   { stateName: decodeURIComponent(stateName), page }
+      // );
       if (apiRes?.data?.success && apiRes?.data?.result.length) {
         for (let res of apiRes.data.result) {
           if (res.images.length) {

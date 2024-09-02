@@ -42,9 +42,11 @@
 }
 
 .OffcanvasBody {
+  max-width: 250px;
   background-color: rgb(17, 17, 22);
 }
 .navLinks_responsive {
+  border-bottom: 1px solid rgb(43, 43, 43);
   width: 100%;
   padding: 10px;
 }
