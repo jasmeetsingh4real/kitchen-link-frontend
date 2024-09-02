@@ -44,11 +44,11 @@ export const RestaurantList = () => {
     if (loading) return;
     setLoading(true);
     try {
-      const apiRes = dummyApiRes;
-      // const apiRes = await axios.post(
-      //   `${process.env.REACT_APP_API_URL}/common/getRestaurantsByStateName`,
-      //   { stateName: decodeURIComponent(stateName), page }
-      // );
+      // const apiRes = dummyApiRes;
+      const apiRes = await axios.post(
+        `${process.env.REACT_APP_API_URL}/common/getRestaurantsByStateName`,
+        { stateName: decodeURIComponent(stateName), page }
+      );
       if (apiRes?.data?.success && apiRes?.data?.result.length) {
         for (let res of apiRes.data.result) {
           if (res.images.length) {

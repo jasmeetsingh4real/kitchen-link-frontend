@@ -19,14 +19,14 @@ export const RestaurantSelect = (props) => {
     }
   );
   const getRestaurants = async () => {
-    const apiRes = dummyApiRes;
-    // const apiRes = await axios.post(
-    //   `${process.env.REACT_APP_API_URL}/common/searchRestaurants`,
-    //   {
-    //     stateId: props.stateId || 4007, //state id of Haryana
-    //     keyword,
-    //   }
-    // );
+    // const apiRes = dummyApiRes;
+    const apiRes = await axios.post(
+      `${process.env.REACT_APP_API_URL}/common/searchRestaurants`,
+      {
+        stateId: props.stateId || 4007, //state id of Haryana
+        keyword,
+      }
+    );
     if (apiRes.data.success && apiRes.data.result.length > 0) {
       let test = [];
       apiRes.data.result.forEach((item) => {

@@ -18,11 +18,11 @@ export const StateSelect = (props) => {
   let id = null;
   const getStates = async () => {
     try {
-      const apiRes = dummyApiRes;
-      // const apiRes = await appAxios.post("/common/getStatesByCountryCode", {
-      //   countryCode: props.selectedCountry.code,
-      //   countryId: props.selectedCountry.id,
-      // });
+      // const apiRes = dummyApiRes;
+      const apiRes = await appAxios.post("/common/getStatesByCountryCode", {
+        countryCode: props.selectedCountry.code,
+        countryId: props.selectedCountry.id,
+      });
       if (apiRes?.data?.success && apiRes?.data?.result.length > 0) {
         const tempArr = [];
         apiRes.data.result.forEach((state) => {

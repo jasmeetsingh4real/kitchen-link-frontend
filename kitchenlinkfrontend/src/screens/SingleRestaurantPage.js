@@ -50,13 +50,13 @@ export const SingleRestaurantPage = () => {
 
   const getRestaurantDetails = async (id) => {
     try {
-      // const apiRes = await axios.post(
-      //   `${process.env.REACT_APP_API_URL}/common/getRestaurantDetailsById`,
-      //   {
-      //     id,
-      //   }
-      // );
-      const apiRes = dummyApiRes;
+      const apiRes = await axios.post(
+        `${process.env.REACT_APP_API_URL}/common/getRestaurantDetailsById`,
+        {
+          id,
+        }
+      );
+      // const apiRes = dummyApiRes;
       if (apiRes?.data.success) {
         if (apiRes.data.result.images.length > 0) {
           for (let image of apiRes.data.result.images) {
@@ -80,11 +80,11 @@ export const SingleRestaurantPage = () => {
   };
 
   const getRestaurantFoodItems = async (restaurantId) => {
-    const apiRes = dummyApiRes2;
-    // const apiRes = await axios.post(
-    //   `${process.env.REACT_APP_API_URL}/common/getRestaurantFoodItems`,
-    //   { restaurantId }
-    // );
+    // const apiRes = dummyApiRes2;
+    const apiRes = await axios.post(
+      `${process.env.REACT_APP_API_URL}/common/getRestaurantFoodItems`,
+      { restaurantId }
+    );
     if (apiRes.data.success) {
       if (apiRes.data.result.length) {
         for (let foodItem of apiRes.data.result) {
