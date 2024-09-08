@@ -78,14 +78,11 @@ export default function SignUpPage() {
         <i className="fa-solid fa-chevron-left "></i> Home
       </Link>
       <div
-        className={`${
+        className={`${styles.signup_container}  ${
           isSeller ? ` ${styles.green_image} ` : ` ${styles.yellow_image} `
-        } ${styles.signup_container} `}
+        } `}
       >
-        <div className={styles.empty_container}>
-          {/* empty container for design purpose */}
-        </div>
-        <div className=" d-flex align-items-center">
+        <div className=" d-flex align-items-center bg-warning rounded p-3 shadow">
           <form action="">
             <div className="form-group mb-2 ">
               {isSeller ? (

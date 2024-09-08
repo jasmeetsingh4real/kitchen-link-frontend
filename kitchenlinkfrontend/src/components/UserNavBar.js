@@ -41,9 +41,7 @@ export const UserNavBar = () => {
                 {" "}
                 {userDetails?.fullName[0]}
               </span>
-              <span className="text-capitalize text-white">
-                {userDetails?.fullName}
-              </span>
+              <span className="text-capitalize ">{userDetails?.fullName}</span>
             </div>
           </>
         ) : (
@@ -75,14 +73,28 @@ export const UserNavBar = () => {
 
         <Offcanvas
           show={show}
-          className={styles.OffcanvasBody}
+          className={"w-75"}
           onHide={handleClose}
           placement="end"
         >
-          <Offcanvas.Header closeButton className="text-white">
-            <Offcanvas.Title className="text-white">Menu</Offcanvas.Title>
+          <Offcanvas.Header closeButton className=" m-0 px-2  mt-3">
+            <Offcanvas.Title className="m-0">
+              {loggedIn ? (
+                <div className={styles.navLinks_responsive}>
+                  <span className={styles.userLogo}>
+                    {" "}
+                    {userDetails?.fullName[0]}
+                  </span>
+                  <span className="text-capitalize  small">
+                    {userDetails?.fullName}
+                  </span>
+                </div>
+              ) : (
+                <span className="ms-4">Menu</span>
+              )}
+            </Offcanvas.Title>
           </Offcanvas.Header>
-          <Offcanvas.Body>
+          <Offcanvas.Body className="m-0 p-2">
             {loggedIn ? (
               <>
                 <Link
@@ -101,29 +113,21 @@ export const UserNavBar = () => {
                 <Link className={styles.navLinks_responsive} to={"/logout"}>
                   Logout
                 </Link>
-                <div className={styles.navLinks_responsive}>
-                  <span className={styles.userLogo}>
-                    {" "}
-                    {userDetails?.fullName[0]}
-                  </span>
-                  <span className="text-capitalize text-white">
-                    {userDetails?.fullName}
-                  </span>
-                </div>
               </>
             ) : (
               <>
-                <div className={styles.navLinks_responsive}>
-                  <Link to={"/createAccount?isSellerSignup=true"} role="button">
-                    Add Restaurant
-                  </Link>
-                </div>
+                {" "}
                 <div className={styles.navLinks_responsive}>
                   <Link to={"/login"}>Login</Link>
-                </div>
+                </div>{" "}
                 <div className={styles.navLinks_responsive}>
                   <Link to={"/createAccount"} role="button">
                     Sign up
+                  </Link>
+                </div>
+                <div className={styles.navLinks_responsive}>
+                  <Link to={"/createAccount?isSellerSignup=true"} role="button">
+                    Add Restaurant
                   </Link>
                 </div>
               </>

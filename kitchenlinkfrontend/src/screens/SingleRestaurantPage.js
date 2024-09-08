@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
-import { Carousel } from "react-bootstrap";
+import { Carousel, Offcanvas } from "react-bootstrap";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./SingleRestaurantPage.module.css";
 import moment from "moment";
@@ -47,7 +47,11 @@ export const SingleRestaurantPage = () => {
   const restaurantIdInRedux = useSelector(
     (state) => state?.userOrder?.restaurantId
   );
+  const orderItems = useSelector((state) => state.userOrder.orderItems);
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const getRestaurantDetails = async (id) => {
     try {
       // const apiRes = await axios.post(
@@ -188,8 +192,8 @@ export const SingleRestaurantPage = () => {
       <div className="pt-5">
         <p className={styles.foodItemsHeading}>Food Items</p>
       </div>
-      <div className={`row ${styles.foodItemsContainer} `}>
-        <div className={`col-3 ${styles.foodItemSidePanel} position-static `}>
+      <div className={` ${styles.foodItemsContainer} `}>
+        <div className={` ${styles.foodItemSidePanel} position-static `}>
           <div id="list-example" className="list-group">
             {categorisedFoodItems.length > 0 &&
               categorisedFoodItems?.map((item) => {
@@ -209,7 +213,7 @@ export const SingleRestaurantPage = () => {
           </div>
           <UserOrder showLocationPopup={() => setShowLocationPopup(true)} />
         </div>
-        <div className={`${styles.fooditemsList} col-9 `}>
+        <div className={`${styles.fooditemsList} `}>
           {categorisedFoodItems.length > 0 &&
             categorisedFoodItems.map((category) => {
               return (
@@ -222,67 +226,69 @@ export const SingleRestaurantPage = () => {
                     const foodItemImage = foodItem.images[0].imgSrc;
                     return (
                       <div className="p-2" key={foodItem.id}>
-                        <div className="p-2 row mb-3 shadow shadow-sm rounded">
-                          <div
-                            className={`  ${styles.foodItemImage} col-4 border shadow p-0`}
-                          >
-                            <img src={foodItemImage} alt="" />
-                            <span
-                              className={`${styles.dietryInfo} border ${
-                                foodItem.dietryInfo === "veg"
-                                  ? "text-success  border-success"
-                                  : "text-danger  border-danger"
-                              }  fa-solid fa-circle`}
+                        <div className="p-2 d-flex justify-content-between mb-3 ">
+                          <div className="d-flex">
+                            <div
+                              className={`  ${styles.foodItemImage}  border shadow p-0 `}
                             >
-                              <i></i>
-                            </span>
+                              <img src={foodItemImage} alt="" />
+                              <span
+                                className={`${styles.dietryInfo} border ${
+                                  foodItem.dietryInfo === "veg"
+                                    ? "text-success  border-success"
+                                    : "text-danger  border-danger"
+                                }  fa-solid fa-circle`}
+                              >
+                                <i></i>
+                              </span>
+                            </div>
+                            <div className=" d-flex flex-column justify-content-center ms-4">
+                              <span className="fs-5">{foodItem.name}</span>
+                              <span>₹{foodItem.price}</span>
+                              <span className="small">
+                                {foodItem.description}
+                              </span>
+                            </div>{" "}
                           </div>
-                          <div className="col-lg-6 col-4 d-flex flex-column justify-content-center">
-                            <span className="fs-5">{foodItem.name}</span>
-                            <span>₹{foodItem.price}</span>
-                            <span className="small">
-                              {foodItem.description}
-                            </span>
-                          </div>{" "}
-                          <div className="col-lg-4 col-4 text-end d-flex flex-column justify-content-center align-items-end">
+                          <div className="  text-end d-flex flex-column justify-content-center align-items-end">
                             <AddToOrderButton
                               className="flex-column"
                               foodItem={foodItem}
                               itemType={itemType.FOOD_ITEM}
                               foodItemImage={foodItemImage}
                             />
-                          </div>
-                          <div className="mt-3">
-                            {foodItem.foodItemOptions.length > 0 &&
-                              foodItem.foodItemOptions.map((foodOption) => {
-                                return (
-                                  <div
-                                    key={foodOption.id}
-                                    className="p-2 border mb-1  rounded d-flex align-items-center justify-content-between"
-                                  >
-                                    <div className="d-flex">
-                                      <div
-                                        className={`${styles.foodOptionImage} col-4 p-0`}
-                                      >
-                                        <img src={foodItemImage} alt="" />
-                                      </div>
-                                      <div className="ms-2">
-                                        {foodOption.name} <br />₹
-                                        {foodOption.price}
-                                      </div>
+                          </div>{" "}
+                        </div>{" "}
+                        <div className="mt-3">
+                          {foodItem.foodItemOptions.length > 0 &&
+                            foodItem.foodItemOptions.map((foodOption) => {
+                              return (
+                                <div
+                                  key={foodOption.id}
+                                  className="p-2 border mb-1  rounded d-flex align-items-center justify-content-between"
+                                >
+                                  <div className="d-flex">
+                                    <div
+                                      className={`${styles.foodOptionImage} col-4 p-0`}
+                                    >
+                                      <img src={foodItemImage} alt="" />
                                     </div>
-                                    <AddToOrderButton
-                                      foodItem={{
-                                        ...foodOption,
-                                        name: `${foodOption.name} (${foodItem.name})`,
-                                      }}
-                                      itemType={itemType.FOOD_ITEM_OPTION}
-                                      foodItemImage={foodItemImage}
-                                    />
+                                    <div className="ms-2">
+                                      {foodOption.name} <br />₹
+                                      {foodOption.price}
+                                    </div>
                                   </div>
-                                );
-                              })}
-                          </div>
+                                  <AddToOrderButton
+                                    foodItem={{
+                                      ...foodOption,
+                                      name: `${foodOption.name} (${foodItem.name})`,
+                                    }}
+                                    itemType={itemType.FOOD_ITEM_OPTION}
+                                    foodItemImage={foodItemImage}
+                                  />
+                                </div>
+                              );
+                            })}
                         </div>
                       </div>
                     );
@@ -300,6 +306,25 @@ export const SingleRestaurantPage = () => {
         selectedCountry={{ id: restaurntDetails?.countryId }}
         selectedState={{ id: restaurntDetails?.stateId }}
       />
+      <button
+        className={`${styles.responsiveCartBtn} btn btn-danger shadow px-3`}
+        onClick={handleShow}
+      >
+        Your Order (
+        {orderItems.reduce((qty, val) => {
+          qty = qty + val.quantity;
+          return qty;
+        }, 0)}
+        ) <i className="fa-solid fa-utensils"></i>
+      </button>
+      <Offcanvas show={show} onHide={handleClose} className=" ">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Your Order</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <UserOrder showLocationPopup={() => setShowLocationPopup(true)} />
+        </Offcanvas.Body>
+      </Offcanvas>
     </div>
   );
 };

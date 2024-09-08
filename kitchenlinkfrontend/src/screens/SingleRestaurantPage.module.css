@@ -48,12 +48,16 @@
 }
 .foodItemsContainer {
   height: max-content;
+  display: flex;
 }
 .foodItemSidePanel {
   max-height: 100%;
   overflow-y: scroll;
+  margin: 0 20px;
+  min-width: 250px;
 }
 .fooditemsList {
+  width: 100%;
   overflow-y: scroll;
   height: 100%;
 }
@@ -107,4 +111,27 @@
 }
 .foodOptionImage img {
   width: 100%;
+}
+.responsiveCartBtn {
+  position: fixed;
+  bottom: 40px;
+  border-radius: 50px;
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .responsiveCartBtn {
+    display: block;
+  }
+  .restaurantCarusal {
+    height: 300px;
+    margin-top: 0px;
+  }
+  .foodItemSidePanel {
+    display: none;
+  }
+  .foodItemImage {
+    height: 80px;
+    width: 80px;
+  }
 }
