@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./secondaryNav.module.css";
+import styles from "./secondarynav.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
