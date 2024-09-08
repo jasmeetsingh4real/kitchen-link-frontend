@@ -247,7 +247,7 @@ export const CheckoutPage = () => {
         placement="bottom"
       >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          <Offcanvas.Title>Order Summary</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className="bg-white rounded py-3 px-4 ">
