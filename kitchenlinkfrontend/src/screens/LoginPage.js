@@ -22,6 +22,7 @@ export default function LoginPage() {
     setValue,
   } = useForm({
     resolver: zodResolver(userLoginDetailsSchema),
+    mode: "onBlur",
   });
   const state = watch();
   const [emailIsValid, setEmailIsValid] = useState(true);
@@ -88,7 +89,6 @@ export default function LoginPage() {
         <i className="fa-solid fa-chevron-left "></i> Home
       </Link>
       <div className={styles.login_container}>
-        <div className={styles.empty_container}></div>
         <div
           className={`${styles.user_details_container}  d-flex align-items-center col-xl-5 col-12`}
         >
@@ -125,7 +125,7 @@ export default function LoginPage() {
               name="email"
               inpClassName={`form-control rounded-5 ${styles.custom_input}`}
               placeholder="Registered Email"
-              value={state.email}
+              // value={state.email}
               onChange={(e) => setEmail(e.target.value)}
               type="email"
             />
@@ -149,7 +149,7 @@ export default function LoginPage() {
               name="password"
               type="password"
               errors={errors}
-              value={state.password}
+              // value={state.password}
             />
 
             <p className="mb-3" role="button">
@@ -188,7 +188,7 @@ export default function LoginPage() {
                   navigate("/seller/sellerLogin");
                 }}
               >
-                login with your seller account
+                Login with your seller account
               </p>
             </div>
           </form>

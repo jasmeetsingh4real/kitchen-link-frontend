@@ -1,6 +1,6 @@
 .CheckoutPage {
   background-color: rgba(232, 232, 232, 0.461);
-  height: 100vh;
+  min-height: 100vh;
 }
 .paymentMethod {
   background-color: rgba(237, 237, 237, 0.442);
@@ -40,4 +40,30 @@
 .tandc {
   font-size: 12px;
   margin-bottom: 5px;
+}
+.responsivePaymentDetails {
+  display: none;
+  width: 0;
+}
+.offcanvaspayment {
+  min-height: 70%;
+}
+@media (max-width: 768px) {
+  .paymentDetails {
+    display: none;
+  }
+  .responsivePaymentDetails {
+    display: block;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 450px) {
+  .offcanvaspayment {
+    min-height: 60%;
+  }
 }

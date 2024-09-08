@@ -10,7 +10,7 @@ export const UserLogout = () => {
   useEffect(() => {
     dispatch(userActions.logoutUser());
     Cookies.remove("authToken");
-    navigate("/login");
+    navigate("/");
   }, []);
   return <></>;
 };
