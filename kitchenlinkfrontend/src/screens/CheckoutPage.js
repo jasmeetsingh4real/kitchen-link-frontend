@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { appAxios } from "../axios/appAxios";
 import { toast } from "react-toastify";
 import { TestPG } from "../paymentGateway/TestPG";
+import { Offcanvas } from "react-bootstrap";
 export const CheckoutPage = () => {
   const [searchParams, setSerachParams] = useSearchParams();
   const [orderDetails, setOrderDetails] = useState();
@@ -11,6 +12,10 @@ export const CheckoutPage = () => {
   const [deliveryAddress, setDeliveryAddress] = useState();
   const [showPaymentGateway, setShowPaymentGateway] = useState(false);
   const [deliveryNotes, setdeliveryNotes] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const navigate = useNavigate();
   const getOrderDetails = async (orderId) => {
     const apiRes = await appAxios.post("/user/getOrderDetails", { orderId });
@@ -60,10 +65,10 @@ export const CheckoutPage = () => {
   return (
     <div className={styles.CheckoutPage}>
       <div className="container pt-4">
-        <h4 className="">Kitchen-link / Payments</h4>
+        <h4 className="">Kitchen-link Payments</h4>
         <div className="row">
-          <div className="col-8 p-2">
-            <div className="bg-white rounded py-4 p-5  ">
+          <div className="col-md-8 col-12 p-mb-2  p-1">
+            <div className="bg-white rounded py-4 p-mb-5 p-3  ">
               <h5>
                 <b>Delivery Address</b>
               </h5>
@@ -154,6 +159,10 @@ export const CheckoutPage = () => {
                 <h5 className="mb-3">
                   <b>Order Details</b>
                 </h5>
+                <b className="text-secondary">
+                  <i className="fa-solid fa-house"></i>{" "}
+                  {orderDetails?.restaurant?.restaurantName}
+                </b>
                 {orderItems.length > 0 &&
                   orderItems.map((item, index) => {
                     return (
@@ -170,7 +179,9 @@ export const CheckoutPage = () => {
               </div>
             </div>
           </div>
-          <div className="col-4 p-2 px-5">
+          <div
+            className={`${styles.paymentDetails} col-md-4 col-12 p-mb-2 px-mb-5 px-1`}
+          >
             <div className="bg-white rounded py-3 px-4 ">
               <h5>Summary</h5>
               <p className="mb-1 small d-flex justify-content-between">
@@ -199,7 +210,7 @@ export const CheckoutPage = () => {
                 </span>
               </p>
               <label htmlFor="" className="small mt-2">
-                Add delivery notes
+                Add delivery instructions (optional)
               </label>
               <textarea
                 name=""
@@ -222,6 +233,73 @@ export const CheckoutPage = () => {
           </div>
         </div>
       </div>
+      <div
+        className={`${styles.responsivePaymentDetails} bg-danger text-white p-3 text-center `}
+        role="button"
+        onClick={handleShow}
+      >
+        Continue <i className="fa-solid fa-angles-right ms-1"></i>
+      </div>
+      <Offcanvas
+        className={styles.offcanvaspayment}
+        show={show}
+        onHide={handleClose}
+        placement="bottom"
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <div className="bg-white rounded py-3 px-4 ">
+            <h5>Summary</h5>
+            <p className="mb-1 small d-flex justify-content-between">
+              <span>Amount:</span>
+              <span>
+                <b> ₹{orderDetails?.totalAmount}</b>
+              </span>
+            </p>
+            <p className="mb-1 small d-flex justify-content-between">
+              <span>Discount:</span>
+              <span>
+                <b>₹0</b>
+              </span>
+            </p>
+            <p className="mb-1 small d-flex justify-content-between">
+              <span>Dilevery Charges:</span>
+              <span>
+                <b>₹0</b>
+              </span>
+            </p>
+            <hr />
+            <p className="mb-1 small d-flex justify-content-between">
+              <span>Total Amount:</span>
+              <span>
+                <b> ₹{orderDetails?.totalAmount}</b>
+              </span>
+            </p>
+            <label htmlFor="" className="small mt-2">
+              Add delivery instructions (optional)
+            </label>
+            <textarea
+              name=""
+              className="form-control small"
+              id=""
+              onChange={(e) => setdeliveryNotes(e.target.value)}
+            ></textarea>
+            <p className={`small mt-4 text-secondary  ${styles.tandc}`}>
+              By clicking this you agree to our terms and conditions.
+            </p>
+            <button
+              className={`btn btn-danger ${styles.checkoutBtn}`}
+              onClick={() => {
+                setShowPaymentGateway(true);
+              }}
+            >
+              Proceed To Pay
+            </button>
+          </div>
+        </Offcanvas.Body>
+      </Offcanvas>
       {orderDetails?.id && showPaymentGateway && (
         <TestPG
           orderId={orderDetails.id}

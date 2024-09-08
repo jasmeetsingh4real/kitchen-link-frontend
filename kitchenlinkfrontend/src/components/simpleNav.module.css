@@ -13,3 +13,20 @@
 .simpleNavLink {
   text-decoration: none;
 }
+.navLinks {
+  display: flex;
+}
+.responsiveMenuBtn {
+  display: none;
+}
+@media (max-width: 720px) {
+  .simpleNav {
+    padding: 5px 10px;
+  }
+  .responsiveMenuBtn {
+    display: block;
+  }
+  .navLinks {
+    display: none;
+  }
+}

@@ -69,7 +69,7 @@ export const TrackOrder = () => {
     <div className={styles.trackorder}>
       <div className={` bg-white  rounded ${styles.trackOrderContainer}`}>
         <div className="mb-1 ">
-          <h5 className="text-center mb-4 pb-4 text-capitalize">
+          <h5 className="text-center mb-md-4 mb-3 pb-md-4 text-capitalize">
             Order Progress ({currentDeliveryStatus})
           </h5>
           <div className={styles.traker}>
@@ -77,21 +77,21 @@ export const TrackOrder = () => {
               itemType={"pending"}
               currentDeliveryStatus={currentDeliveryStatus}
             />
-            <div className="h-50">
+            <div className={`h-50 ${styles.progressArrow}`}>
               <i className="fa-solid fa-angles-right"></i>
             </div>
             <DeliveryProgressItem
               itemType={"being_prepared"}
               currentDeliveryStatus={currentDeliveryStatus}
             />
-            <div className="h-50">
+            <div className={`h-50 ${styles.progressArrow}`}>
               <i className="fa-solid fa-angles-right"></i>
             </div>
             <DeliveryProgressItem
               itemType={"in_transit"}
               currentDeliveryStatus={currentDeliveryStatus}
             />
-            <div className="h-50">
+            <div className={`h-50 ${styles.progressArrow}`}>
               <i className="fa-solid fa-angles-right"></i>
             </div>
             <DeliveryProgressItem
@@ -100,8 +100,17 @@ export const TrackOrder = () => {
             />
           </div>
         </div>{" "}
-        <h5 className="mb-2 p-0 mt-0">Order details</h5>{" "}
-        <div className={`d-flex flex-column w-100 ${styles.orderDetails}`}>
+        <h5 className="mb-3  pt-3 mt-0 border-top text-center">
+          <b>Order details</b>
+        </h5>{" "}
+        <b className=" py-3">
+          Restaurant : {deliveryDetails?.order?.restaurant?.restaurantName}
+        </b>
+        <br />
+        <div
+          className={`d-flex mt-3 flex-column w-100 bg-light rounded p-2 ${styles.orderDetails}`}
+        >
+          <b>Order Items : </b>
           <ol>
             {deliveryDetails?.order &&
               deliveryDetails?.order?.order_items.map((item, index) => {
@@ -127,13 +136,13 @@ export const TrackOrder = () => {
             </div>
           </ol>{" "}
         </div>{" "}
-        <div className="mb-3">
-          <h5 className="">Address Details</h5>
+        <div className="my-3 p-2 bg-light">
+          <b>Address Details:</b> <br />
           {deliveryAddress?.address}, H.No - {deliveryAddress?.houseNo} (
           {deliveryAddress?.pincode})
         </div>
         {deliveryDetails?.deliveryNotes && (
-          <div className="p-2 mb-3">
+          <div className="p-2 mb-3 bg-light">
             <h5 className="">Delivery Notes</h5>
             {deliveryDetails?.deliveryNotes}
           </div>

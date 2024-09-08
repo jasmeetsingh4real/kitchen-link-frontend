@@ -133,7 +133,7 @@ export const RestaurantList = () => {
             });
 
             return (
-              <div className={`col-4 p-4 `} key={index}>
+              <div className={`col-12 col-md-6 col-xl-4 p-4 `} key={index}>
                 <div
                   className={`${styles.restaurantCard}  p-2 shadow border rounded h-100`}
                 >

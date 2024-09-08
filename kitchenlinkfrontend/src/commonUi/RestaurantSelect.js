@@ -67,6 +67,7 @@ export const RestaurantSelect = (props) => {
         props.onChange(value);
         setRestaurants([]);
       }}
+      className={props?.className}
       options={restaurants}
     />
   );
