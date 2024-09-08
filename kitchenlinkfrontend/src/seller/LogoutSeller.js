@@ -11,7 +11,7 @@ export const LogoutSeller = () => {
   useEffect(() => {
     dispatch(userActions.logoutSeller());
     Cookies.remove("sellerAuthToken");
-    navigate("/seller/sellerLogin");
+    // navigate("/seller/sellerLogin");
   }, []);
   return <></>;
 };

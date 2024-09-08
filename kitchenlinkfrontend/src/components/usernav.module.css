@@ -46,13 +46,15 @@
   background-color: rgb(17, 17, 22);
 }
 .navLinks_responsive {
-  border-bottom: 1px solid rgb(43, 43, 43);
+  color: black;
+  border-bottom: 1px solid rgb(159, 159, 159);
   width: 100%;
   padding: 10px;
+  display: flex;
+  text-decoration: none;
 }
 .navLinks_responsive a {
   text-decoration: none;
-  color: white;
 }
 @media (max-width: 770px) {
   .Offcanvas {

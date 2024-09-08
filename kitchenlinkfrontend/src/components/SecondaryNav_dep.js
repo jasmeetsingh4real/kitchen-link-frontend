@@ -1,4 +1,4 @@
-import styles from "./secondarynav.module.css";
+import "./secondarynav.css";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,15 +34,15 @@ export const SecondaryNav = () => {
     }
   }, [Cookies, userDetails]);
   return (
-    <div className={`${styles.secondaryNav} shadow-sm mb-3`}>
+    <div className={`${styles.SecondaryNav} shadow-sm mb-3`}>
       <div>
         <Link className={styles.navLinks} to={"/"}>
           <h3 className={styles.secodaryNavHeading}>Kitchen-Link</h3>
         </Link>
       </div>
       <div className={styles.searchBar}>
-        <div className={`${styles.reataurantSearchInput} `}>
-          <div className="p-0  m-0 w-50">
+        <div className={`${styles.reataurantSearchInput} row`}>
+          <div className="col-5">
             <StateSelect
               selectedCountry={{ code: "IN", id: 101 }}
               onChange={(value) => {
@@ -53,9 +53,8 @@ export const SecondaryNav = () => {
               styles={customStyles}
             />{" "}
           </div>
-          <div className="p-0  m-0 w-50">
+          <div className="col-6">
             <RestaurantSelect
-              className="p-0  m-0 "
               //   selected={searchedRestaurant}
               styles={customStyles}
               //   stateId={searchedState?.value && searchedState?.value?.id}
@@ -65,16 +64,10 @@ export const SecondaryNav = () => {
               }}
             />
           </div>
+          <div className="col-1 d-flex align-items-center text-secondary">
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </div>
         </div>{" "}
-        <div className=" d-flex justify-content-center  ms-4">
-          <button
-            variant="primary"
-            className={` ${styles.offCanvasNavBtn}  `}
-            onClick={handleShow}
-          >
-            <i className="fa-solid fa-bars"></i>
-          </button>
-        </div>
       </div>{" "}
       <div
         className={styles.sidemenu}
@@ -115,8 +108,15 @@ export const SecondaryNav = () => {
           </div>
         )}{" "}
       </div>
+      <button
+        variant="primary"
+        className={` ${styles.offCanvasNavBtn}  `}
+        onClick={handleShow}
+      >
+        <i className="fa-solid fa-bars"></i>
+      </button>
       <Offcanvas
-        className={`w-75 ${styles.offcanvasbody}`}
+        className={styles.offcanvasbody}
         show={show}
         placement={"end"}
         onHide={handleClose}
@@ -124,7 +124,7 @@ export const SecondaryNav = () => {
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>
             <Link className={styles.navLinksoffCanvas} to={"/"}>
-              <h3 className={`fs-5 ${styles.secodaryNavHeadingOffcanvas}`}>
+              <h3 className={styles.secodaryNavHeadingOffcanvas}>
                 Kitchen-Link
               </h3>
             </Link>

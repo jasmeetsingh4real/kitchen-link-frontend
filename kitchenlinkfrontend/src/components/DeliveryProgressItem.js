@@ -75,14 +75,16 @@ export const DeliveryProgressItem = (props) => {
   return (
     <div className={`mb-4 ${styles.progressItem} `}>
       <div
-        className={`d-flex align-items-center justify-content-center mb-3 ${styles[progressAnimation]}  ${styles.progressItemIcon}`}
+        className={`d-flex align-items-center justify-content-center mb-mb-3 ${styles[progressAnimation]}  ${styles.progressItemIcon}`}
       >
         {_getItemDetails(props.itemType).logo}
       </div>
       <div
-        className={`p-2 d-flex justify-content-center flex-column text-center ${
+        className={`${
+          styles.deliveryProgressItemDescription
+        } p-2 d-flex justify-content-center flex-column text-center ${
           progressAnimation === "muted" ? "text-muted" : " text-success"
-        }`}
+        }  `}
       >
         <b>{_getItemDetails(props.itemType).label}</b>
         <p className=" small m-0 p-0">

@@ -15,9 +15,12 @@ h2 i {
   height: 100vh;
 }
 .homePageBtn {
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: white;
   position: absolute;
   top: 20px;
-  left: 60px;
+  left: 10px;
   color: black;
   text-decoration: none;
 }
@@ -31,14 +34,16 @@ h2 i {
   width: 50%;
 }
 .signup_container {
+  margin: 100px;
+  padding: 100px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   border-radius: 20px;
   overflow: hidden;
-  width: 80%;
+  width: 100%;
   height: 80vh;
   background-size: cover;
   background-repeat: no-repeat;
@@ -74,12 +79,13 @@ button:hover {
     display: none;
   }
   .signup_container {
+    /* padding: 0; */
+    margin: 0;
     border-radius: 0;
-    padding: 20px;
     align-items: center;
+    justify-content: center;
     height: 100%;
     width: 100%;
-    justify-content: center;
   }
   .user_details_container {
     max-width: max-content;
@@ -95,7 +101,7 @@ button:hover {
 }
 
 @media screen and (max-width: 470px) {
-  .user_details_ container {
+  /* .user_details_ container {
     padding: 10px;
   }
   .signup_heading,
@@ -115,5 +121,5 @@ button:hover {
   .custom_input {
     height: 40px;
     width: 50%;
-  }
+  } */
 }

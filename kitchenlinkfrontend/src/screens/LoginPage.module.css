@@ -16,9 +16,12 @@
   background-color: #ffaa05;
 }
 .homePageBtn {
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: white;
   position: absolute;
   top: 20px;
-  left: 60px;
+  left: 10px;
   color: black;
   text-decoration: none;
 }
@@ -27,7 +30,7 @@
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   border-radius: 20px;
   overflow: hidden;
   width: 80%;
@@ -80,7 +83,16 @@ button:hover {
 }
 
 @media screen and (max-width: 470px) {
-  .user_details_ container {
+  .user_details_container {
+    width: 100vw;
+  }
+  .login_page {
+    padding: 0px;
+  }
+  .login_container {
+    margin: 0px;
+  }
+  /* .user_details_ container {
     padding: 10px;
   }
   .login_heading,
@@ -100,5 +112,5 @@ button:hover {
   .custom_input {
     height: 40px;
     width: 50%;
-  }
+  } */
 }
